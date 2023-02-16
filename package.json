@@ -40,5 +40,8 @@
     "unocss-preset-daisy": "^1.2.0",
     "vite-plugin-glsl": "^1.1.2",
     "vite-svg-loader": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }
