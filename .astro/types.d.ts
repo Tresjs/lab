@@ -74,6 +74,13 @@ declare module 'astro:content' {
   collection: "authors",
   data: any
 },
+"jaime-torrealba.md": {
+  id: "jaime-torrealba.md",
+  slug: "jaime-bboyjt",
+  body: string,
+  collection: "authors",
+  data: any
+},
 },
 "experiments": {
 "animations.mdx": {
@@ -121,6 +128,13 @@ declare module 'astro:content' {
 "materials.mdx": {
   id: "materials.mdx",
   slug: "materials",
+  body: string,
+  collection: "experiments",
+  data: any
+},
+"pam-camera-mouse.mdx": {
+  id: "pam-camera-mouse.mdx",
+  slug: "pam-camera-mouse",
   body: string,
   collection: "experiments",
   data: any
