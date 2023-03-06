@@ -1,16 +1,18 @@
 ---
 layout: /@/layouts/ExperimentLayout.astro
-thumbnail: /animations-fps.png
-title: FPS
-author: Alvarosabu
-description: A basic explanation of FPS
-tags: ['fps', 'animations', 'useRendererLoop']
+thumbnail: /animations.png
+title: Animations
+slug: animations
+author: alvaro-saburido
+type: vue
+description: A basic example of how to animate a geometry using useRendererLoop composable
+tags: ['basic', 'animations', 'useRendererLoop']
 ---
 
-import FPSExample from '/@/components/fps/FPSExample.vue'
+import BasicAnimations from '/@/components/BasicAnimations.vue'
 import TheInfo from '/@/components/TheInfo.astro'
 
-<FPSExample client:only />
+<BasicAnimations client:only />
 
 <TheInfo >
 # { frontmatter.title }
