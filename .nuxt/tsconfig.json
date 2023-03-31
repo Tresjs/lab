@@ -63,10 +63,10 @@
         "node_modules/.pnpm/nuxt@3.3.2/node_modules/nuxt/dist/app/compat/vue-demi"
       ],
       "#image": [
-        "node_modules/.pnpm/@nuxt+image-edge@1.0.0-27991759.1a5eea1/node_modules/@nuxt/image-edge/dist/runtime"
+        "node_modules/.pnpm/@nuxt+image-edge@1.0.0-28001428.0aa03b6/node_modules/@nuxt/image-edge/dist/runtime"
       ],
       "#image/*": [
-        "node_modules/.pnpm/@nuxt+image-edge@1.0.0-27991759.1a5eea1/node_modules/@nuxt/image-edge/dist/runtime/*"
+        "node_modules/.pnpm/@nuxt+image-edge@1.0.0-28001428.0aa03b6/node_modules/@nuxt/image-edge/dist/runtime/*"
       ],
       "@vueuse/head": [
         "node_modules/.pnpm/@unhead+vue@1.1.25_vue@3.2.47/node_modules/@unhead/vue/dist/index"

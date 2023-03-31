@@ -8,5 +8,5 @@ export { useContentHelpers } from '../node_modules/.pnpm/@nuxt+content@2.5.2/nod
 export { useContentHead } from '../node_modules/.pnpm/@nuxt+content@2.5.2/node_modules/@nuxt/content/dist/runtime/composables/head';
 export { withContentBase, useUnwrap, useContentDisabled as useContentState, useContentDisabled as useContent } from '../node_modules/.pnpm/@nuxt+content@2.5.2/node_modules/@nuxt/content/dist/runtime/composables/utils';
 export { fetchContentNavigation } from '../node_modules/.pnpm/@nuxt+content@2.5.2/node_modules/@nuxt/content/dist/runtime/composables/navigation';
-export { useImage } from '../node_modules/.pnpm/@nuxt+image-edge@1.0.0-27991759.1a5eea1/node_modules/@nuxt/image-edge/dist/runtime/composables';
+export { useImage } from '../node_modules/.pnpm/@nuxt+image-edge@1.0.0-28001428.0aa03b6/node_modules/@nuxt/image-edge/dist/runtime/composables';
 export { definePageMeta } from '../node_modules/.pnpm/nuxt@3.3.2/node_modules/nuxt/dist/pages/runtime/composables';

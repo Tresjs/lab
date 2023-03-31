@@ -11,7 +11,7 @@ type NuxtAppInjections =
   InjectionType<typeof import("../../node_modules/.pnpm/nuxt@3.3.2/node_modules/nuxt/dist/head/runtime/plugins/vueuse-head-polyfill").default> &
   InjectionType<typeof import("../../node_modules/.pnpm/nuxt@3.3.2/node_modules/nuxt/dist/pages/runtime/plugins/router").default> &
   InjectionType<typeof import("../../node_modules/.pnpm/nuxt@3.3.2/node_modules/nuxt/dist/pages/runtime/plugins/prefetch.client").default> &
-  InjectionType<typeof import("../../node_modules/.pnpm/@nuxt+image-edge@1.0.0-27991759.1a5eea1/node_modules/@nuxt/image-edge/dist/runtime/plugin").default> &
+  InjectionType<typeof import("../../node_modules/.pnpm/@nuxt+image-edge@1.0.0-28001428.0aa03b6/node_modules/@nuxt/image-edge/dist/runtime/plugin").default> &
   InjectionType<typeof import("../../node_modules/.pnpm/@nuxt+content@2.5.2/node_modules/@nuxt/content/dist/runtime/plugins/ws").default> &
   InjectionType<typeof import("../unocss").default> &
   InjectionType<typeof import("../../node_modules/.pnpm/nuxt@3.3.2/node_modules/nuxt/dist/app/plugins/chunk-reload.client").default>
