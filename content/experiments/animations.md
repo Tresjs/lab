@@ -20,6 +20,8 @@ Author: [@**alvarosabu**](https://twitter.com/alvarosabu).
 
 > This is a basic example of how to animate a geometry using useRendererLoop composable. It includes a sphere, a plane and a camera with orbit controls.
 
+Docs [here](https://tresjs.org/examples/basic-animations.html).
+
 ```vue
 <script setup lang="ts">
 import { TresCanvas, TresInstance, useRenderLoop } from '@tresjs/core'
