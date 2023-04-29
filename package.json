@@ -15,7 +15,7 @@
     "@nuxt/image-edge": "1.0.0-27991759.1a5eea1",
     "@tresjs/core": "2.0.0-beta.13",
     "@types/three": "^0.149.0",
-    "@unocss/nuxt": "^0.50.6",
+    "@unocss/nuxt": "^0.51.0",
     "gsap": "^3.11.5",
     "nuxt": "^3.3.2",
     "nuxt-svgo": "^1.1.0",
