@@ -18,7 +18,7 @@
     "@unocss/nuxt": "^0.50.6",
     "gsap": "^3.11.5",
     "nuxt": "^3.3.2",
-    "nuxt-svgo": "^1.1.0",
+    "nuxt-svgo": "^3.0.0",
     "vite-plugin-glsl": "^1.1.2"
   },
   "dependencies": {
