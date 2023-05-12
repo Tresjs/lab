@@ -14,7 +14,7 @@
     "@iconify-json/logos": "^1.1.25",
     "@nuxt/content": "^2.6.0",
     "@nuxt/image-edge": "1.0.0-28050764.aaee7ac",
-    "@tresjs/cientos": "2.0.0-rc.1",
+    "@tresjs/cientos": "2.0.0",
     "@tresjs/core": "2.0.0-rc.2",
     "@types/three": "^0.152.0",
     "@unocss/nuxt": "^0.51.8",
