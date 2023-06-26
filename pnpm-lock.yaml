@@ -9,8 +9,8 @@ dependencies:
     specifier: ^2.2.0
     version: 2.2.0(react@18.2.0)(three@0.153.0)(vue@3.3.4)
   '@tresjs/post-processing':
-    specifier: ^0.2.1
-    version: 0.2.1(@tresjs/core@2.2.0)(three@0.153.0)(vue@3.3.4)
+    specifier: ^0.3.0
+    version: 0.3.0(@tresjs/core@2.2.0)(three@0.153.0)(vue@3.3.4)
   three:
     specifier: ^0.153.0
     version: 0.153.0
@@ -838,11 +838,11 @@ packages:
       - supports-color
     dev: true
 
-  /@nuxt/kit-edge@3.6.1-28126129.789c8bfa:
-    resolution: {integrity: sha512-Xlu+bK1+spDd/hH9lqZb/4+qeVS68pLPbEiMP2Sqc1Wr3KOmOhHw8Y8Wf+NBP2KXu0/Ps5u7YabaLvJfqhN+zA==}
+  /@nuxt/kit-edge@3.6.1-28129733.e69837d6:
+    resolution: {integrity: sha512-N7aHx8T5FCCW6UOuYx7OPXNYTKJPk2NJm9V3Xe1L5P68vayCeaQki2Jx94gZQY1HNDmm8PZFVL4ii9nli2tX7Q==}
     engines: {node: ^14.18.0 || >=16.10.0}
     dependencies:
-      '@nuxt/schema': /@nuxt/schema-edge@3.6.1-28126129.789c8bfa
+      '@nuxt/schema': /@nuxt/schema-edge@3.6.1-28129733.e69837d6
       c12: 1.4.2
       consola: 3.1.0
       defu: 6.1.2
@@ -890,8 +890,8 @@ packages:
       - supports-color
     dev: true
 
-  /@nuxt/schema-edge@3.6.1-28126129.789c8bfa:
-    resolution: {integrity: sha512-tPqcmBn01avZktyq1waMscDyno9ahIxcOVynbsc22i1XZy9J2ridiJPj7G3CABF2ujvTR9X/pRbPTWqmJaq6WA==}
+  /@nuxt/schema-edge@3.6.1-28129733.e69837d6:
+    resolution: {integrity: sha512-Mno/aHoXqCD33h5TqhDm50rvV5arcHLeroVHSki98/hgl1LA1w5PcMJ+y1WHSmzO1s1akbF549Y/lCXBrqRTjA==}
     engines: {node: ^14.18.0 || >=16.10.0}
     dependencies:
       defu: 6.1.2
@@ -1238,6 +1238,24 @@ packages:
       vue: 3.3.4
     transitivePeerDependencies:
       - '@vue/composition-api'
+    dev: true
+
+  /@tresjs/post-processing@0.3.0(@tresjs/core@2.2.0)(three@0.153.0)(vue@3.3.4):
+    resolution: {integrity: sha512-0xxq46hZOjPjX/WcHV3MmkMER+4b+N5qUbcsIXB2hZSi6JZXCirxNxqOH1bkGnbnAwoYxJn04bytJ7v+sx0Psw==}
+    peerDependencies:
+      '@tresjs/core': '>=2.3.0'
+      three: '>=0.133'
+      vue: '>=3.3'
+    dependencies:
+      '@tresjs/core': 2.2.0(react@18.2.0)(three@0.153.0)(vue@3.3.4)
+      '@vueuse/core': 10.2.0(vue@3.3.4)
+      postprocessing: 6.32.1(three@0.153.0)
+      three: 0.153.0
+      three-stdlib: 2.23.10(three@0.153.0)
+      vue: 3.3.4
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+    dev: false
 
   /@trysound/sax@0.2.0:
     resolution: {integrity: sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==}
@@ -4847,7 +4865,7 @@ packages:
       vue-svg-loader:
         optional: true
     dependencies:
-      '@nuxt/kit': /@nuxt/kit-edge@3.6.1-28126129.789c8bfa
+      '@nuxt/kit': /@nuxt/kit-edge@3.6.1-28129733.e69837d6
       '@vue/compiler-sfc': 3.3.4
       svgo: 3.0.2
     transitivePeerDependencies:
