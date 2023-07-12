@@ -13,55 +13,91 @@ const gl = {
   toneMapping: NoToneMapping,
 }
 
+function lerp(start, end, t) {
+  return start * (1 - t) + end * t
+}
+
 const progress = ref(0)
 const scRef = ref()
+
+const cameraRef = ref()
+
+const { onLoop } = useRenderLoop()
+
+onLoop(() => {
+  if (cameraRef.value) {
+    if(progress.value <= 0.5) {
+      cameraRef.value.position.x = -progress.value
+      cameraRef.value.position.z = -progress.value * 2  + 6
+    } else {
+      const t = (progress.value - 0.5) * 4  // Normalize progress from 0.5 to 1 to range 0 to 1
+      cameraRef.value.position.x = lerp(-0.5, 1, t*t) // Smoothly interpolate from -0.5 to 1 based on t
+    }
+  }
+})
+
+watchEffect(() => {
+  if(!cameraRef.value) return
+  console.log('jaime ~ progress:', {
+    progress: progress.value,
+    camera: cameraRef.value.position.x
+  })
+})
 </script>
 
 <template>
-    <main>
-    <section>
-      <h1>First section</h1>
+  <main>
+    <section class="min-h-screen container flex justify-end items-center">
+      <div class="w-1/2 text-right">
+        <h2 class="text-4xl text-light font-extrabold ">Hi! 👋 I'm <span class="text-primary">AlvaroSabu</span></h2>
+
+      </div>
     </section>
-     <section>
-      <h2>Second section</h2>
+    <section class="min-h-screen container flex justify-end items-center">
+      <div class="w-1/2 text-light text-right">
+        <h2 class="text-4xl font-extrabold mb-4">Welcome to <span class="text-primary">TresJS</span></h2>
+        <p class="font-italic">The coolest 3D solution for Vue </p>
+
+      </div>
     </section>
-    <section>
-      <h3 >Third section</h3>
+    <section class="min-h-screen container flex justify-end items-center">
+      <div class="w-1/2 text-light text-right">
+        <h2 class="text-4xl font-extrabold mb-4">Launch your 3D Portfolio</h2>
+        <p class="font-italic">And take it to the 🌕 🚀</p>
+
+      </div>
     </section>
   </main>
-  <TresCanvas v-bind="gl" window-size>
-    <TresPerspectiveCamera :position="[0, 2, 5]" />
-    <Stars :radius="1" />
-    <ScrollControls ref="scRef" 
+
+    <TresCanvas v-bind="gl" window-size>
+      <TresPerspectiveCamera ref="cameraRef" :position="[0, 2, 5]"/>
+      <Stars :radius="1" />
+      <ScrollControls ref="scRef" 
       v-model="progress"
       :distance="10"
       :smooth-scroll="0.1"
+      html-scroll
       >
-        <Suspense>
-            <LowPolyPlanet />
-        </Suspense>
-    </ScrollControls>
-    <TresGridHelper />
-    <TresAmbientLight :intensity="2" />
-  </TresCanvas>
+      <Suspense>
+        <LowPolyPlanet :progress="progress" />
+      </Suspense>
+      <Suspense>
+        <Rocket :progress="progress" />
+      </Suspense>
+
+      </ScrollControls>
+      <TresAmbientLight :intensity="2" />
+      <TresPointLight color="#1BFFEF" :position="[0, 8, -16]" :intensity="8" cast-shadow />
+      <TresDirectionalLight ref="directionalLightRef" :position="[0, 2, 4]" :intensity="1" cast-shadow />
+    </TresCanvas>
+
 </template>
 
 <style scoped>
-.container {
-  height: 50vh;
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+* {
+  font-family: 'Inter', sans-serif;
 }
-main {
-  background-color: transparent;
-}
-section {
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  outline: 1px solid red;
-}
-h1,
-h2,
-h3 {
-  color: #f7f7f7;
-}
+
 </style>

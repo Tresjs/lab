@@ -1,30 +1,44 @@
 <script setup lang="ts">
+import { TresObject3D } from '@tresjs/core';
 import { shallowRef } from 'vue'
 
-const { scene: planet } = await useGLTF(
-  'https://raw.githubusercontent.com/Tresjs/assets/main/models/gltf/low-poly/planet.gltf',
+const props = defineProps<{
+  progress: number
+}>()
+
+const { progress } = toRefs(props)
+
+const { nodes } = await useGLTF(
+  '/models/low-poly-planet/low-poly-planet-v3.glb',
 )
 
-
+const planet = nodes['Planet'] as TresObject3D
 const planetRef = shallowRef()
-
-planet.traverse(child => {
-  if (child.isMesh) {
-    child.receiveShadow = true
-  }
-})
+const clouds = Object.values(nodes).filter(node => node.name.includes('Cloud'))
+const cloudsRef = shallowRef()
 
 const { onLoop } = useRenderLoop()
 
 onLoop(({ delta }) => {
   if (!planet) return
-  planet.rotation.y += delta * 0.04
-  planet.rotation.z += delta * 0.02
-  planet.rotation.x += delta * 0.05
+  planet.rotation.y -= delta * 0.004
+  planet.rotation.z -= delta * 0.002
+  planet.rotation.x -= delta * 0.005
   planet.updateMatrixWorld()
+
+  /* if(cloudsRef.value) {
+    cloudsRef.value.forEach((cloud: TresObject3D) => {
+      cloud.rotation.x = -progress.value * 2
+    })
+  } */
 })
 </script>
 <template>
-  <primitive ref="planetRef" :object="planet" />
-<!--   <Cloud v-for="cloud of [1, 2, 3, 4, 5, 6, 7, 8, 9]" :key="cloud" :planet="planetRef" /> -->
+  <TresGroup :position="[-2, 2, 0]">
+    <primitive ref="planetRef" :object="planet" />
+    <TresGroup :rotation="[0, -progress, 0]">
+      <primitive v-for="cloud in clouds" :object="cloud" :key="cloud.id" ref="cloudsRef" />
+    </TresGroup>
+
+  </TresGroup>
 </template>
