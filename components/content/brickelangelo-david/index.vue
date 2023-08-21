@@ -39,8 +39,8 @@ useControls({ cameraPosition })
 
 const { hasFinishLoading, progress, items } = await useProgress()
 
-watch(cameraRef, value => {
-  if (!value) return
+watch([cameraRef, hasFinishLoading], ([value, hasFinishLoading]) => {
+  if (!value || hasFinishLoading) return
   gsap.to(value.position, {
     duration: 10,
     x: -0.63,
