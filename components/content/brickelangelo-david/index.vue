@@ -78,7 +78,7 @@ watch(cameraRef, value => {
     <Suspense>
       <David />
     </Suspense>
-    <TresSpotLight ref="lightRef" :position="[20, 20, 20]" :intensity="8" cast-shadow />
+    <TresSpotLight ref="lightRef" :position="[5, 5, 5]" :intensity="8" cast-shadow />
   </TresCanvas>
   <div
     class="title absolute left-0 bottom-30 w-full text-white z-20 pointer-events-none flex flex-col items-center justify-around"
