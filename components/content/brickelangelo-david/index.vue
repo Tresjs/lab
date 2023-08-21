@@ -62,9 +62,9 @@ watch(cameraRef, value => {
   >
     <div
       v-show="!hasFinishLoading"
-      class="absolute title bg-black t-0 l-0 w-full h-full z-30 flex justify-center items-center text-white font-mono"
+      class="absolute bg-black t-0 l-0 w-full h-full z-30 flex justify-center items-center text-white font-mono"
     >
-      <div class="w-200px">Loading Art... {{ progress }} %</div>
+      <div class="font-italic title w-200px">Loading Art... {{ progress }} %</div>
     </div>
   </Transition>
   <div
