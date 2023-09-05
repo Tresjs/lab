@@ -1,7 +1,4 @@
 <script setup>
-import { computed } from 'vue'
-import { TresCanvas } from '@tresjs/core'
-import { useProgress } from '@tresjs/cientos'
 import { PerspectiveCamera, Vector4, Vector3 } from 'three'
 import { useWindowSize } from '@vueuse/core'
 
@@ -53,6 +50,7 @@ cameraOptions.forEach(data => {
 const { hasFinishLoading, progress, items } = await useProgress()
 </script>
 <template>
+  <TresLeches />
   <Transition
     name="fade-overlay"
     enter-active-class="opacity-1 transition-opacity duration-200"

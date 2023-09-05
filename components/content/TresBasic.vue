@@ -1,6 +1,7 @@
 <script setup lang="ts">
+import { TresCanvas } from '@tresjs/core';
 import { BasicShadowMap, SRGBColorSpace, NoToneMapping } from 'three'
-
+import { Levioso } from '@tresjs/cientos';
 const gl = {
   clearColor: '#82DBC5',
   shadows: true,
@@ -19,6 +20,12 @@ const gl = {
       <TresConeGeometry :args="[1, 1.5, 3]" />
       <TresMeshToonMaterial color="#82DBC5" />
     </TresMesh>
+    <Levioso :speed="5" :float-factor="10" :range="[-0.1, 0.1]">
+      <TresMesh :position="[0, 2, 0]" cast-shadow>
+        <TresBoxGeometry :args="[1.5, 1.5, 1.5]" />
+        <TresMeshToonMaterial color="#4F4F4F" />
+      </TresMesh>
+    </Levioso>
     <TresMesh :position="[0, 0, 0]">
       <TresBoxGeometry :args="[1.5, 1.5, 1.5]" />
       <TresMeshToonMaterial color="#4F4F4F" />

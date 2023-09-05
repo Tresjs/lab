@@ -2,7 +2,6 @@ import { presetUno, presetIcons, presetTypography, presetWebFonts } from 'unocss
 import svgLoader from 'vite-svg-loader'
 
 import glsl from 'vite-plugin-glsl'
-import { templateCompilerOptions } from '@tresjs/core'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   app: {

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { useRenderLoop } from '@tresjs/core'
-import { useAnimations, useGLTF, useTweakPane } from '@tresjs/cientos'
 
 const { scene: model, animations } = await useGLTF(
   'https://raw.githubusercontent.com/Tresjs/assets/main/models/gltf/warcraft-3-alliance-footmanfanmade/source/Footman_RIG.glb',
@@ -12,7 +10,31 @@ let currentAction = actions.Idle
 
 currentAction.play()
 
-const { pane } = useTweakPane()
+const { value: animation } = useControls({
+  animation: {
+    value: 'Idle',
+    options: [
+    { text: 'Idle', value: 'Idle' },
+    { text: 'SwordAndShieldCrouchBlockIdle', value: 'SwordAndShieldCrouchBlockIdle' },
+    { text: 'SwordAndShieldDeath_2', value: 'SwordAndShieldDeath_2' },
+    { text: 'SwordAndShieldIdle', value: 'SwordAndShieldIdle' },
+    { text: 'SwordAndShieldKick', value: 'SwordAndShieldKick' },
+    { text: 'SwordAndShieldRun(back)', value: 'SwordAndShieldRun(back)' },
+    { text: 'SwordAndShieldRun', value: 'SwordAndShieldRun' },
+    { text: 'SwordAndShieldSlash_2', value: 'SwordAndShieldSlash_2' },
+    { text: 'SwordAndShieldSlash', value: 'SwordAndShieldSlash' },
+    { text: 'T-Pose', value: 'T-Pose' },
+    ],
+  },
+})
+
+watch(animation, value => {
+  currentAction.stop()
+  currentAction = actions[value]
+  currentAction.play()
+})
+
+/* const { pane } = useTweakPane()
 
 const animationList = pane.addBlade({
   view: 'list',
@@ -36,7 +58,7 @@ animationList.on('change', value => {
   currentAction.stop()
   currentAction = actions[value.value]
   currentAction.play()
-})
+}) */
 
 const { onLoop } = useRenderLoop()
 
