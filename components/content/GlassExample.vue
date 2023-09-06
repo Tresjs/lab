@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { EquirectangularReflectionMapping } from 'three'
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader'
 
@@ -25,53 +25,88 @@ const options = reactive({
   envMapIntensity: 1.5,
 })
 
-const { pane } = useTweakPane()
-pane.addInput(options, 'transmission', {
-  label: 'transmission',
-  min: 0,
-  max: 1,
-  step: 0.01,
-})
-pane.addInput(options, 'thickness', {
-  label: 'thickness',
-  min: 0,
-  max: 1,
-  step: 0.01,
-})
-pane.addInput(options, 'envMapIntensity', {
-  label: 'envMapIntensity',
-  min: 0,
-  max: 3,
-  step: 0.1,
-})
-pane.addInput(options, 'roughness', {
-  label: 'roughness',
-  min: 0,
-  max: 1,
-  step: 0.01,
+const [transmission, thickness, roughness, envMapIntensity, useHDR] = useControls({
+  transmission: {
+    value: 1,
+    min: 0,
+    max: 1,
+    step: 0.01,
+  },
+  thickness: {
+    value: 0.5,
+    min: 0,
+    max: 1,
+    step: 0.01,
+  },
+  roughness: {
+    value: 0,
+    min: 0,
+    max: 1,
+    step: 0.01,
+  },
+  envMapIntensity: {
+    value: 1.5,
+    min: 0,
+    max: 3,
+    step: 0.1,
+  },
+  useHDR: true,
 })
 
-const hdrEquiredButton = pane.addButton({
-  title: 'Enable/Disable hdrEquired',
+watch([transmission.value, thickness.value, roughness.value, envMapIntensity.value], (state) => {
+  state.forEach((value, index) => {
+    options[Object.keys(options)[index] as string] = value
+  })
 })
-hdrEquiredButton.on('click', () => {
-  options.envMap = options.envMap ? null : hdrEquirect
+
+watch(useHDR.value, (value) => {
+  options.envMap = value ? hdrEquirect : null
 })
 </script>
+
 <template>
-  <TresCanvas window-size clear-color="#F7F7F7" class="over-hidden" grid>
-    <TresPerspectiveCamera :position="[0, 0, 3]" :fov="45" :aspect="1" :near="0.1" :far="1000" />
+  <TresLeches preset="realistic" />
+  <TresCanvas
+    window-size
+    clear-color="#F7F7F7"
+    class="over-hidden"
+    grid
+  >
+    <TresPerspectiveCamera
+      :position="[0, 0, 3]"
+      :fov="45"
+      :aspect="1"
+      :near="0.1"
+      :far="1000"
+    />
     <OrbitControls />
-    <TresGridHelper :args="[30, 30]" :position="[0, -2.5, 0]" />
+    <TresGridHelper
+      :args="[30, 30]"
+      :position="[0, -2.5, 0]"
+    />
     <TresMesh :position="[-0, 0, 0]">
       <TresIcosahedronGeometry :args="[1, 10]" />
-      <TresMeshPhysicalMaterial v-bind="options" />
+      <TresMeshPhysicalMaterial 
+        :transmission="options.transmission" 
+        :thickness="options.thickness" 
+        :roughness="options.roughness" 
+        :env-map="options.envMap" 
+        :env-map-intensity="options.envMapIntensity" 
+        :clearcoat-normal-map="normalMap"
+      />
     </TresMesh>
-    <TresMesh ref="planeRef" :position="[0, 0, -1]">
+    <TresMesh
+      ref="planeRef"
+      :position="[0, 0, -1]"
+    >
       <TresPlaneGeometry :args="[5, 5]" />
       <TresMeshBasicMaterial :map="map" />
     </TresMesh>
-    <TresDirectionalLight :position="[0, 2, 4]" :intensity="2" cast-shadow />
-    <TresAmbientLight />
+    <TresDirectionalLight
+      :position="[0, 2, 4]"
+      :intensity="1"
+      cast-shadow
+    />
+    <TresAmbientLight :intensity="0.2" />
   </TresCanvas>
 </template>
