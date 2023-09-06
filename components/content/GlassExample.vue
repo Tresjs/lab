@@ -1,6 +1,15 @@
 <script setup lang="ts">
-import { EquirectangularReflectionMapping } from 'three'
+import { BasicShadowMap, EquirectangularReflectionMapping, NoToneMapping, SRGBColorSpace } from 'three'
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader'
+
+const gl = {
+  clearColor: '#F7F7F7',
+  shadows: true,
+  alpha: false,
+  shadowMapType: BasicShadowMap,
+  outputColorSpace: SRGBColorSpace,
+  toneMapping: NoToneMapping,
+}
 
 const { map, normalMap } = await useTexture({
   map: 'https://raw.githubusercontent.com/Tresjs/assets/main/textures/glass-effect/bg-texture.jpg',
@@ -68,9 +77,7 @@ watch(useHDR.value, (value) => {
   <TresLeches preset="realistic" />
   <TresCanvas
     window-size
-    clear-color="#F7F7F7"
-    class="over-hidden"
-    grid
+    v-bind="gl"
   >
     <TresPerspectiveCamera
       :position="[0, 0, 3]"
