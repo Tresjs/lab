@@ -1,29 +1,19 @@
 <script setup lang="ts">
-import { shallowRef, watch } from 'vue'
 import Airplane from './Airplane.vue'
 import Cloud from './Cloud.vue'
 
-const { scene: planet } = await useGLTF(
+const { nodes } = await useGLTF(
   'https://raw.githubusercontent.com/Tresjs/assets/main/models/gltf/low-poly/planet.gltf',
 )
 
-const { pane } = useTweakPane()
-
-const planetRef = shallowRef()
-
+const planet = nodes.Planet
+const icosphere = nodes.Icosphere
 planet.traverse(child => {
   if (child.isMesh) {
     child.receiveShadow = true
   }
 })
 
-watch(
-  () => planetRef.value,
-  planet => {
-    if (!planet) return
-    pane.addInput(planetRef.value, 'visible', { label: 'Planet' })
-  },
-)
 
 const { onLoop } = useRenderLoop()
 
@@ -36,7 +26,7 @@ onLoop(({ delta }) => {
 })
 </script>
 <template>
-  <TresMesh ref="planetRef" v-bind="planet" />
-  <Airplane :planet="planetRef" />
-  <Cloud v-for="cloud of [1, 2, 3, 4, 5, 6, 7, 8, 9]" :key="cloud" :planet="planetRef" />
+  <primitive :object="planet" />
+  <Airplane :planet="icosphere" />
+  <Cloud v-for="cloud of [1, 2, 3, 4, 5, 6, 7, 8, 9]" :key="cloud" :planet="icosphere" />
 </template>

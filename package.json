@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@tresjs/core": "^3.2.0",
-    "@tresjs/post-processing": "^0.3.0",
+    "@tresjs/post-processing": "^0.4.0",
     "three": "^0.156.1"
   }
 }

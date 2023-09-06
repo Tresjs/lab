@@ -28,27 +28,13 @@ watch(
   planet => {
     if (!planet) return
     planet.geometry.computeBoundingSphere()
-    const radius = Math.abs(planet.geometry.boundingSphere?.radius | 1) + 0.5
+    const radius = Math.abs(planet.geometry.boundingSphere?.radius | 1)
     airplane.position.set(radius, 0, 0)
 
     airplane.lookAt(planet.position)
   },
 )
 
-const { pane } = useTweakPane()
-
-const folder = pane.addFolder({
-  title: 'Airplane',
-  expanded: true,
-})
-
-watch(
-  () => airplaneRef.value,
-  planet => {
-    if (!planet) return
-    folder.addInput(airplaneRef.value, 'visible', { label: 'Visible' })
-  },
-)
 
 let angle = 0
 let speed = 0.2
@@ -67,5 +53,5 @@ onLoop(({ delta }) => {
 })
 </script>
 <template>
-  <TresMesh ref="airplaneRef" v-bind="airplane" />
+  <primitive :object="airplane" />
 </template>
