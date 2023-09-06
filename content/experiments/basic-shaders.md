@@ -3,6 +3,7 @@ thumbnail: /basic-shaders.png
 title: Basic Shaders
 slug: basic-shaders
 author: alvarosabu
+status: published
 description: Demo of using shaders with TresJS
 tags: ['basic', 'shaders', 'glsl']
 ---
@@ -49,10 +50,17 @@ onLoop(({ _delta, elapsed }) => {
 </script>
 
 <template>
-  <TresCanvas clear-color="#111" shadows alpha>
+  <TresCanvas
+    clear-color="#111"
+    shadows
+    alpha
+  >
     <TresPerspectiveCamera :position="[11, 11, 11]" />
     <OrbitControls />
-    <TresMesh ref="blobRef" :position="[0, 4, 0]">
+    <TresMesh
+      ref="blobRef"
+      :position="[0, 4, 0]"
+    >
       <TresSphereGeometry :args="[2, 32, 32]" />
       <TresShaderMaterial
         ref="materialRef"

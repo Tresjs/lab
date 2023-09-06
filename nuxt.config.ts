@@ -18,6 +18,7 @@ export default defineNuxtConfig({
   },
   modules: ['@tresjs/nuxt', '@unocss/nuxt', 'nuxt-svgo', '@nuxt/content', '@nuxt/image-edge'],
   css: ['@unocss/reset/tailwind-compat.css', '@tresjs/leches/styles'],
+  declare: ['*.glsl'],
   unocss: {
     // presets
     theme: {
