@@ -37,7 +37,7 @@ const transformState = shallowReactive({
   showY: true,
   showZ: true,
 })
-</script>
+</script>x
 
 <template>
   <TresCanvas v-bind="gl">
