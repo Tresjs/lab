@@ -5,7 +5,12 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.vue"
+  },
+  "dependencies": {
+    "@tresjs/post-processing": "^0.4.0",
+    "three": "^0.156.1"
   },
   "devDependencies": {
     "@iconify-json/carbon": "^1.1.20",
@@ -14,10 +19,11 @@
     "@iconify-json/logos": "^1.1.34",
     "@nuxt/content": "^2.7.2",
     "@nuxt/image-edge": "1.0.0-rc.1-28205905.cb96767",
-    "@tresjs/cientos": "3.2.1",
-    "@tresjs/eslint-config-vue": "^0.2.0",
-    "@tresjs/leches": "^0.8.0",
-    "@tresjs/nuxt": "1.1.5",
+    "@tresjs/cientos": "3.3.0",
+    "@tresjs/core": "^3.2.2",
+    "@tresjs/eslint-config-vue": "^0.2.1",
+    "@tresjs/leches": "^0.10.0",
+    "@tresjs/nuxt": "1.1.7",
     "@tweakpane/plugin-essentials": "^0.2.0",
     "@types/three": "^0.155.1",
     "@unocss/nuxt": "^0.55.3",
@@ -27,10 +33,5 @@
     "postprocessing": "^6.33.0",
     "vite-plugin-glsl": "^1.1.2",
     "vite-svg-loader": "^4.0.0"
-  },
-  "dependencies": {
-    "@tresjs/core": "^3.2.0",
-    "@tresjs/post-processing": "^0.4.0",
-    "three": "^0.156.1"
   }
 }

@@ -46,9 +46,9 @@ for (let i = 0; i < parameters.count; i++) {
   positions[i3 + 1] = 0 // y
   positions[i3 + 2] = Math.sin(branchAngle) * radius // z
 
-  const randomX = Math.pow(Math.random(), parameters.randomnessPower) * (Math.random() < 0.5 ? -1 : 1)
-  const randomY = Math.pow(Math.random(), parameters.randomnessPower) * (Math.random() < 0.5 ? -1 : 1)
-  const randomZ = Math.pow(Math.random(), parameters.randomnessPower) * (Math.random() < 0.5 ? -1 : 1)
+  const randomX = Math.random() ** parameters.randomnessPower * (Math.random() < 0.5 ? -1 : 1)
+  const randomY = Math.random() ** parameters.randomnessPower * (Math.random() < 0.5 ? -1 : 1)
+  const randomZ = Math.random() ** parameters.randomnessPower * (Math.random() < 0.5 ? -1 : 1)
 
   randomnessArray[i3] = randomX
   randomnessArray[i3 + 1] = randomY
@@ -100,9 +100,9 @@ function updateGalaxy() {
       positions[i3 + 1] = 0 // y
       positions[i3 + 2] = Math.sin(branchAngle) * radius // z
 
-      const randomX = Math.pow(Math.random(), parameters.randomnessPower) * (Math.random() < 0.5 ? -1 : 1)
-      const randomY = Math.pow(Math.random(), parameters.randomnessPower) * (Math.random() < 0.5 ? -1 : 1)
-      const randomZ = Math.pow(Math.random(), parameters.randomnessPower) * (Math.random() < 0.5 ? -1 : 1)
+      const randomX = Math.random() ** parameters.randomnessPower * (Math.random() < 0.5 ? -1 : 1)
+      const randomY = Math.random() ** parameters.randomnessPower * (Math.random() < 0.5 ? -1 : 1)
+      const randomZ = Math.random() ** parameters.randomnessPower * (Math.random() < 0.5 ? -1 : 1)
 
       randomness[i3] = randomX
       randomness[i3 + 1] = randomY
@@ -178,7 +178,7 @@ const [count, size, radius, branches, spin, randomness, randomnessPower, insideC
     step: 0.001,
   },
   insideColor: '#b5f28d',
-  outsideColor : '#1b3984',
+  outsideColor: '#1b3984',
 })
 
 watch([count.value, size.value, radius.value, branches.value, spin.value, randomness.value, randomnessPower.value, insideColor.value, outsideColor.value], (state) => {
@@ -187,7 +187,6 @@ watch([count.value, size.value, radius.value, branches.value, spin.value, random
   })
   updateGalaxy()
 })
-
 
 onMounted(() => {
   gsap.to('.title', {

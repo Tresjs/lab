@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Object3D } from 'three'
+import type { Object3D } from 'three'
 import { shallowRef, watch } from 'vue'
 
 const props = defineProps<{
@@ -25,7 +25,7 @@ cloud.updateMatrixWorld()
 
 watch(
   () => props.planet,
-  planet => {
+  (planet) => {
     if (!planet) return
     cloud.lookAt(planet.position)
     cloud.updateMatrixWorld()
@@ -35,14 +35,14 @@ watch(
 const { onLoop } = useRenderLoop()
 
 let angle = random(-1, 1) * Math.PI
-let speed = Math.random() / 10
+const speed = Math.random() / 10
 onLoop(({ delta }) => {
   if (!cloud) return
 
   const radius = Math.abs(props.planet.geometry.boundingSphere.radius - 0.5)
   angle += delta * speed
-  let x = radius * Math.cos(angle)
-  let z = radius * Math.sin(angle)
+  const x = radius * Math.cos(angle)
+  const z = radius * Math.sin(angle)
   cloud.position.x = x
   cloud.position.z = z
   cloud.rotation.y = -angle
@@ -50,6 +50,10 @@ onLoop(({ delta }) => {
   cloud.updateMatrixWorld()
 })
 </script>
+
 <template>
-  <primitive :object="scene" cast-shadow />
+  <primitive
+    :object="scene"
+    cast-shadow
+  />
 </template>

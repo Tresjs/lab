@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 const { scene: model, animations } = await useGLTF(
   'https://raw.githubusercontent.com/Tresjs/assets/main/models/gltf/warcraft-3-alliance-footmanfanmade/source/Footman_RIG.glb',
 )
@@ -13,26 +12,25 @@ const { value: animation } = useControls({
   animation: {
     value: 'Idle',
     options: [
-    { text: 'Idle', value: 'Idle' },
-    { text: 'SwordAndShieldCrouchBlockIdle', value: 'SwordAndShieldCrouchBlockIdle' },
-    { text: 'SwordAndShieldDeath_2', value: 'SwordAndShieldDeath_2' },
-    { text: 'SwordAndShieldIdle', value: 'SwordAndShieldIdle' },
-    { text: 'SwordAndShieldKick', value: 'SwordAndShieldKick' },
-    { text: 'SwordAndShieldRun(back)', value: 'SwordAndShieldRun(back)' },
-    { text: 'SwordAndShieldRun', value: 'SwordAndShieldRun' },
-    { text: 'SwordAndShieldSlash_2', value: 'SwordAndShieldSlash_2' },
-    { text: 'SwordAndShieldSlash', value: 'SwordAndShieldSlash' },
-    { text: 'T-Pose', value: 'T-Pose' },
+      { text: 'Idle', value: 'Idle' },
+      { text: 'SwordAndShieldCrouchBlockIdle', value: 'SwordAndShieldCrouchBlockIdle' },
+      { text: 'SwordAndShieldDeath_2', value: 'SwordAndShieldDeath_2' },
+      { text: 'SwordAndShieldIdle', value: 'SwordAndShieldIdle' },
+      { text: 'SwordAndShieldKick', value: 'SwordAndShieldKick' },
+      { text: 'SwordAndShieldRun(back)', value: 'SwordAndShieldRun(back)' },
+      { text: 'SwordAndShieldRun', value: 'SwordAndShieldRun' },
+      { text: 'SwordAndShieldSlash_2', value: 'SwordAndShieldSlash_2' },
+      { text: 'SwordAndShieldSlash', value: 'SwordAndShieldSlash' },
+      { text: 'T-Pose', value: 'T-Pose' },
     ],
   },
 })
 
-watch(animation, value => {
+watch(animation, (value) => {
   currentAction.stop()
-  currentAction = actions[value]
+  currentAction = actions[value as unknown as string]
   currentAction.play()
 })
-
 
 const { onLoop } = useRenderLoop()
 
@@ -42,6 +40,7 @@ onLoop(() => {
   }
 })
 </script>
+
 <template>
   <Suspense>
     <primitive :object="model" />

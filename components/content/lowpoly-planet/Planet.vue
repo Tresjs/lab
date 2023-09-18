@@ -8,12 +8,11 @@ const { nodes } = await useGLTF(
 
 const planet = nodes.Planet
 const icosphere = nodes.Icosphere
-planet.traverse(child => {
+planet.traverse((child) => {
   if (child.isMesh) {
     child.receiveShadow = true
   }
 })
-
 
 const { onLoop } = useRenderLoop()
 
@@ -25,8 +24,13 @@ onLoop(({ delta }) => {
   planet.updateMatrixWorld()
 })
 </script>
+
 <template>
   <primitive :object="planet" />
   <Airplane :planet="icosphere" />
-  <Cloud v-for="cloud of [1, 2, 3, 4, 5, 6, 7, 8, 9]" :key="cloud" :planet="icosphere" />
+  <Cloud
+    v-for="cloud of [1, 2, 3, 4, 5, 6, 7, 8, 9]"
+    :key="cloud"
+    :planet="icosphere"
+  />
 </template>
