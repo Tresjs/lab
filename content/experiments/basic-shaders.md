@@ -81,7 +81,7 @@ onLoop(({ _delta, elapsed }) => {
 
 Now we need to create the shaders. Shaders are written in GLSL, a C-like language for writing shaders.
 
-```glsl
+```
 // vertex.glsl
 uniform vec2 uAmplitude;
 uniform vec2 uFrequency;
@@ -100,7 +100,7 @@ void main() {
 }
 ```
 
-```glsl
+```
 // fragment.glsl
 precision mediump float;
 varying vec2 vUv;

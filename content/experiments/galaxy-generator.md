@@ -231,7 +231,7 @@ pane.addInput(parameters, 'outsideColor').on('change', updateGalaxy)
 
 Now we need to create the shaders. Shaders are written in GLSL, a C-like language for writing shaders.
 
-```glsl
+```
 // vertex.glsl
 uniform float uSize;
 uniform float uTime;
@@ -271,7 +271,7 @@ void main() {
 }
 ```
 
-```glsl
+```
 // fragment.glsl
 varying vec3 vColor;
 
