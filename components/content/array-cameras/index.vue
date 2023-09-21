@@ -50,6 +50,7 @@ cameraOptions.forEach((data) => {
 const { hasFinishLoading, progress } = await useProgress()
 
 useControls('fpsgraph')
+
 </script>
 
 <template>

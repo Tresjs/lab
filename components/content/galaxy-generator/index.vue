@@ -135,6 +135,7 @@ onLoop(({ elapsed }) => {
 })
 useControls('fpsgraph')
 const {count, size, radius, branches, spin, randomness, randomnessPower, insideColor, outsideColor} = useControls({
+
   count: {
     value: 30000,
     min: 0,
