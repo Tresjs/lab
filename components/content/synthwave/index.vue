@@ -1,10 +1,9 @@
 <script lang="ts" setup>
-import { SRGBColorSpace, WebGLRenderer, Camera, Mesh, Scene, CineonToneMapping } from 'three'
+import { SRGBColorSpace, WebGLRenderer, Camera, Mesh, Scene, CineonToneMapping, Vector2 } from 'three'
 import { shallowRef } from 'vue'
-import { BloomEffect, FXAAEffect, GridEffect, EffectComposer, RenderPass, EffectPass } from 'postprocessing'
+import { BloomEffect, FXAAEffect, ScanlineEffect, EffectComposer, RenderPass, EffectPass } from 'postprocessing'
 import { useWindowSize } from '@vueuse/core'
 import { PALETTE } from './components/palette'
-
 // Source: https://lospec.com/palette-list/synthwave-9
 
 const gl = {
@@ -27,16 +26,16 @@ function setup(renderer: WebGLRenderer, scene: Scene, camera: Camera) {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
   const bloomEffect = new BloomEffect({
     intensity: 0.5,
-    luminanceThreshold: 0.1,
-    radius: 1,
+    luminanceThreshold: 0,
+    radius: 4,
   })
   const fxaaEffect = new FXAAEffect()
-  const gridEffect = new GridEffect({ scale: 1.6 })
 
   fxaaEffect.minEdgeThreshold = 0.01
+  const scanline = new ScanlineEffect()
 
   const renderPass = new RenderPass(scene, camera)
-  const effectPass = new EffectPass(camera, fxaaEffect, bloomEffect)
+  const effectPass = new EffectPass(camera, fxaaEffect, bloomEffect, scanline)
 
   effectComposer = new EffectComposer(renderer)
   effectComposer.addPass(renderPass)
@@ -64,11 +63,11 @@ watch([setupRef], () => {
     <TresMesh ref="setupRef" :position="[0, 0, 0]"></TresMesh>
 
     <TresPerspectiveCamera :position="[0, 0, 12]">
-      <TresPointLight :intensity="1000" :position="[0, 3, 0]" :color="PALETTE[2]" />
+      <TresPointLight :intensity="1000" :position="[0, 3, 0]" :color="PALETTE[1]" />
     </TresPerspectiveCamera>
 
     <TresAmbientLight :intensity="3" />
-    <TresPointLight :intensity="1000" :position="[0, 3, -10]" :color="PALETTE[3]" />
+    <TresPointLight :intensity="10000" :position="[0, 3, -10]" :color="PALETTE[3]" />
     <TresPointLight :intensity="10000" :position="[0, 6, -40]" :color="PALETTE[8]" />
 
     <Stars />
