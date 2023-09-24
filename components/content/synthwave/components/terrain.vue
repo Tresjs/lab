@@ -1,122 +1,165 @@
 <script lang="ts" setup>
-import { PlaneGeometry, TypedArray } from 'three'
+import {
+  AdditiveBlending,
+  BufferGeometry,
+  Color,
+  Float32BufferAttribute,
+  Group,
+  Mesh,
+  MeshPhongMaterial,
+  PlaneGeometry,
+  Points,
+  PointsMaterial,
+} from 'three'
 import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry'
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial'
 import { Line2 } from 'three/examples/jsm/lines/Line2'
-import { ImprovedNoise } from 'three/examples/jsm/math/ImprovedNoise'
-import { shallowRef } from 'vue'
+import { lerp } from 'three/src/math/MathUtils'
 
 export interface TerrainProps {
   colorFills: string
   colorLines: string
+  colorDust: string
+  speed: number
+  terrainGenFn: (x: number, y: number) => [number, number, number]
 }
 
 const props = defineProps<TerrainProps>()
 
-const width = 40
-const depth = 60
-const STEP = 5
+const NUM_CHUNKS = 10
+const ROWS_PER_CHUNK = 6
+const COLS_PER_CHUNK = 30
+const NUM_DUST_PER_CHUNK = 500
 
-const ANIMATION = {
-  speed: 3,
-}
+const meshMaterial = new MeshPhongMaterial({
+  color: props.colorFills,
+  flatShading: true,
+  shininess: 50,
+})
 
-const NOISE_SCALE = 0.3
+const lineMaterial = new LineMaterial({
+  color: new Color(props.colorLines).getHex(),
+  linewidth: 0.0006,
+  alphaToCoverage: false,
+})
 
-const landscapeRef = shallowRef({ position: { x: 0, y: 0, z: 0 } })
-const positionArrayRef = shallowRef(new Uint32Array() as TypedArray)
-const geometryRef = shallowRef(undefined as unknown as PlaneGeometry)
-const lineMeshRef = shallowRef(undefined as unknown as Line2)
+const dustMaterial = new PointsMaterial({
+  color: props.colorDust,
+  size: 0.2,
+  blending: AdditiveBlending,
+  depthTest: true,
+  transparent: true,
+})
 
-const noise = new ImprovedNoise().noise
-function getVertexArray(offset = 0) {
-  const geometry = new PlaneGeometry(width, depth, width, depth)
-  const vertices = geometry.attributes.position.array
-  const numVertices = vertices.length / 3
+function getChunk(chunkI = 0) {
+  const geometry = new PlaneGeometry(1, 1 / NUM_CHUNKS, COLS_PER_CHUNK, ROWS_PER_CHUNK)
+  const chunk = new Mesh(geometry, meshMaterial)
+  const positions = geometry.attributes.position.array
+  const offsetY = chunkI / NUM_CHUNKS
+  const numVertices = positions.length / 3
   for (let v = 0; v < numVertices; v++) {
     const i = v * 3
-    const x = vertices[i]
-    const y = vertices[i + 1] + offset
-    vertices[i] += Math.sin(y * 0.33) * 0.25
-    vertices[i + 2] = Math.abs(noise(x * NOISE_SCALE, y * NOISE_SCALE, 0)) * 7
-    vertices[i + 2] *= Math.abs(Math.sin(x * 0.2)) + 0.1
-    vertices[i + 2] += Math.sin(y * 0.133) * 0.5
+    const xx = positions[i]
+    const yy = positions[i + 1] + offsetY
+    const [x, y, z] = props.terrainGenFn(xx, yy)
+    positions[i] = x
+    positions[i + 1] = y
+    positions[i + 2] = z - offsetY
   }
-  return vertices
+  return chunk
 }
 
-function getLinePositions() {
-  let linePositions = []
-  for (let row = 0; row < depth; row++) {
-    let isEvenRow = row % 2 == 0
-    for (let col = isEvenRow ? 0 : width - 1; isEvenRow ? col < width : col >= 0; isEvenRow ? col++ : col--) {
-      for (let point = isEvenRow ? 0 : 3; isEvenRow ? point < 4 : point >= 0; isEvenRow ? point++ : point--) {
-        let mappedIndex
-        let rowOffset = row * (width + 1)
-        if (point < 2) {
-          mappedIndex = rowOffset + col + point
-        } else {
-          mappedIndex = rowOffset + col + point + width - 1
+function getLines(mesh: Mesh) {
+  const vis = []
+  for (let row = 0; row < ROWS_PER_CHUNK; row++) {
+    const rowOffset = row * (COLS_PER_CHUNK + 1)
+    if (row % 2 === 0) {
+      for (let col = 0; col < COLS_PER_CHUNK; col++) {
+        for (let point = 0; point < 4; point++) {
+          vis.push(rowOffset + col + point + (point < 2 ? 0 : COLS_PER_CHUNK - 1))
         }
-
-        linePositions.push(positionArrayRef.value[mappedIndex * 3])
-        linePositions.push(positionArrayRef.value[mappedIndex * 3 + 1])
-        linePositions.push(positionArrayRef.value[mappedIndex * 3 + 2])
+      }
+    } else {
+      for (let col = COLS_PER_CHUNK - 1; col >= 0; col--) {
+        for (let point = 3; point >= 0; point--) {
+          vis.push(rowOffset + col + point + (point < 2 ? 0 : COLS_PER_CHUNK - 1))
+        }
       }
     }
   }
-  return linePositions
-}
 
-{
-  positionArrayRef.value = getVertexArray()
-  // the grid lines, reference: https://threejs.org/examples/?q=line#webgl_lines_fat
+  const srcVerts = mesh.geometry.attributes.position.array
+  const vertices: number[] = []
+  vis.forEach(vi => vertices.push(srcVerts[vi * 3], srcVerts[vi * 3 + 1], srcVerts[vi * 3 + 2]))
   const lineGeometry = new LineGeometry()
-  lineGeometry.setPositions(getLinePositions())
-  // This is a specific way to map line points to cooresponding vertices of the planeGeometry
-
-  // the material for the grid lines
-  let lineMaterial = new LineMaterial({
-    color: new Number(props.colorLines) as number,
-    linewidth: 0.005, // in world units with size attenuation, pixels otherwise
-    alphaToCoverage: false,
-    worldUnits: true, // such that line width depends on world distance
-  })
-
-  // create the lines mesh and add to scene
-  let line = new Line2(lineGeometry, lineMaterial)
-  line.position.set(0, 0.01, 0)
-  line.rotation.x -= Math.PI / 2
-  lineMeshRef.value = line
+  lineGeometry.setPositions(vertices)
+  return new Line2(lineGeometry, lineMaterial)
 }
 
-let offset = 0
-useRenderLoop().onLoop(({ delta }) => {
-  landscapeRef.value.position.z += delta * ANIMATION.speed
+const rangeSplit = (n: number) => {
+  return n * (Math.random() - 0.5)
+}
 
-  while (landscapeRef.value.position.z > STEP) {
-    landscapeRef.value.position.z -= STEP
-    offset += STEP
-    positionArrayRef.value = getVertexArray(offset)
-    lineMeshRef.value.geometry.setPositions(getLinePositions())
-    if (geometryRef.value) {
-      geometryRef.value.attributes.position.needsUpdate = true
-      geometryRef.value.computeVertexNormals()
-    }
+function getDust(chunkI: number) {
+  const geometry = new BufferGeometry()
+  const vertices = []
+  for (let i = 0; i < NUM_DUST_PER_CHUNK; i++) {
+    const x = rangeSplit(2)
+    const y = rangeSplit(10)
+    const z = Math.random() / NUM_CHUNKS
+    vertices.push(x, y, z)
   }
+
+  geometry.setAttribute('position', new Float32BufferAttribute(vertices, 3))
+  const particles = new Points(geometry, dustMaterial)
+  return particles
+}
+
+function easeOutSine(x: number): number {
+  return Math.sin((x * Math.PI) / 2)
+}
+
+const RESET_DIST = 0.3
+useRenderLoop().onLoop(({ delta }) => {
+  group.position.z += delta * props.speed
+  let progress = 1 - (RESET_DIST - group.position.z) / RESET_DIST
+
+  while (progress > 1) {
+    group.position.z -= 1 / NUM_CHUNKS
+    progress = 1 - (RESET_DIST - group.position.z) / RESET_DIST
+    const c = group.children.pop()
+    if (c) {
+      group.children.unshift(c)
+    }
+    group.children.forEach((c, i) => {
+      c.position.z = i / NUM_CHUNKS
+      c.position.y = 0
+    })
+  }
+  group.children[0].position.y = lerp(-9, 0, easeOutSine(progress))
 })
+
+const conveyor = new Group()
+const group = new Group()
+conveyor.add(group)
+{
+  for (let chunkI = 0; chunkI < NUM_CHUNKS; chunkI++) {
+    const chunk = new Group()
+    const mesh = getChunk(chunkI)
+    chunk.add(mesh)
+    const lines = getLines(mesh)
+    lines.position.y += 0.001
+    chunk.add(lines)
+    const dust = getDust(chunkI)
+    chunk.add(dust)
+
+    group.add(chunk)
+  }
+  group.children.forEach((c, i) => (c.position.z = i / NUM_CHUNKS))
+  group.position.z = 1
+}
 </script>
 
 <template>
-  <TresGroup ref="landscapeRef">
-    <TresMesh :rotation="[-Math.PI * 0.5, 0, 0]">
-      <TresPlaneGeometry
-        ref="geometryRef"
-        :args="[width, depth, width, depth]"
-        :attributes-position-array="positionArrayRef"
-      />
-      <TresMeshPhongMaterial :color="props.colorFills" :flat-shading="true" :shininess="100" />
-    </TresMesh>
-    <primitive :object="lineMeshRef" />
-  </TresGroup>
+  <primitive :object="conveyor" />
 </template>

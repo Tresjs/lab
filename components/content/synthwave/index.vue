@@ -1,38 +1,97 @@
 <script lang="ts" setup>
-import { SRGBColorSpace, CineonToneMapping } from 'three'
+import { SRGBColorSpace, CineonToneMapping, AdditiveBlending, Color, SubtractiveBlending } from 'three'
 import { PALETTE } from './components/palette'
+import { ImprovedNoise } from 'three/examples/jsm/math/ImprovedNoise'
 
 const gl = {
   clearColor: PALETTE[0],
   alpha: false,
   outputColorSpace: SRGBColorSpace,
   toneMapping: CineonToneMapping,
-  logarithmicDepthBuffer: true,
 }
+
+const PI2 = Math.PI * 2
+const NOISE_PEAK = 4
+const NOISE_SCALE = 6
+const TERRAIN_SCALE = [120, 6, 360]
+const SPEED = 0.04
+const noise = new ImprovedNoise().noise
+
+const pathGen = (yy: number): [number, number, number] => {
+  const path = Math.sin(PI2 * yy * 2) * 0.05
+  const wave = Math.sin(PI2 * yy * 3) * 0.3
+  return [path, wave, yy]
+}
+
+function fract(a: number) {
+  return a - Math.floor(a)
+}
+
+function pingpong(a: number, b: number) {
+  if (b == 0.0) {
+    return 0.0
+  } else {
+    return Math.abs(fract((a - b) / (b * 2.0)) * b * 2.0 - b)
+  }
+}
+
+const terrainGen = (planeX: number, planeY: number): [number, number, number] => {
+  const [path, wave, z] = pathGen(planeY)
+  const x = planeX
+  const noiseV = Math.abs(
+    noise(planeX * NOISE_SCALE, pingpong(planeY * 4, 0.5) * (NOISE_SCALE * (2 * Math.sin(PI2 * planeY))), 0),
+  )
+  const noisePeaks = -(NOISE_PEAK + Math.abs(Math.sin(PI2 * planeY))) * noiseV
+  const y = (noisePeaks + noisePeaks * Math.abs(wave)) * Math.abs(Math.sin(PI2 * (planeX - path))) + wave
+  return [-x, -y, z]
+}
+const x = shallowRef(0)
+const y = shallowRef(0)
+const z = shallowRef(0)
+
+useRenderLoop().onLoop(({ elapsed }) => {
+  const [xx, yy, _] = pathGen(elapsed * SPEED)
+  x.value = xx * TERRAIN_SCALE[0]
+  y.value = yy * TERRAIN_SCALE[1] + 3
+  z.value = TERRAIN_SCALE[2]
+})
 </script>
 
 <template>
-  <TresCanvas v-bind="gl" :disable-render="true">
+  <TresCanvas v-bind="gl" :disable-render="false">
     <Postprocessing />
-    <TresWebGLRenderer ref="rendererRef"></TresWebGLRenderer>
-    <TresMesh ref="setupRef" :position="[0, 0, 0]"></TresMesh>
 
-    <TresPerspectiveCamera :position="[0, 0, 12]">
-      <TresPointLight :intensity="1000" :position="[0, 3, 0]" :color="PALETTE[1]" />
+    <TresPerspectiveCamera :position="[x, y, z]">
+      <TresPointLight :intensity="1000" :position="[0, 3, 0]" :color="PALETTE[6]" />
+      <Mountain :color="PALETTE[8]" :position="[0, 0, -500]" :scale="24" />
+
+      <Sun :scale="100" :color-a="PALETTE[3]" :color-b="PALETTE[7]" :position="[0, 133, -600]" />
+
+      <Grid
+        :num-divisions="39"
+        :color="PALETTE[1]"
+        :fill="PALETTE[2]"
+        :scale="2660"
+        :position="[0, 71, -600]"
+        :col-fills="[
+          { color: PALETTE[6], colNum: -1 },
+          { color: PALETTE[6], colNum: 0 },
+          { color: PALETTE[6], colNum: 1 },
+        ]"
+      />
+      <Stars :scale="2" />
     </TresPerspectiveCamera>
-
     <TresAmbientLight :intensity="3" />
-    <TresPointLight :intensity="10000" :position="[0, 3, -10]" :color="PALETTE[3]" />
-    <TresPointLight :intensity="10000" :position="[0, 6, -40]" :color="PALETTE[8]" />
+    <TresDirectionalLight :intensity="100" :position="[0, 70, -400]" :color="PALETTE[3]" />
+    <TresDirectionalLight :intensity="100" :position="[200, 0, 100]" :color="PALETTE[1]" />
 
-    <Stars />
-    <Sun :position="[0, 80, -400]" :color-a="PALETTE[3]" :color-b="PALETTE[7]" />
-    <Mountain :color-fills="PALETTE[8]" :position="[0, -4, -160]" />
-    <Dust :color-fills="PALETTE[4]" />
-
-    <TresGroup :position="[0, 0, -15]">
-      <Terrain :color-fills="PALETTE[2]" :color-lines="PALETTE[6]" :position="[0, -1, 0]" />
-    </TresGroup>
-    <OrbitControls />
+    <Terrain
+      :terrain-gen-fn="terrainGen"
+      :color-fills="PALETTE[2]"
+      :color-lines="PALETTE[8]"
+      :color-dust="PALETTE[3]"
+      :scale="TERRAIN_SCALE"
+      :speed="SPEED"
+    />
   </TresCanvas>
 </template>

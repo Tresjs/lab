@@ -1,3 +1,5 @@
+import { Color } from 'three'
+
 export const PALETTE = [
   '#0D0221',
   '#241734',
@@ -9,3 +11,10 @@ export const PALETTE = [
   '#F9C80E',
   '#FFFFFF',
 ]
+
+export const PALETTE_VEC4 = PALETTE.map(hexToRgbaString)
+
+export function hexToRgbaString(hex: string) {
+  const c = new Color(hex)
+  return `vec4(${c.r}, ${c.g}, ${c.b}, 1.0)`
+}

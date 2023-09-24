@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-import { Color, Vector3 } from 'three'
+import { NoBlending, Color, Vector3, DoubleSide, Mesh, SphereGeometry } from 'three'
+import { hexToRgbaString } from './palette'
 
 export interface SunProps {
   colorA: string
@@ -8,7 +9,7 @@ export interface SunProps {
 
 const props = defineProps<SunProps>()
 
-const vertex = `
+const vertexShader = `
 varying vec3 vPos;
 void main() {
   vPos = position;
@@ -16,19 +17,19 @@ void main() {
 }
 `
 
-const frag = `
+const fragmentShader = `
 #ifdef GL_ES
 precision mediump float;
 #endif
 #define PI 3.14159265359
 #define TWO_PI 6.28318530718
 
-uniform vec3 color_main;
-uniform vec3 color_accent;
+const vec4 color_main = ${hexToRgbaString(props.colorA)};
+const vec4 color_accent = ${hexToRgbaString(props.colorB)};
+
 varying vec3 vPos;
 void main() {
-  vec3 color = mix(color_main, color_accent, vPos.y * 0.007 - 0.1);
-  gl_FragColor = vec4(color, 1.0);
+  gl_FragColor = mix(color_main, color_accent, vPos.y * .7 - 0.1);
 }
 `
 
@@ -45,8 +46,11 @@ const uniforms = {
 </script>
 
 <template>
-  <TresMesh>
-    <TresSphereGeometry :args="[60, 64, 64]" />
-    <TresShaderMaterial :uniforms="uniforms" :vertex-shader="vertex" :fragment-shader="frag" :transparent="true" />
-  </TresMesh>
+  <TresGroup>
+    <slot />
+    <TresMesh :render-order="0">
+      <TresSphereGeometry :args="[1, 64, 64]" />
+      <TresShaderMaterial :vertex-shader="vertexShader" :fragment-shader="fragmentShader" />
+    </TresMesh>
+  </TresGroup>
 </template>

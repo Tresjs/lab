@@ -1,11 +1,10 @@
 <script lang="ts" setup>
-import { PlaneGeometry, TypedArray } from 'three'
-import { Line2 } from 'three/examples/jsm/lines/Line2'
+import { PlaneGeometry } from 'three'
 import { ImprovedNoise } from 'three/examples/jsm/math/ImprovedNoise'
 import { shallowRef } from 'vue'
 
 export interface TerrainProps {
-  colorFills: string
+  color: string
 }
 
 const props = defineProps<TerrainProps>()
@@ -38,14 +37,15 @@ function getVertexArray(offset = 0) {
 </script>
 
 <template>
-  <TresGroup ref="landscapeRef" :scale="8">
+  <TresGroup ref="landscapeRef">
+    <slot />
     <TresMesh :rotation="[-Math.PI * 0.5, 0, 0]">
       <TresPlaneGeometry
         ref="geometryRef"
         :args="[width, depth, width, depth]"
         :attributes-position-array="getVertexArray()"
       />
-      <TresMeshStandardMaterial :color="props.colorFills" :flat-shading="true" />
+      <TresMeshBasicMaterial :color="props.color" />
     </TresMesh>
   </TresGroup>
 </template>
