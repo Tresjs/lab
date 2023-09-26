@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { NoBlending, Color, Vector3, DoubleSide, Mesh, SphereGeometry } from 'three'
+import { Color, Vector3 } from 'three'
 import { hexToRgbaString } from './palette'
 
 export interface SunProps {

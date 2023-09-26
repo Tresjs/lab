@@ -5,10 +5,14 @@ import { useWindowSize } from '@vueuse/core'
 let effectComposer: EffectComposer
 
 function setup(renderer: WebGLRenderer, scene: Scene, camera: Camera) {
+  const onUpdateWindowSize = () => {
+    const { width, height } = useWindowSize()
+    renderer.setSize(width.value, height.value)
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+  }
+  onUpdateWindowSize()
+
   effectComposer = new EffectComposer(renderer)
-  const { width, height } = useWindowSize()
-  renderer.setSize(width.value, height.value)
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
   const bloomEffect = new BloomEffect({
     intensity: 0.9,
     luminanceThreshold: 0,
@@ -21,6 +25,8 @@ function setup(renderer: WebGLRenderer, scene: Scene, camera: Camera) {
   effectComposer = new EffectComposer(renderer)
   effectComposer.addPass(renderPass)
   effectComposer.addPass(effectPass)
+
+  watch(useWindowSize, onUpdateWindowSize)
 }
 
 useRenderLoop().onLoop(() => {

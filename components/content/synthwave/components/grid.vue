@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import { AdditiveBlending, Color, Mesh, MeshBasicMaterial, MeshPhongMaterial, PlaneGeometry } from 'three'
+import { AdditiveBlending, Color, Mesh, MeshBasicMaterial, PlaneGeometry } from 'three'
 import { Line2 } from 'three/examples/jsm/lines/Line2'
 import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry'
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial'
-import { PALETTE } from './palette'
-import { ColorAverageEffect } from 'postprocessing'
 
 type ColFill = {
   colNum: number
@@ -16,6 +14,7 @@ export interface TerrainProps {
   fill: string
   numDivisions: number
   colFills: ColFill[]
+  progress?: number
 }
 
 const props = withDefaults(defineProps<TerrainProps>(), {
@@ -25,6 +24,7 @@ const props = withDefaults(defineProps<TerrainProps>(), {
     { colNum: 10, color: '#F00' },
     { colNum: 11, color: '#FFFFFF' },
   ],
+  progress: 1.0,
 })
 
 const OPACITY = 0.2
@@ -97,12 +97,13 @@ for (const i of Array.from({ length: props.numDivisions }, (e, i) => i)) {
   offsets.push((i > numDivisions * 0.5 ? i : numDivisions - i + 1) * invNumDivisions)
 }
 
-useRenderLoop().onLoop(({ elapsed }) => {
-  const progress = elapsed * 0.2
+watch(() => props.progress, update)
+
+function update() {
   cols.forEach((col, i) => {
-    col.scale.y = Math.abs(Math.floor(Math.sin(progress + -offsets[i] * 0.2) * numDivisions)) * invNumDivisions
+    col.scale.y = Math.abs(Math.floor(Math.sin(props.progress + -offsets[i] * 0.2) * numDivisions)) * invNumDivisions
   })
-})
+}
 </script>
 
 <template>

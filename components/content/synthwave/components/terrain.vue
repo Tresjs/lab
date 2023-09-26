@@ -15,6 +15,7 @@ import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry'
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial'
 import { Line2 } from 'three/examples/jsm/lines/Line2'
 import { lerp } from 'three/src/math/MathUtils'
+import { ProseA } from '.nuxt/components'
 
 export interface TerrainProps {
   colorFills: string
@@ -22,6 +23,7 @@ export interface TerrainProps {
   colorDust: string
   speed: number
   terrainGenFn: (x: number, y: number) => [number, number, number]
+  shininess: number
 }
 
 const props = defineProps<TerrainProps>()
@@ -34,8 +36,15 @@ const NUM_DUST_PER_CHUNK = 500
 const meshMaterial = new MeshPhongMaterial({
   color: props.colorFills,
   flatShading: true,
-  shininess: 50,
+  shininess: 50 * props.shininess,
 })
+
+watch(
+  () => props.shininess,
+  () => {
+    meshMaterial.shininess = 10 + props.shininess * 90
+  },
+)
 
 const lineMaterial = new LineMaterial({
   color: new Color(props.colorLines).getHex(),
