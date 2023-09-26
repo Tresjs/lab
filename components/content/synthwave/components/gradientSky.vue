@@ -31,8 +31,8 @@ const fragmentShader = `
     gl_FragColor = vec4( mix( bottomColor, topColor, h), 1.0 );
   }`
 const uniforms = {
-  topColor: { value: new Color(0x0000ff) },
-  bottomColor: { value: new Color(0xff0000) },
+  topColor: { value: new Color(props.colorSky) },
+  bottomColor: { value: new Color(props.colorGround) },
   offset: { value: props.offset },
   scale: { value: props.scale },
 }

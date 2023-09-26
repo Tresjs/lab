@@ -98,6 +98,6 @@ useRenderLoop().onLoop(({ elapsed }) => {
       :speed="SPEED"
       :shininess="dayProgress"
     />
-    <GradientSky :color-sky="PALETTE[1]" :color-ground="PALETTE[3]" :size="1000" :offset="0" :scale="1" />
+    <GradientSky :color-sky="PALETTE[3]" :color-ground="PALETTE[5]" :size="1000" :offset="0.3" :scale="2" />
   </TresCanvas>
 </template>
