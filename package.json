@@ -11,7 +11,7 @@
   "dependencies": {
     "@tresjs/post-processing": "^0.4.0",
     "mdast-util-to-string": "^4.0.0",
-    "three": "^0.156.1",
+    "three": "^0.157.0",
     "unist-util-stringify-position": "^4.0.0"
   },
   "devDependencies": {
@@ -27,7 +27,7 @@
     "@tresjs/leches": "^0.10.0",
     "@tresjs/nuxt": "1.1.7",
     "@tweakpane/plugin-essentials": "^0.2.0",
-    "@types/three": "^0.155.1",
+    "@types/three": "^0.157.0",
     "@unocss/nuxt": "^0.55.3",
     "gsap": "^3.12.2",
     "nuxt": "^3.7.3",
