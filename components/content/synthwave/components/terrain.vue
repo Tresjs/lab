@@ -15,7 +15,6 @@ import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry'
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial'
 import { Line2 } from 'three/examples/jsm/lines/Line2'
 import { lerp } from 'three/src/math/MathUtils'
-import { ProseA } from '.nuxt/components'
 
 export interface TerrainProps {
   colorFills: string
@@ -28,10 +27,10 @@ export interface TerrainProps {
 
 const props = defineProps<TerrainProps>()
 
-const NUM_CHUNKS = 10
-const ROWS_PER_CHUNK = 6
+const NUM_CHUNKS = 120
+const ROWS_PER_CHUNK = 1
 const COLS_PER_CHUNK = 30
-const NUM_DUST_PER_CHUNK = 500
+const NUM_DUST_PER_CHUNK = 50
 
 const meshMaterial = new MeshPhongMaterial({
   color: props.colorFills,
@@ -109,7 +108,7 @@ const rangeSplit = (n: number) => {
   return n * (Math.random() - 0.5)
 }
 
-function getDust(chunkI: number) {
+function getDust() {
   const geometry = new BufferGeometry()
   const vertices = []
   for (let i = 0; i < NUM_DUST_PER_CHUNK; i++) {
@@ -129,7 +128,7 @@ function easeOutSine(x: number): number {
 }
 
 const RESET_DIST = 0.3
-useRenderLoop().onLoop(({ delta }) => {
+useRenderLoop().onLoop(({ delta, elapsed }) => {
   group.position.z += delta * props.speed
   let progress = 1 - (RESET_DIST - group.position.z) / RESET_DIST
 
@@ -145,6 +144,11 @@ useRenderLoop().onLoop(({ delta }) => {
       c.position.y = 0
     })
   }
+  group.children.forEach((c, i) => {
+    c.children[1].visible =
+      (c.position.z > 0.6 && c.position.z < 0.65) ||
+      Math.abs(Math.abs(Math.sin(elapsed * 0.25)) - c.position.z) < 0.0125
+  })
   group.children[0].position.y = lerp(-9, 0, easeOutSine(progress))
 })
 
@@ -159,7 +163,7 @@ conveyor.add(group)
     const lines = getLines(mesh)
     lines.position.y += 0.001
     chunk.add(lines)
-    const dust = getDust(chunkI)
+    const dust = getDust()
     chunk.add(dust)
 
     group.add(chunk)

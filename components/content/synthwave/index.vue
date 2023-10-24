@@ -61,6 +61,7 @@ useRenderLoop().onLoop(({ elapsed }) => {
 </script>
 
 <template>
+  <MusicPlayer />
   <TresCanvas v-bind="gl" :disable-render="false">
     <Postprocessing />
 
@@ -92,7 +93,7 @@ useRenderLoop().onLoop(({ elapsed }) => {
     <Terrain
       :terrain-gen-fn="terrainGen"
       :color-fills="PALETTE[2]"
-      :color-lines="PALETTE[8]"
+      :color-lines="PALETTE[5]"
       :color-dust="PALETTE[3]"
       :scale="TERRAIN_SCALE"
       :speed="SPEED"
