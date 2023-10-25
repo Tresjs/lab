@@ -10,11 +10,12 @@ import {
   PlaneGeometry,
   Points,
   PointsMaterial,
+  Vector3,
 } from 'three'
 import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry'
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial'
 import { Line2 } from 'three/examples/jsm/lines/Line2'
-import { lerp } from 'three/src/math/MathUtils'
+import { clamp, lerp } from 'three/src/math/MathUtils'
 
 export interface TerrainProps {
   colorFills: string
@@ -23,14 +24,15 @@ export interface TerrainProps {
   speed: number
   terrainGenFn: (x: number, y: number) => [number, number, number]
   shininess: number
+  cameraZ: number
 }
 
 const props = defineProps<TerrainProps>()
 
-const NUM_CHUNKS = 120
-const ROWS_PER_CHUNK = 1
+const NUM_CHUNKS = 20
+const ROWS_PER_CHUNK = 6
 const COLS_PER_CHUNK = 30
-const NUM_DUST_PER_CHUNK = 50
+const NUM_DUST_PER_CHUNK = 150
 
 const meshMaterial = new MeshPhongMaterial({
   color: props.colorFills,
@@ -47,7 +49,7 @@ watch(
 
 const lineMaterial = new LineMaterial({
   color: new Color(props.colorLines).getHex(),
-  linewidth: 0.0006,
+  worldUnits: false,
   alphaToCoverage: false,
 })
 
@@ -127,14 +129,15 @@ function easeOutSine(x: number): number {
   return Math.sin((x * Math.PI) / 2)
 }
 
-const RESET_DIST = 0.3
-useRenderLoop().onLoop(({ delta, elapsed }) => {
+const v = new Vector3(0, 0, 0)
+useRenderLoop().onLoop(({ delta }) => {
   group.position.z += delta * props.speed
-  let progress = 1 - (RESET_DIST - group.position.z) / RESET_DIST
-
-  while (progress > 1) {
+  let p = group.children[NUM_CHUNKS - 1].worldToLocal(v.set(0, 0, props.cameraZ)).z
+  let progress = p * NUM_CHUNKS * -1 - 1
+  lineMaterial.linewidth = clamp(Math.sin(progress * Math.PI) * 2.2 - 0.5, 0, 1) * 0.001
+  while (p < -0.1) {
     group.position.z -= 1 / NUM_CHUNKS
-    progress = 1 - (RESET_DIST - group.position.z) / RESET_DIST
+    p = group.children[NUM_CHUNKS - 1].worldToLocal(v.set(0, 0, props.cameraZ)).z
     const c = group.children.pop()
     if (c) {
       group.children.unshift(c)
@@ -143,13 +146,13 @@ useRenderLoop().onLoop(({ delta, elapsed }) => {
       c.position.z = i / NUM_CHUNKS
       c.position.y = 0
     })
+    lineMaterial.color = new Color(props.colorLines)
   }
   group.children.forEach((c, i) => {
-    c.children[1].visible =
-      (c.position.z > 0.6 && c.position.z < 0.65) ||
-      Math.abs(Math.abs(Math.sin(elapsed * 0.25)) - c.position.z) < 0.0125
+    c.children[1].visible = i === NUM_CHUNKS - 4
   })
-  group.children[0].position.y = lerp(-9, 0, easeOutSine(progress))
+  progress = p * NUM_CHUNKS * -1 - 1
+  group.children[0].position.y = lerp(-3, 0, easeOutSine(progress))
 })
 
 const conveyor = new Group()

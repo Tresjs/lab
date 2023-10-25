@@ -15,7 +15,7 @@ const PI2 = Math.PI * 2
 const NOISE_PEAK = 4
 const NOISE_SCALE = 6
 const TERRAIN_SCALE = [120, 6, 360]
-const SPEED = 0.04
+const SPEED = 0.0375
 const noise = new ImprovedNoise().noise
 
 const pathGen = (yy: number): [number, number, number] => {
@@ -55,8 +55,8 @@ useRenderLoop().onLoop(({ elapsed }) => {
   const [xx, yy, _] = pathGen(elapsed * SPEED)
   x.value = xx * TERRAIN_SCALE[0]
   y.value = yy * TERRAIN_SCALE[1] + 3
-  z.value = TERRAIN_SCALE[2]
-  dayProgress.value = Math.pow(clamp(Math.cos(elapsed * 0.2) + 0.5, 0, 1), 2)
+  z.value = 0
+  dayProgress.value = clamp(Math.cos(elapsed * SPEED * 2) + 0.5, 0, 1)
 })
 </script>
 
@@ -84,7 +84,7 @@ useRenderLoop().onLoop(({ elapsed }) => {
           { color: PALETTE[6], colNum: 1 },
         ]"
       />
-      <Stars :scale="2" />
+      <Stars :scale="5" />
     </TresPerspectiveCamera>
     <TresAmbientLight :color="PALETTE[3]" :intensity="40 * (1 - dayProgress)" />
     <TresDirectionalLight :intensity="20 + 80 * dayProgress" :position="[0, 70, -400]" :color="PALETTE[3]" />
@@ -92,8 +92,9 @@ useRenderLoop().onLoop(({ elapsed }) => {
 
     <Terrain
       :terrain-gen-fn="terrainGen"
+      :camera-z="z"
       :color-fills="PALETTE[2]"
-      :color-lines="PALETTE[5]"
+      :color-lines="dayProgress > 0.5 ? PALETTE[4] : PALETTE[8]"
       :color-dust="PALETTE[3]"
       :scale="TERRAIN_SCALE"
       :speed="SPEED"
