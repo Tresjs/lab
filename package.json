@@ -9,7 +9,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.vue"
   },
   "dependencies": {
-    "@tresjs/post-processing": "^0.4.0",
+    "@tresjs/post-processing": "^0.7.0",
     "mdast-util-to-string": "^4.0.0",
     "three": "^0.157.0",
     "three-custom-shader-material": "^5.4.0",
