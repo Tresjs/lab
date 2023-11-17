@@ -35,6 +35,6 @@
     "nuxt-svgo": "^3.5.5",
     "postprocessing": "^6.33.2",
     "vite-plugin-glsl": "^1.1.2",
-    "vite-svg-loader": "^4.0.0"
+    "vite-svg-loader": "^5.0.0"
   }
 }
