@@ -29,7 +29,7 @@
     "@tresjs/nuxt": "1.2.0",
     "@tweakpane/plugin-essentials": "^0.2.0",
     "@types/three": "^0.157.0",
-    "@unocss/nuxt": "^0.55.3",
+    "@unocss/nuxt": "^0.58.0",
     "gsap": "^3.12.2",
     "nuxt": "^3.7.4",
     "nuxt-svgo": "^3.5.5",
