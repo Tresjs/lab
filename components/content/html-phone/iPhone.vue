@@ -31,7 +31,22 @@ function onViewClose() {
     <TresGroup :position="[0, 1, 0]" ref="">
       <primitive :object="model">
         <Html :distance-factor="1.39" transform :position="[1, 0, 0.2]" :occlude="[back]" v-if="!closeUp">
-          <button @click="onViewClose" class="p-6 flex items-center rounded-full text-4xl"> <i class="i-carbon-view"></i></button>
+          <button @click="onViewClose" 
+            class="
+              p-6
+              flex
+              items-center
+              rounded-full
+              text-4xl
+              hover:bg-dark
+              hover:text-white
+              transition-colors
+              duration-200
+              ease-in-out
+              "
+            > 
+            <i class="i-carbon-view" />
+          </button>
         </Html>
         <Html
           transform
