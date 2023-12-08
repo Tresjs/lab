@@ -11,7 +11,7 @@
   "dependencies": {
     "@tresjs/post-processing": "^0.7.0",
     "mdast-util-to-string": "^4.0.0",
-    "three": "^0.158.0",
+    "three": "^0.159.0",
     "three-custom-shader-material": "^5.4.0",
     "unist-util-stringify-position": "^4.0.0"
   },
