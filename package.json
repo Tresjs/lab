@@ -23,7 +23,7 @@
     "@nuxt/content": "^2.9.0",
     "@nuxt/image": "^1.1.0",
     "@nuxt/image-edge": "1.1.0-28373407.4ef2978",
-    "@tresjs/cientos": "3.6.0",
+    "@tresjs/cientos": "3.7.0",
     "@tresjs/core": "3.6.0",
     "@tresjs/eslint-config-vue": "^0.2.1",
     "@tresjs/leches": "0.15.0-next.1",
