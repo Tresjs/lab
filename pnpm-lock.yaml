@@ -62,8 +62,8 @@ devDependencies:
     specifier: ^0.2.1
     version: 0.2.1(tweakpane@4.0.3)
   '@types/three':
-    specifier: ^0.159.0
-    version: 0.159.0
+    specifier: ^0.160.0
+    version: 0.160.0
   '@unocss/nuxt':
     specifier: ^0.58.2
     version: 0.58.2(postcss@8.4.32)(vite@5.0.10)(webpack@5.89.0)
@@ -2645,6 +2645,15 @@ packages:
 
   /@types/three@0.159.0:
     resolution: {integrity: sha512-2gybdh7HtX+rGUgslzK7QEJfzD2I0qrbUGzKk+dK0FDx49UHkNX0rqZVRzIgeFjBd1HzzhNNgwNoMacm3Wyc7w==}
+    dependencies:
+      '@types/stats.js': 0.17.3
+      '@types/webxr': 0.5.10
+      fflate: 0.6.10
+      meshoptimizer: 0.18.1
+    dev: true
+
+  /@types/three@0.160.0:
+    resolution: {integrity: sha512-jWlbUBovicUKaOYxzgkLlhkiEQJkhCVvg4W2IYD2trqD2om3VK4DGLpHH5zQHNr7RweZK/5re/4IVhbhvxbV9w==}
     dependencies:
       '@types/stats.js': 0.17.3
       '@types/webxr': 0.5.10
