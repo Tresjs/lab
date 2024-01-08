@@ -33,7 +33,7 @@
     "@unocss/nuxt": "^0.58.2",
     "gsap": "^3.12.4",
     "nuxt": "^3.9.0",
-    "nuxt-svgo": "^3.7.0",
+    "nuxt-svgo": "^4.0.0",
     "postprocessing": "^6.34.1",
     "vite-svg-loader": "^5.1.0"
   }
