@@ -56,8 +56,8 @@ devDependencies:
     specifier: ^0.2.1
     version: 0.2.1(eslint@8.56.0)(typescript@5.3.3)
   '@tresjs/leches':
-    specifier: 0.15.0-next.1
-    version: 0.15.0-next.1(vite@5.0.11)(vue@3.4.13)
+    specifier: 0.15.0-next.3
+    version: 0.15.0-next.3(three@0.160.0)(vite@5.0.11)(vue@3.4.13)
   '@tresjs/nuxt':
     specifier: 2.0.1
     version: 2.0.1(nuxt@3.9.1)(postcss@8.4.33)(three@0.160.0)(vite@5.0.11)(vue@3.4.13)(webpack@5.89.0)
@@ -2338,7 +2338,7 @@ packages:
       - react
     dev: true
 
-  /@tresjs/core@3.5.1(three@0.159.0)(vue@3.4.13):
+  /@tresjs/core@3.5.1(three@0.160.0)(vue@3.4.13):
     resolution: {integrity: sha512-j7fHT3X8NamQk+n5A20r/UUkInHWQOJr5dzzcuOCdD6s3FFc3WMYtbRq+cJN8FR8mS0vpSK6h9s82com8cmRNA==}
     peerDependencies:
       three: '>=0.133'
@@ -2346,7 +2346,7 @@ packages:
     dependencies:
       '@alvarosabu/utils': 3.1.1
       '@vueuse/core': 10.7.1(vue@3.4.13)
-      three: 0.159.0
+      three: 0.160.0
       vue: 3.4.13(typescript@5.3.3)
     transitivePeerDependencies:
       - '@vue/composition-api'
@@ -2443,16 +2443,17 @@ packages:
       - supports-color
     dev: true
 
-  /@tresjs/leches@0.15.0-next.1(vite@5.0.11)(vue@3.4.13):
-    resolution: {integrity: sha512-2kZ8Lh4x03xCBM0X/XSAp2uEBIO4o1F7IP2U5SBeexppeZKqHaO9JSM0eXP5hJiGAQGmmj7uOKMDNWA0nae8VQ==}
+  /@tresjs/leches@0.15.0-next.3(three@0.160.0)(vite@5.0.11)(vue@3.4.13):
+    resolution: {integrity: sha512-kI8DovuzZ/mnSY3ifEiKJ1fd3aBoM5hYSfX0uwlJ6KWblVafrhds1J8j5aoFq6Kx0pjDVsY72fL8itAfm0ZrzQ==}
     peerDependencies:
+      three: '>=0.133'
       vue: '>=3.3.4'
     dependencies:
-      '@tresjs/core': 3.5.1(three@0.159.0)(vue@3.4.13)
+      '@tresjs/core': 3.5.1(three@0.160.0)(vue@3.4.13)
       '@types/three': 0.158.3
       '@unocss/core': 0.57.7
       '@vueuse/components': 10.6.1(vue@3.4.13)
-      three: 0.159.0
+      three: 0.160.0
       vite-plugin-css-injected-by-js: 3.3.0(vite@5.0.11)
       vue: 3.4.13(typescript@5.3.3)
     transitivePeerDependencies:
@@ -10678,10 +10679,6 @@ packages:
       potpack: 1.0.2
       three: 0.160.0
     dev: false
-
-  /three@0.159.0:
-    resolution: {integrity: sha512-eCmhlLGbBgucuo4VEA9IO3Qpc7dh8Bd4VKzr7WfW4+8hMcIfoAVi1ev0pJYN9PTTsCslbcKgBwr2wNZ1EvLInA==}
-    dev: true
 
   /three@0.160.0:
     resolution: {integrity: sha512-DLU8lc0zNIPkM7rH5/e1Ks1Z8tWCGRq6g8mPowdDJpw1CFBJMU7UoJjC6PefXW7z//SSl0b2+GCw14LB+uDhng==}
