@@ -24,7 +24,7 @@
     "@nuxt/image": "^1.2.0",
     "@nuxt/image-edge": "1.2.0-28417792.5fb7d0e",
     "@nuxtjs/color-mode": "^3.3.2",
-    "@tresjs/cientos": "3.7.0",
+    "@tresjs/cientos": "3.8.0",
     "@tresjs/core": "3.6.0",
     "@tresjs/eslint-config-vue": "^0.2.1",
     "@tresjs/leches": "0.15.0-next.1",
