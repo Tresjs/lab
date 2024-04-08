@@ -125,7 +125,7 @@ tags: ['basic', 'cientos', 'useGLTF', 'blender']
 <LowpolyPlanet />
 ```
 
-5. Take a screenshot of your scene ot the `public` directory.
+5. Take a screenshot of your scene. Crop it to 16:9. Save it in the `public` directory as a png.
 
 ## License
 
