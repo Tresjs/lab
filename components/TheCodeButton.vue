@@ -6,29 +6,37 @@ defineProps<{
 </script>
 
 <template>
-  <NuxtLink
-    :custom="true"
-  >
-    <a
-      :href="to"
-      :title="title"
-      class="i-carbon-logo-github w-6 h-6"
-    />
-  </NuxtLink>
+  <span class="rounded-full border-3">
+    <NuxtLink
+      :custom="true"
+    >
+      <a
+        :href="to"
+        :title="title"
+        class="i-carbon-logo-github w-6 h-6"
+      />
+    </NuxtLink>
+  </span>
 </template>
 
 <style scoped>
-a {
-  display: inline-block;
-  z-index: 10;
+.dark span {
+  background-color: rgb(34, 34, 34);
+  border-color: rgb(34, 34, 34);
 }
+
 .dark a {
   background-color: rgb(209, 213, 219);
   text-shadow: rgb(34, 34, 34) 1px 0 10px;
 }
 
-.sepia a {
+span, .sepia span {
+  background-color: #FFF;
+  border-color: #FFF;
+}
+
+a, .sepia a {
+  background-color: rgb(75, 85, 99);
   text-shadow: rgb(209, 213, 219) 1px 0 10px;
-  background-color: rgb(34, 34, 34);
 }
 </style>
