@@ -16,6 +16,14 @@ const { data: formattedExperiments } = await useAsyncData('/', () =>
     })),
   ),
 )
+
+function getRepoPath(slug) {
+  return `https://github.com/Tresjs/lab/tree/main/components/content/${slug}`
+}
+
+function getRepoTitle(slug) {
+  return `${slug} – code on Github` 
+}
 </script>
 
 <template>
@@ -26,6 +34,8 @@ const { data: formattedExperiments } = await useAsyncData('/', () =>
         :key="experiment._path"
         :title="experiment.title"
         :path="experiment._path"
+        :repo-title="getRepoTitle(experiment.slug)"
+        :repo-path="getRepoPath(experiment.slug)"
         :media="experiment.thumbnail"
         :description="experiment.description"
         :author="experiment.author"

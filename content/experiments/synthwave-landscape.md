@@ -8,5 +8,5 @@ description: Infinite procedural landscape
 tags: ['procedural', 'shader', 'post-processing']
 ---
 
-::synthwave
+::synthwave-landscape
 ::

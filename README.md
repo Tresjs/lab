@@ -127,6 +127,12 @@ tags: ['basic', 'cientos', 'useGLTF', 'blender']
 
 5. Take a screenshot of your scene. Crop it to 16:9. Save it in the `public` directory as a png.
 
+### Broken Github demo links
+
+Note that the system will automatically add a link to your demo's source code on Github, so that visitors can see how you made your demo. 
+
+The link will be broken until your demo is merged into the main Lab branch.
+
 ## License
 
 [MIT](/LICENSE)
