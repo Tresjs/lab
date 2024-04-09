@@ -1,7 +1,5 @@
 ---
-thumbnail: /portal-journey.png
-title: Portal Journey
-slug: portal-journey
+status: unpublished
 author: alvarosabu
 type: vue
 description: Famous Bruno Simon's ThreeJS Journey Portal.

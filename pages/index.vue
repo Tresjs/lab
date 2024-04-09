@@ -1,28 +1,62 @@
 <script setup>
 const { data: experiments } = await useAsyncData('/', 
   () => queryContent('experiments')
-    .where({ status: 'published' })
+    .where({ $or: [ 
+      { status: { $exists: false } }, 
+      { status: 'published' },
+    ] })
     .sort({ date: -1 })
     .find(),
 )
+
 const { data: formattedExperiments } = await useAsyncData('/', () =>
   Promise.all(
     experiments.value.map(async experiment => ({
       ...experiment,
+      slug: getSlugFromExperiment(experiment),
+      title: getTitleFromExperiment(experiment),
+      thumbnail: getThumbnailFromExperiment(experiment),
       author: await queryContent('authors')
         .where({ slug: experiment.author })
         .only(['name', 'avatar', 'slug'])
         .findOne(),
-    })),
-  ),
-)
+      repoPath: getRepoPathFromExperiment(experiment),
+      repoTitle: getRepoTitleFromExperiment(experiment),
+    }))))
 
-function getRepoPath(slug) {
-  return `https://github.com/Tresjs/lab/tree/main/components/content/${slug}`
+function getSlugFromExperiment(experiment) {
+  return experiment.slug ?? experiment._path.split('/').pop()
 }
 
-function getRepoTitle(slug) {
-  return `${slug} – code on Github` 
+function getTitleFromExperiment(experiment) {
+  return experiment.title 
+    ?? getSlugFromExperiment(experiment).split('-')
+      .map(capitalize)
+      .join(' ')
+}
+
+function capitalize(word) {
+  if (word.length === 0) {
+    return word
+  } 
+  else if (word.length === 1) {
+    return word.toUpperCase()
+  } 
+  else {
+    return word[0].toUpperCase() + word.slice(1)
+  }
+}
+
+function getThumbnailFromExperiment(experiment) {
+  return experiment.thumbnail ?? `/${getSlugFromExperiment(experiment)}.png`
+}
+
+function getRepoPathFromExperiment(experiment) {
+  return `https://github.com/Tresjs/lab/tree/main/components/content/${getSlugFromExperiment(experiment)}`
+}
+
+function getRepoTitleFromExperiment(experiment) {
+  return `${getSlugFromExperiment(experiment)} – code on Github` 
 }
 </script>
 
@@ -34,8 +68,8 @@ function getRepoTitle(slug) {
         :key="experiment._path"
         :title="experiment.title"
         :path="experiment._path"
-        :repo-title="getRepoTitle(experiment.slug)"
-        :repo-path="getRepoPath(experiment.slug)"
+        repo-title="experiment.repoTitle"
+        repo-path="experiment.repoPath"
         :media="experiment.thumbnail"
         :description="experiment.description"
         :author="experiment.author"
