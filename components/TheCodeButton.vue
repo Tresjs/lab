@@ -7,15 +7,11 @@ defineProps<{
 
 <template>
   <span class="rounded-full border-3">
-    <NuxtLink
-      :custom="true"
-    >
-      <a
-        :href="to"
-        :title="title"
-        class="i-carbon-logo-github w-6 h-6"
-      />
-    </NuxtLink>
+    <a
+      :href="to"
+      :title="title"
+      class="i-carbon-logo-github w-6 h-6"
+    />
   </span>
 </template>
 
