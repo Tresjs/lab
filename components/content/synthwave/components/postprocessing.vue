@@ -29,7 +29,7 @@ function setup(renderer: WebGLRenderer, scene: Scene, camera: Camera) {
   watch(useWindowSize, onUpdateWindowSize)
 }
 
-useRenderLoop().onLoop(() => {
+useLoop().render(() => {
   effectComposer?.render()
 })
 
