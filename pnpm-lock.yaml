@@ -10,16 +10,16 @@ importers:
     dependencies:
       '@tresjs/post-processing':
         specifier: ^0.7.0
-        version: 0.7.0(three@0.160.0)(vue@3.4.31(typescript@5.5.4))
+        version: 0.7.0(three@0.167.1)(vue@3.4.31(typescript@5.5.4))
       mdast-util-to-string:
         specifier: ^4.0.0
         version: 4.0.0
       three:
-        specifier: ^0.160.0
-        version: 0.160.0
+        specifier: ^0.167.0
+        version: 0.167.1
       three-custom-shader-material:
         specifier: ^5.4.0
-        version: 5.4.0(three@0.160.0)
+        version: 5.4.0(three@0.167.1)
       unist-util-stringify-position:
         specifier: ^4.0.0
         version: 4.0.0
@@ -50,10 +50,10 @@ importers:
         version: 3.4.2(magicast@0.3.4)(rollup@4.18.1)
       '@tresjs/cientos':
         specifier: 3.9.0
-        version: 3.9.0(@tresjs/core@3.9.0(three@0.160.0)(vue@3.4.31(typescript@5.5.4)))(three@0.160.0)(tweakpane@4.0.3)(vue@3.4.31(typescript@5.5.4))
+        version: 3.9.0(@tresjs/core@3.9.0(three@0.167.1)(vue@3.4.31(typescript@5.5.4)))(three@0.167.1)(tweakpane@4.0.3)(vue@3.4.31(typescript@5.5.4))
       '@tresjs/core':
         specifier: 3.9.0
-        version: 3.9.0(three@0.160.0)(vue@3.4.31(typescript@5.5.4))
+        version: 3.9.0(three@0.167.1)(vue@3.4.31(typescript@5.5.4))
       '@tresjs/eslint-config-vue':
         specifier: ^0.2.1
         version: 0.2.1(@typescript-eslint/eslint-plugin@6.7.2(@typescript-eslint/parser@6.7.2(eslint@8.56.0)(typescript@5.5.4))(eslint@8.56.0)(typescript@5.5.4))(eslint@8.56.0)(typescript@5.5.4)
@@ -62,13 +62,13 @@ importers:
         version: 0.15.0-next.1(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))
       '@tresjs/nuxt':
         specifier: 3.0.2
-        version: 3.0.2(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.160.0)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))(webpack@5.89.0)
+        version: 3.0.2(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.167.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))(webpack@5.89.0)
       '@tweakpane/plugin-essentials':
         specifier: ^0.2.1
         version: 0.2.1(tweakpane@4.0.3)
       '@types/three':
-        specifier: ^0.160.0
-        version: 0.160.0
+        specifier: ^0.167.0
+        version: 0.167.1
       '@unocss/nuxt':
         specifier: ^0.58.3
         version: 0.58.3(postcss@8.4.39)(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(webpack@5.89.0)
@@ -83,7 +83,7 @@ importers:
         version: 4.0.2(magicast@0.3.4)(rollup@4.18.1)(vue@3.4.31(typescript@5.5.4))
       postprocessing:
         specifier: 6.36.0
-        version: 6.36.0(three@0.160.0)
+        version: 6.36.0(three@0.167.1)
       vite-svg-loader:
         specifier: ^5.1.0
         version: 5.1.0(vue@3.4.31(typescript@5.5.4))
@@ -1772,6 +1772,9 @@ packages:
 
   '@types/three@0.166.0':
     resolution: {integrity: sha512-FHMnpcdhdbdOOIYbfkTkUVpYMW53odxbTRwd0/xJpYnTzEsjnVnondGAvHZb4z06UW0vo6WPVuvH0/9qrxKx7g==}
+
+  '@types/three@0.167.1':
+    resolution: {integrity: sha512-OCd2Uv/8/4TbmSaIRFawrCOnDMLdpaa+QGJdhlUBmdfbHjLY8k6uFc0tde2/UvcaHQ6NtLl28onj/vJfofV+Tg==}
 
   '@types/unist@2.0.10':
     resolution: {integrity: sha512-IfYcSBWE3hLpBg8+X2SEa8LVkJdJEkT2Ese2aaLs3ptGdVtABxndrMaxuFlQ1qdFf9Q5rDvDpxI3WwgvKFAsQA==}
@@ -5931,8 +5934,8 @@ packages:
   three@0.159.0:
     resolution: {integrity: sha512-eCmhlLGbBgucuo4VEA9IO3Qpc7dh8Bd4VKzr7WfW4+8hMcIfoAVi1ev0pJYN9PTTsCslbcKgBwr2wNZ1EvLInA==}
 
-  three@0.160.0:
-    resolution: {integrity: sha512-DLU8lc0zNIPkM7rH5/e1Ks1Z8tWCGRq6g8mPowdDJpw1CFBJMU7UoJjC6PefXW7z//SSl0b2+GCw14LB+uDhng==}
+  three@0.167.1:
+    resolution: {integrity: sha512-gYTLJA/UQip6J/tJvl91YYqlZF47+D/kxiWrbTon35ZHlXEN0VOo+Qke2walF1/x92v55H6enomymg4Dak52kw==}
 
   through2@0.6.5:
     resolution: {integrity: sha512-RkK/CCESdTKQZHdmKICijdKKsCRVHs5KsLZ6pACAmF/1GPUQhonHSXWNERctxEp7RmvjdNbZTL5z9V7nSCXKcg==}
@@ -8621,16 +8624,16 @@ snapshots:
       '@tanstack/virtual-core': 3.4.0
       vue: 3.4.31(typescript@5.5.4)
 
-  '@tresjs/cientos@3.9.0(@tresjs/core@3.9.0(three@0.160.0)(vue@3.4.31(typescript@5.5.4)))(three@0.160.0)(tweakpane@4.0.3)(vue@3.4.31(typescript@5.5.4))':
+  '@tresjs/cientos@3.9.0(@tresjs/core@3.9.0(three@0.167.1)(vue@3.4.31(typescript@5.5.4)))(three@0.167.1)(tweakpane@4.0.3)(vue@3.4.31(typescript@5.5.4))':
     dependencies:
-      '@tresjs/core': 3.9.0(three@0.160.0)(vue@3.4.31(typescript@5.5.4))
+      '@tresjs/core': 3.9.0(three@0.167.1)(vue@3.4.31(typescript@5.5.4))
       '@vueuse/core': 10.9.0(vue@3.4.31(typescript@5.5.4))
-      camera-controls: 2.8.3(three@0.160.0)
+      camera-controls: 2.8.3(three@0.167.1)
       stats-gl: 2.2.8
       stats.js: 0.17.0
-      three: 0.160.0
-      three-custom-shader-material: 5.4.0(three@0.160.0)
-      three-stdlib: 2.29.11(three@0.160.0)
+      three: 0.167.1
+      three-custom-shader-material: 5.4.0(three@0.167.1)
+      three-stdlib: 2.29.11(three@0.167.1)
       tweakpane: 4.0.3
       vue: 3.4.31(typescript@5.5.4)
     transitivePeerDependencies:
@@ -8647,69 +8650,69 @@ snapshots:
     transitivePeerDependencies:
       - '@vue/composition-api'
 
-  '@tresjs/core@3.6.0-next.0(three@0.160.0)(vue@3.4.31(typescript@5.5.4))':
+  '@tresjs/core@3.6.0-next.0(three@0.167.1)(vue@3.4.31(typescript@5.5.4))':
     dependencies:
       '@alvarosabu/utils': 3.1.1
       '@vueuse/core': 10.11.0(vue@3.4.31(typescript@5.5.4))
-      three: 0.160.0
+      three: 0.167.1
       vue: 3.4.31(typescript@5.5.4)
     transitivePeerDependencies:
       - '@vue/composition-api'
 
-  '@tresjs/core@3.6.1(three@0.160.0)(vue@3.4.31(typescript@5.5.4))':
+  '@tresjs/core@3.6.1(three@0.167.1)(vue@3.4.31(typescript@5.5.4))':
     dependencies:
       '@alvarosabu/utils': 3.1.1
       '@vueuse/core': 10.11.0(vue@3.4.31(typescript@5.5.4))
-      three: 0.160.0
+      three: 0.167.1
       vue: 3.4.31(typescript@5.5.4)
     transitivePeerDependencies:
       - '@vue/composition-api'
 
-  '@tresjs/core@3.7.0(three@0.160.0)(vue@3.4.31(typescript@5.5.4))':
+  '@tresjs/core@3.7.0(three@0.167.1)(vue@3.4.31(typescript@5.5.4))':
     dependencies:
       '@alvarosabu/utils': 3.1.1
       '@vueuse/core': 10.11.0(vue@3.4.31(typescript@5.5.4))
-      three: 0.160.0
+      three: 0.167.1
       vue: 3.4.31(typescript@5.5.4)
     transitivePeerDependencies:
       - '@vue/composition-api'
 
-  '@tresjs/core@3.9.0(three@0.160.0)(vue@3.4.31(typescript@5.5.4))':
+  '@tresjs/core@3.9.0(three@0.167.1)(vue@3.4.31(typescript@5.5.4))':
     dependencies:
       '@alvarosabu/utils': 3.1.1
       '@vue/devtools-api': 6.6.1
       '@vueuse/core': 10.9.0(vue@3.4.31(typescript@5.5.4))
-      three: 0.160.0
+      three: 0.167.1
       vue: 3.4.31(typescript@5.5.4)
     transitivePeerDependencies:
       - '@vue/composition-api'
 
-  '@tresjs/core@4.0.2(three@0.160.0)(vue@3.4.31(typescript@5.5.4))':
+  '@tresjs/core@4.0.2(three@0.167.1)(vue@3.4.31(typescript@5.5.4))':
     dependencies:
       '@alvarosabu/utils': 3.2.0
       '@vue/devtools-api': 6.6.3
       '@vueuse/core': 10.11.0(vue@3.4.31(typescript@5.5.4))
-      three: 0.160.0
+      three: 0.167.1
       vue: 3.4.31(typescript@5.5.4)
     transitivePeerDependencies:
       - '@vue/composition-api'
 
-  '@tresjs/core@4.1.0(three@0.160.0)(vue@3.4.31(typescript@5.5.4))':
+  '@tresjs/core@4.1.0(three@0.167.1)(vue@3.4.31(typescript@5.5.4))':
     dependencies:
       '@alvarosabu/utils': 3.2.0
       '@vue/devtools-api': 6.6.3
       '@vueuse/core': 10.11.0(vue@3.4.31(typescript@5.5.4))
-      three: 0.160.0
+      three: 0.167.1
       vue: 3.4.31(typescript@5.5.4)
     transitivePeerDependencies:
       - '@vue/composition-api'
 
-  '@tresjs/core@4.2.1(three@0.160.0)(vue@3.4.31(typescript@5.5.4))':
+  '@tresjs/core@4.2.1(three@0.167.1)(vue@3.4.31(typescript@5.5.4))':
     dependencies:
       '@alvarosabu/utils': 3.2.0
       '@vue/devtools-api': 6.6.3
       '@vueuse/core': 10.11.0(vue@3.4.31(typescript@5.5.4))
-      three: 0.160.0
+      three: 0.167.1
       vue: 3.4.31(typescript@5.5.4)
     transitivePeerDependencies:
       - '@vue/composition-api'
@@ -8777,20 +8780,20 @@ snapshots:
       - '@vue/composition-api'
       - vite
 
-  '@tresjs/nuxt@2.0.1(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.160.0)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))(webpack@5.89.0)':
+  '@tresjs/nuxt@2.0.1(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.167.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))(webpack@5.89.0)':
     dependencies:
       '@nuxt/devtools-kit': 1.3.9(magicast@0.3.4)(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))
       '@nuxt/kit': 3.12.4(magicast@0.3.4)(rollup@4.18.1)
       '@nuxt/ui': 2.18.2(focus-trap@7.5.4)(magicast@0.3.4)(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))
-      '@tresjs/core': 3.6.0-next.0(three@0.160.0)(vue@3.4.31(typescript@5.5.4))
-      '@tresjs/nuxt': 2.0.1-next.0(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.160.0)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))(webpack@5.89.0)
+      '@tresjs/core': 3.6.0-next.0(three@0.167.1)(vue@3.4.31(typescript@5.5.4))
+      '@tresjs/nuxt': 2.0.1-next.0(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.167.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))(webpack@5.89.0)
       '@types/three': 0.159.0
       '@unocss/nuxt': 0.58.9(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(webpack@5.89.0)
       defu: 6.1.4
       mlly: 1.7.1
       pkg-types: 1.1.3
       sirv: 2.0.4
-      three: 0.160.0
+      three: 0.167.1
       typescript: 5.5.4
       vite-plugin-glsl: 1.3.0(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))
     transitivePeerDependencies:
@@ -8816,19 +8819,19 @@ snapshots:
       - vue
       - webpack
 
-  '@tresjs/nuxt@2.0.1-next.0(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.160.0)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))(webpack@5.89.0)':
+  '@tresjs/nuxt@2.0.1-next.0(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.167.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))(webpack@5.89.0)':
     dependencies:
       '@nuxt/devtools-kit': 1.3.9(magicast@0.3.4)(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))
       '@nuxt/kit': 3.12.4(magicast@0.3.4)(rollup@4.18.1)
       '@nuxt/ui': 2.18.2(focus-trap@7.5.4)(magicast@0.3.4)(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))
-      '@tresjs/core': 3.6.0-next.0(three@0.160.0)(vue@3.4.31(typescript@5.5.4))
+      '@tresjs/core': 3.6.0-next.0(three@0.167.1)(vue@3.4.31(typescript@5.5.4))
       '@types/three': 0.159.0
       '@unocss/nuxt': 0.58.9(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(webpack@5.89.0)
       defu: 6.1.4
       mlly: 1.7.1
       pkg-types: 1.1.3
       sirv: 2.0.4
-      three: 0.160.0
+      three: 0.167.1
       typescript: 5.5.4
       vite-plugin-glsl: 1.3.0(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))
     transitivePeerDependencies:
@@ -8854,20 +8857,20 @@ snapshots:
       - vue
       - webpack
 
-  '@tresjs/nuxt@2.0.2(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.160.0)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))(webpack@5.89.0)':
+  '@tresjs/nuxt@2.0.2(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.167.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))(webpack@5.89.0)':
     dependencies:
       '@nuxt/devtools-kit': 1.3.9(magicast@0.3.4)(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))
       '@nuxt/kit': 3.12.4(magicast@0.3.4)(rollup@4.18.1)
       '@nuxt/ui': 2.18.2(focus-trap@7.5.4)(magicast@0.3.4)(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))
-      '@tresjs/core': 3.6.1(three@0.160.0)(vue@3.4.31(typescript@5.5.4))
-      '@tresjs/nuxt': 2.0.1(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.160.0)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))(webpack@5.89.0)
+      '@tresjs/core': 3.6.1(three@0.167.1)(vue@3.4.31(typescript@5.5.4))
+      '@tresjs/nuxt': 2.0.1(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.167.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))(webpack@5.89.0)
       '@types/three': 0.160.0
       '@unocss/nuxt': 0.58.9(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(webpack@5.89.0)
       defu: 6.1.4
       mlly: 1.7.1
       pkg-types: 1.1.3
       sirv: 2.0.4
-      three: 0.160.0
+      three: 0.167.1
       typescript: 5.5.4
       vite-plugin-glsl: 1.3.0(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))
     transitivePeerDependencies:
@@ -8893,20 +8896,20 @@ snapshots:
       - vue
       - webpack
 
-  '@tresjs/nuxt@2.1.0(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.160.0)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))(webpack@5.89.0)':
+  '@tresjs/nuxt@2.1.0(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.167.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))(webpack@5.89.0)':
     dependencies:
       '@nuxt/devtools-kit': 1.3.9(magicast@0.3.4)(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))
       '@nuxt/kit': 3.12.4(magicast@0.3.4)(rollup@4.18.1)
       '@nuxt/ui': 2.18.2(focus-trap@7.5.4)(magicast@0.3.4)(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))
-      '@tresjs/core': 3.7.0(three@0.160.0)(vue@3.4.31(typescript@5.5.4))
-      '@tresjs/nuxt': 2.0.2(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.160.0)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))(webpack@5.89.0)
+      '@tresjs/core': 3.7.0(three@0.167.1)(vue@3.4.31(typescript@5.5.4))
+      '@tresjs/nuxt': 2.0.2(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.167.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))(webpack@5.89.0)
       '@types/three': 0.160.0
       '@unocss/nuxt': 0.58.9(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(webpack@5.89.0)
       defu: 6.1.4
       mlly: 1.7.1
       pkg-types: 1.1.3
       sirv: 2.0.4
-      three: 0.160.0
+      three: 0.167.1
       typescript: 5.5.4
       vite-plugin-glsl: 1.3.0(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))
     transitivePeerDependencies:
@@ -8932,20 +8935,20 @@ snapshots:
       - vue
       - webpack
 
-  '@tresjs/nuxt@2.1.1(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.160.0)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))(webpack@5.89.0)':
+  '@tresjs/nuxt@2.1.1(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.167.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))(webpack@5.89.0)':
     dependencies:
       '@nuxt/devtools-kit': 1.3.9(magicast@0.3.4)(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))
       '@nuxt/kit': 3.12.4(magicast@0.3.4)(rollup@4.18.1)
       '@nuxt/ui': 2.18.2(focus-trap@7.5.4)(magicast@0.3.4)(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))
-      '@tresjs/core': 3.7.0(three@0.160.0)(vue@3.4.31(typescript@5.5.4))
-      '@tresjs/nuxt': 2.1.0(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.160.0)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))(webpack@5.89.0)
+      '@tresjs/core': 3.7.0(three@0.167.1)(vue@3.4.31(typescript@5.5.4))
+      '@tresjs/nuxt': 2.1.0(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.167.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))(webpack@5.89.0)
       '@types/three': 0.160.0
       '@unocss/nuxt': 0.58.9(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(webpack@5.89.0)
       defu: 6.1.4
       mlly: 1.7.1
       pkg-types: 1.1.3
       sirv: 2.0.4
-      three: 0.160.0
+      three: 0.167.1
       typescript: 5.5.4
       vite-plugin-glsl: 1.3.0(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))
     transitivePeerDependencies:
@@ -8971,20 +8974,20 @@ snapshots:
       - vue
       - webpack
 
-  '@tresjs/nuxt@2.1.2(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.160.0)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))(webpack@5.89.0)':
+  '@tresjs/nuxt@2.1.2(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.167.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))(webpack@5.89.0)':
     dependencies:
       '@nuxt/devtools-kit': 1.3.9(magicast@0.3.4)(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))
       '@nuxt/kit': 3.12.4(magicast@0.3.4)(rollup@4.18.1)
       '@nuxt/ui': 2.18.2(focus-trap@7.5.4)(magicast@0.3.4)(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))
-      '@tresjs/core': 3.9.0(three@0.160.0)(vue@3.4.31(typescript@5.5.4))
-      '@tresjs/nuxt': 2.1.1(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.160.0)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))(webpack@5.89.0)
+      '@tresjs/core': 3.9.0(three@0.167.1)(vue@3.4.31(typescript@5.5.4))
+      '@tresjs/nuxt': 2.1.1(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.167.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))(webpack@5.89.0)
       '@types/three': 0.164.0
       '@unocss/nuxt': 0.59.4(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(webpack@5.89.0)
       defu: 6.1.4
       mlly: 1.7.1
       pkg-types: 1.1.3
       sirv: 2.0.4
-      three: 0.160.0
+      three: 0.167.1
       typescript: 5.5.4
       vite-plugin-glsl: 1.3.0(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))
     transitivePeerDependencies:
@@ -9010,20 +9013,20 @@ snapshots:
       - vue
       - webpack
 
-  '@tresjs/nuxt@3.0.0(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.160.0)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))(webpack@5.89.0)':
+  '@tresjs/nuxt@3.0.0(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.167.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))(webpack@5.89.0)':
     dependencies:
       '@nuxt/devtools-kit': 1.3.9(magicast@0.3.4)(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))
       '@nuxt/kit': 3.12.4(magicast@0.3.4)(rollup@4.18.1)
       '@nuxt/ui': 2.18.2(focus-trap@7.5.4)(magicast@0.3.4)(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))
-      '@tresjs/core': 4.0.2(three@0.160.0)(vue@3.4.31(typescript@5.5.4))
-      '@tresjs/nuxt': 2.1.2(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.160.0)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))(webpack@5.89.0)
+      '@tresjs/core': 4.0.2(three@0.167.1)(vue@3.4.31(typescript@5.5.4))
+      '@tresjs/nuxt': 2.1.2(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.167.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))(webpack@5.89.0)
       '@types/three': 0.165.0
       '@unocss/nuxt': 0.61.5(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(webpack@5.89.0)
       defu: 6.1.4
       mlly: 1.7.1
       pkg-types: 1.1.3
       sirv: 2.0.4
-      three: 0.160.0
+      three: 0.167.1
       typescript: 5.5.4
       vite-plugin-glsl: 1.3.0(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))
     transitivePeerDependencies:
@@ -9049,20 +9052,20 @@ snapshots:
       - vue
       - webpack
 
-  '@tresjs/nuxt@3.0.1(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.160.0)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))(webpack@5.89.0)':
+  '@tresjs/nuxt@3.0.1(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.167.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))(webpack@5.89.0)':
     dependencies:
       '@nuxt/devtools-kit': 1.3.9(magicast@0.3.4)(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))
       '@nuxt/kit': 3.12.4(magicast@0.3.4)(rollup@4.18.1)
       '@nuxt/ui': 2.18.2(focus-trap@7.5.4)(magicast@0.3.4)(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))
-      '@tresjs/core': 4.1.0(three@0.160.0)(vue@3.4.31(typescript@5.5.4))
-      '@tresjs/nuxt': 3.0.0(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.160.0)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))(webpack@5.89.0)
+      '@tresjs/core': 4.1.0(three@0.167.1)(vue@3.4.31(typescript@5.5.4))
+      '@tresjs/nuxt': 3.0.0(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.167.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))(webpack@5.89.0)
       '@types/three': 0.166.0
       '@unocss/nuxt': 0.61.5(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(webpack@5.89.0)
       defu: 6.1.4
       mlly: 1.7.1
       pkg-types: 1.1.3
       sirv: 2.0.4
-      three: 0.160.0
+      three: 0.167.1
       typescript: 5.5.4
       vite-plugin-glsl: 1.3.0(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))
     transitivePeerDependencies:
@@ -9088,20 +9091,20 @@ snapshots:
       - vue
       - webpack
 
-  '@tresjs/nuxt@3.0.2(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.160.0)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))(webpack@5.89.0)':
+  '@tresjs/nuxt@3.0.2(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.167.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))(webpack@5.89.0)':
     dependencies:
       '@nuxt/devtools-kit': 1.3.9(magicast@0.3.4)(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))
       '@nuxt/kit': 3.12.4(magicast@0.3.4)(rollup@4.18.1)
       '@nuxt/ui': 2.18.2(focus-trap@7.5.4)(magicast@0.3.4)(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))
-      '@tresjs/core': 4.2.1(three@0.160.0)(vue@3.4.31(typescript@5.5.4))
-      '@tresjs/nuxt': 3.0.1(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.160.0)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))(webpack@5.89.0)
+      '@tresjs/core': 4.2.1(three@0.167.1)(vue@3.4.31(typescript@5.5.4))
+      '@tresjs/nuxt': 3.0.1(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.167.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(vue@3.4.31(typescript@5.5.4))(webpack@5.89.0)
       '@types/three': 0.166.0
       '@unocss/nuxt': 0.61.5(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))(webpack@5.89.0)
       defu: 6.1.4
       mlly: 1.7.1
       pkg-types: 1.1.3
       sirv: 2.0.4
-      three: 0.160.0
+      three: 0.167.1
       typescript: 5.5.4
       vite-plugin-glsl: 1.3.0(rollup@4.18.1)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))
     transitivePeerDependencies:
@@ -9127,14 +9130,14 @@ snapshots:
       - vue
       - webpack
 
-  '@tresjs/post-processing@0.7.0(three@0.160.0)(vue@3.4.31(typescript@5.5.4))':
+  '@tresjs/post-processing@0.7.0(three@0.167.1)(vue@3.4.31(typescript@5.5.4))':
     dependencies:
-      '@tresjs/core': 3.9.0(three@0.160.0)(vue@3.4.31(typescript@5.5.4))
+      '@tresjs/core': 3.9.0(three@0.167.1)(vue@3.4.31(typescript@5.5.4))
       '@unocss/core': 0.57.4
       '@vueuse/core': 10.6.1(vue@3.4.31(typescript@5.5.4))
-      postprocessing: 6.36.0(three@0.160.0)
-      three: 0.160.0
-      three-stdlib: 2.28.5(three@0.160.0)
+      postprocessing: 6.36.0(three@0.167.1)
+      three: 0.167.1
+      three-stdlib: 2.28.5(three@0.167.1)
       vue: 3.4.31(typescript@5.5.4)
     transitivePeerDependencies:
       - '@vue/composition-api'
@@ -9259,6 +9262,14 @@ snapshots:
       meshoptimizer: 0.18.1
 
   '@types/three@0.166.0':
+    dependencies:
+      '@tweenjs/tween.js': 23.1.2
+      '@types/stats.js': 0.17.3
+      '@types/webxr': 0.5.10
+      fflate: 0.8.2
+      meshoptimizer: 0.18.1
+
+  '@types/three@0.167.1':
     dependencies:
       '@tweenjs/tween.js': 23.1.2
       '@types/stats.js': 0.17.3
@@ -10881,9 +10892,9 @@ snapshots:
 
   camelcase@6.3.0: {}
 
-  camera-controls@2.8.3(three@0.160.0):
+  camera-controls@2.8.3(three@0.167.1):
     dependencies:
-      three: 0.160.0
+      three: 0.167.1
 
   caniuse-api@3.0.0:
     dependencies:
@@ -13992,9 +14003,9 @@ snapshots:
       picocolors: 1.0.1
       source-map-js: 1.2.0
 
-  postprocessing@6.36.0(three@0.160.0):
+  postprocessing@6.36.0(three@0.167.1):
     dependencies:
-      three: 0.160.0
+      three: 0.167.1
 
   potpack@1.0.2: {}
 
@@ -14836,15 +14847,15 @@ snapshots:
     dependencies:
       any-promise: 1.3.0
 
-  three-custom-shader-material@5.4.0(three@0.160.0):
+  three-custom-shader-material@5.4.0(three@0.167.1):
     dependencies:
       glsl-token-functions: 1.0.1
       glsl-token-string: 1.0.1
       glsl-tokenizer: 2.1.5
       object-hash: 3.0.0
-      three: 0.160.0
+      three: 0.167.1
 
-  three-stdlib@2.28.5(three@0.160.0):
+  three-stdlib@2.28.5(three@0.167.1):
     dependencies:
       '@types/draco3d': 1.4.8
       '@types/offscreencanvas': 2019.7.3
@@ -14852,9 +14863,9 @@ snapshots:
       draco3d: 1.5.6
       fflate: 0.6.10
       potpack: 1.0.2
-      three: 0.160.0
+      three: 0.167.1
 
-  three-stdlib@2.29.11(three@0.160.0):
+  three-stdlib@2.29.11(three@0.167.1):
     dependencies:
       '@types/draco3d': 1.4.9
       '@types/offscreencanvas': 2019.7.3
@@ -14862,11 +14873,11 @@ snapshots:
       draco3d: 1.5.6
       fflate: 0.6.10
       potpack: 1.0.2
-      three: 0.160.0
+      three: 0.167.1
 
   three@0.159.0: {}
 
-  three@0.160.0: {}
+  three@0.167.1: {}
 
   through2@0.6.5:
     dependencies:
