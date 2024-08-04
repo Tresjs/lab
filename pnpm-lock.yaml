@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@tresjs/post-processing':
         specifier: ^0.7.0
-        version: 0.7.0(three@0.160.0)(vue@3.4.31(typescript@5.5.4))
+        version: 0.7.1(three@0.160.0)(vue@3.4.31(typescript@5.5.4))
       mdast-util-to-string:
         specifier: ^4.0.0
         version: 4.0.0
@@ -1668,8 +1668,8 @@ packages:
     peerDependencies:
       three: '>=0.133'
 
-  '@tresjs/post-processing@0.7.0':
-    resolution: {integrity: sha512-HCLZLvextKBxZBRb09cfmKSmP3GQf/meeaBQoPrawX/mQw0tQMp2SP9jdo0nBCd/xotwudteygXp2PfRzpzzSA==}
+  '@tresjs/post-processing@0.7.1':
+    resolution: {integrity: sha512-MLrjxR4rJ55MOYFKMEZ8aqh5no2/sOG1fdYk2B49Ntx2p2etyuVpI6e9BBAvrc4M/wktRHkQ2JNDbgMaCiJoMg==}
     peerDependencies:
       three: '>=0.133'
       vue: '>=3.3'
@@ -1689,8 +1689,8 @@ packages:
   '@types/debug@4.1.12':
     resolution: {integrity: sha512-vIChWdVG3LG1SMxEvI/AK+FWJthlrqlTu7fbrlywTkkaONwk/UAGaULXRlf8vkzFBLVm0zkMdCquhL5aOjhXPQ==}
 
-  '@types/draco3d@1.4.8':
-    resolution: {integrity: sha512-hdA2gODc+1X5gG+buH8gMRnQdRTa3vep8+PyGFK9xDQmbdudobP//yXLK+C/SnjGLWHiER2QL+xWjq7qkFuivA==}
+  '@types/draco3d@1.4.10':
+    resolution: {integrity: sha512-AX22jp8Y7wwaBgAixaSvkoG4M/+PlAcm3Qs4OW8yT9DM4xUpWKeFhLueTAyZF39pviAdcDdeJoACapiAceqNcw==}
 
   '@types/draco3d@1.4.9':
     resolution: {integrity: sha512-4MMUjMQb4yA5fJ4osXx+QxGHt0/ZSy4spT6jL1HM7Tn8OJEC35siqdnpOo+HxPhYjqEFumKfGVF9hJfdyKBIBA==}
@@ -1787,6 +1787,9 @@ packages:
 
   '@types/webxr@0.5.10':
     resolution: {integrity: sha512-n3u5sqXQJhf1CS68mw3Wf16FQ4cRPNBBwdYLFzq3UddiADOim1Pn3Y6PBdDilz1vOJF3ybLxJ8ZEDlLIzrOQZg==}
+
+  '@types/webxr@0.5.19':
+    resolution: {integrity: sha512-4hxA+NwohSgImdTSlPXEqDqqFktNgmTXQ05ff1uWam05tNGroCMp4G+4XVl6qWm1p7GQ/9oD41kAYsSssF6Mzw==}
 
   '@typescript-eslint/eslint-plugin@6.7.2':
     resolution: {integrity: sha512-ooaHxlmSgZTM6CHYAFRlifqh1OAr3PAQEwi7lhYhaegbnXrnh7CDcHmc3+ihhbQC7H0i4JF0psI5ehzkF6Yl6Q==}
@@ -1950,9 +1953,6 @@ packages:
   '@unocss/config@0.61.5':
     resolution: {integrity: sha512-VIIln/1aD9cqU95+3IVZG9U1yO7Ys6RqyqtgD5pIJ77rg57v/2sey+S2ScFx3KB24Bal3FxAgHA5CdjFpQZldA==}
     engines: {node: '>=14'}
-
-  '@unocss/core@0.57.4':
-    resolution: {integrity: sha512-JXufixa501p7+uwUkfG9voIUvNYXv58shZCKXO4Q9AojOzOMu6TDj35x8f3Sv5WFtZ3tp03sIETAfQRo7ksshw==}
 
   '@unocss/core@0.57.7':
     resolution: {integrity: sha512-1d36M0CV3yC80J0pqOa5rH1BX6g2iZdtKmIb3oSBN4AWnMCSrrJEPBrUikyMq2TEQTrYWJIVDzv5A9hBUat3TA==}
@@ -3270,6 +3270,9 @@ packages:
 
   draco3d@1.5.6:
     resolution: {integrity: sha512-+3NaRjWktb5r61ZFoDejlykPEFKT5N/LkbXsaddlw6xNSXBanUYpFc2AXXpbJDilPHazcSreU/DpQIaxfX0NfQ==}
+
+  draco3d@1.5.7:
+    resolution: {integrity: sha512-m6WCKt/erDXcw+70IJXnG7M3awwQPAsZvJGX5zY7beBqpELw6RDGkYVU0W43AFxye4pDZ5i2Lbyc/NNGqwjUVQ==}
 
   duplexer@0.1.2:
     resolution: {integrity: sha512-jtD6YG370ZCIi/9GTaJKQxWTZD045+4R4hTk/x1UyoqadyJ9x9CgSi1RlVDQF8U2sxLLSnFkCaMihqljHIWgMg==}
@@ -5918,13 +5921,13 @@ packages:
       react:
         optional: true
 
-  three-stdlib@2.28.5:
-    resolution: {integrity: sha512-JdLMhkpT+1ZWeQPyKQNW1zqUwISI2hsUljS6u3vB9lp5EvwsayaAzGnbVeR35895udOF+zxcTiQY3psk+qqlxg==}
+  three-stdlib@2.29.11:
+    resolution: {integrity: sha512-vSyUavKCwOJQd2ch9IHhyJVx6eNG3y+z3/LulqHM7OLMy81OqnmIrvc2b4phKr/c1aVjHRNG2X7JOklfrDDcmQ==}
     peerDependencies:
       three: '>=0.128.0'
 
-  three-stdlib@2.29.11:
-    resolution: {integrity: sha512-vSyUavKCwOJQd2ch9IHhyJVx6eNG3y+z3/LulqHM7OLMy81OqnmIrvc2b4phKr/c1aVjHRNG2X7JOklfrDDcmQ==}
+  three-stdlib@2.30.5:
+    resolution: {integrity: sha512-BBZkKnTDmUacXU9mv7fA5R7Brb89uUbOUWXXZKNrzdx6JEozJt3e6I5zPMRbb1FC2aw/2QFtgwPi1PI8VjX6FQ==}
     peerDependencies:
       three: '>=0.128.0'
 
@@ -9127,14 +9130,14 @@ snapshots:
       - vue
       - webpack
 
-  '@tresjs/post-processing@0.7.0(three@0.160.0)(vue@3.4.31(typescript@5.5.4))':
+  '@tresjs/post-processing@0.7.1(three@0.160.0)(vue@3.4.31(typescript@5.5.4))':
     dependencies:
       '@tresjs/core': 3.9.0(three@0.160.0)(vue@3.4.31(typescript@5.5.4))
-      '@unocss/core': 0.57.4
-      '@vueuse/core': 10.6.1(vue@3.4.31(typescript@5.5.4))
+      '@unocss/core': 0.58.9
+      '@vueuse/core': 10.11.0(vue@3.4.31(typescript@5.5.4))
       postprocessing: 6.36.0(three@0.160.0)
       three: 0.160.0
-      three-stdlib: 2.28.5(three@0.160.0)
+      three-stdlib: 2.30.5(three@0.160.0)
       vue: 3.4.31(typescript@5.5.4)
     transitivePeerDependencies:
       - '@vue/composition-api'
@@ -9151,7 +9154,7 @@ snapshots:
     dependencies:
       '@types/ms': 0.7.34
 
-  '@types/draco3d@1.4.8': {}
+  '@types/draco3d@1.4.10': {}
 
   '@types/draco3d@1.4.9': {}
 
@@ -9223,7 +9226,7 @@ snapshots:
   '@types/three@0.159.0':
     dependencies:
       '@types/stats.js': 0.17.3
-      '@types/webxr': 0.5.10
+      '@types/webxr': 0.5.19
       fflate: 0.6.10
       meshoptimizer: 0.18.1
 
@@ -9246,7 +9249,7 @@ snapshots:
     dependencies:
       '@tweenjs/tween.js': 23.1.2
       '@types/stats.js': 0.17.3
-      '@types/webxr': 0.5.10
+      '@types/webxr': 0.5.19
       fflate: 0.8.2
       meshoptimizer: 0.18.1
 
@@ -9254,7 +9257,7 @@ snapshots:
     dependencies:
       '@tweenjs/tween.js': 23.1.2
       '@types/stats.js': 0.17.3
-      '@types/webxr': 0.5.10
+      '@types/webxr': 0.5.19
       fflate: 0.8.2
       meshoptimizer: 0.18.1
 
@@ -9275,6 +9278,8 @@ snapshots:
   '@types/web-bluetooth@0.0.20': {}
 
   '@types/webxr@0.5.10': {}
+
+  '@types/webxr@0.5.19': {}
 
   '@typescript-eslint/eslint-plugin@6.7.2(@typescript-eslint/parser@6.7.2(eslint@8.56.0)(typescript@5.5.4))(eslint@8.56.0)(typescript@5.5.4)':
     dependencies:
@@ -9548,8 +9553,6 @@ snapshots:
     dependencies:
       '@unocss/core': 0.61.5
       unconfig: 0.3.13
-
-  '@unocss/core@0.57.4': {}
 
   '@unocss/core@0.57.7': {}
 
@@ -11298,6 +11301,8 @@ snapshots:
   dotenv@16.4.5: {}
 
   draco3d@1.5.6: {}
+
+  draco3d@1.5.7: {}
 
   duplexer@0.1.2: {}
 
@@ -14844,9 +14849,9 @@ snapshots:
       object-hash: 3.0.0
       three: 0.160.0
 
-  three-stdlib@2.28.5(three@0.160.0):
+  three-stdlib@2.29.11(three@0.160.0):
     dependencies:
-      '@types/draco3d': 1.4.8
+      '@types/draco3d': 1.4.9
       '@types/offscreencanvas': 2019.7.3
       '@types/webxr': 0.5.10
       draco3d: 1.5.6
@@ -14854,12 +14859,12 @@ snapshots:
       potpack: 1.0.2
       three: 0.160.0
 
-  three-stdlib@2.29.11(three@0.160.0):
+  three-stdlib@2.30.5(three@0.160.0):
     dependencies:
-      '@types/draco3d': 1.4.9
+      '@types/draco3d': 1.4.10
       '@types/offscreencanvas': 2019.7.3
-      '@types/webxr': 0.5.10
-      draco3d: 1.5.6
+      '@types/webxr': 0.5.19
+      draco3d: 1.5.7
       fflate: 0.6.10
       potpack: 1.0.2
       three: 0.160.0
