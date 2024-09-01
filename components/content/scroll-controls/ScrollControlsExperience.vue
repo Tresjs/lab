@@ -39,7 +39,7 @@ const { hasFinishLoading } = await useProgress()
 
 <template>
   
-  <!-- <Transition
+  <Transition
     name="fade-overlay"
     enter-active-class="opacity-1 transition-opacity duration-200"
     leave-active-class="opacity-0 transition-opacity duration-200"
@@ -52,7 +52,7 @@ const { hasFinishLoading } = await useProgress()
         Loading... {{ progress }} % 🚀
       </div>
     </div>
-  </Transition> -->
+  </Transition>
   <TresCanvas
     v-bind="gl"
     window-size
@@ -90,7 +90,7 @@ const { hasFinishLoading } = await useProgress()
       cast-shadow
     />
   </TresCanvas>
-  <div class="">
+  <div>
     <section class="min-h-screen container flex justify-end items-center">
       <div class="w-1/2 text-right">
         <h2 class="text-4xl text-light font-extrabold">
@@ -121,8 +121,3 @@ const { hasFinishLoading } = await useProgress()
   </div>
 </template>
 
-<style scoped>
-#__nuxt {
-  height: 0;
-}
-</style>
