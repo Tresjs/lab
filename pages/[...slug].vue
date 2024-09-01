@@ -72,7 +72,7 @@ useHead({
 </script>
 
 <template>
-  <main>
+  <main class="bg-white dark:bg-dark">
     <ClientOnly>
       <ContentRenderer
         v-if="data"

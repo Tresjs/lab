@@ -2,7 +2,7 @@
 import { LoopOnce } from 'three'
 
 const { scene, nodes, animations } = await useGLTF('/models/cult-of-the-lamb/lamb-v2.glb', { draco: true })
-console.log(animations)
+
 const lamb = nodes['rig']
 
 const { actions } = useAnimations(animations, lamb)

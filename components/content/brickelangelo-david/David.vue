@@ -7,7 +7,6 @@ import { useMouse } from '@vueuse/core'
 const groupRef = ref<Group>()
 
 const gltf = await useGLTF('/models/legolangelo/david.glb')
-console.log(gltf)
 
 const david = gltf.nodes.David
 

@@ -44,7 +44,7 @@ const handleMicrophoneAccess = () => {
   </button>
 
   <TresCanvas :clear-color="'#0c1a30'" v-show="!showInfoDialog">
-    <Experience :analyser="analyser" :data-array="dataArray" />
+    <TheDancingBlob :analyser="analyser" :data-array="dataArray" />
   </TresCanvas>
   <span class="blobPermissionDialog justify-center items-center infline-flex absolute" v-if="showInfoDialog">
     <p>
