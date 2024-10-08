@@ -11,7 +11,7 @@
   "dependencies": {
     "@tresjs/post-processing": "1.0.0-next.1",
     "mdast-util-to-string": "^4.0.0",
-    "three": "^0.168.0",
+    "three": "^0.169.0",
     "three-custom-shader-material": "^5.4.0",
     "unist-util-stringify-position": "^4.0.0"
   },
@@ -30,7 +30,7 @@
     "@tresjs/leches": "0.15.0-next.1",
     "@tresjs/nuxt": "3.0.7",
     "@tweakpane/plugin-essentials": "^0.2.1",
-    "@types/three": "^0.167.2",
+    "@types/three": "^0.169.0",
     "@unocss/nuxt": "^0.62.3",
     "gsap": "^3.12.4",
     "nuxt": "^3.13.0",
