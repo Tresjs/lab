@@ -1,0 +1,34 @@
+<script setup lang="ts">
+import * as THREE from 'three'
+import { useLoader } from '@tresjs/core'
+
+const earth = await useLoader(THREE.TextureLoader, '/textures/space-game/earth.jpg') as THREE.Texture
+const moon = await useLoader(THREE.TextureLoader, '/textures/space-game/moon.png') as THREE.Texture
+</script>
+
+<template>
+  <TresGroup :scale="[100, 100, 100]" :position="[-500, -500, 1000]">
+    <TresMesh>
+      <TresBoxGeometry />
+      <TresMeshNormalMaterial />
+    </TresMesh>
+    <TresMesh>
+      <TresSphereGeometry :args="[5, 32, 32]" />
+      <Suspense>
+        <TresMeshStandardMaterial :map="earth" :roughness="1" :fog="false" />
+      </Suspense>
+    </TresMesh>
+    <TresMesh :position="[5, -5, -5]">
+      <TresSphereGeometry :args="[0.75, 32, 32]" />
+      <Suspense>
+        <TresMeshStandardMaterial :roughness="1" :map="moon" :fog="false" />
+      </Suspense>
+    </TresMesh>
+    <TresPointLight :position="[-5, -5, -5]" :distance="1000" :intensity="6" />
+    <TresMesh :position="[-30, -10, -60]">
+      <TresSphereGeometry :args="[4, 32, 32]" />
+      <TresMeshBasicMaterial color="#FFFF99" :fog="false" />
+      <TresPointLight :distance="6100" :intensity="50" color="white" />
+    </TresMesh>
+  </TresGroup>
+</template>
