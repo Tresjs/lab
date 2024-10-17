@@ -6,7 +6,6 @@ import { Group } from 'three'
 import type { GameStore } from '../GameStore'
 
 const gameStore: GameStore = inject('gameStore') as GameStore
-const { rocks } = gameStore
 const rocksGroupRef = shallowRef(new Group())
 
 const { nodes, materials } = await useLoader(GLTFLoader, '/models/space-game/rock.gltf')
