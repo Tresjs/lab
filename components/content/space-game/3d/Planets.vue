@@ -15,13 +15,13 @@ const moon = await useLoader(THREE.TextureLoader, '/textures/space-game/moon.png
     <TresMesh>
       <TresSphereGeometry :args="[5, 32, 32]" />
       <Suspense>
-        <TresMeshStandardMaterial :map="earth" :roughness="1" :fog="false" />
+        <TresMeshBasicMaterial :map="earth" :fog="false" color="#666666" />
       </Suspense>
     </TresMesh>
     <TresMesh :position="[5, -5, -5]">
       <TresSphereGeometry :args="[0.75, 32, 32]" />
       <Suspense>
-        <TresMeshStandardMaterial :roughness="1" :map="moon" :fog="false" />
+        <TresMeshBasicMaterial :roughness="1" :map="moon" :fog="false" color="#666666" />
       </Suspense>
     </TresMesh>
     <TresPointLight :position="[-5, -5, -5]" :distance="1000" :intensity="6" />

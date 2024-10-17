@@ -39,16 +39,8 @@ useLoop().onAfterRender(({ camera }) => {
 
 <template>
   <TresGroup ref="groupRef">
-    <TresPointLight
-      :distance="400"
-      :position="[0, 0, -250]"
-      :intensity="2000"
-      color="indianred"
-    />
-    <TresGroup
-      ref="rig"
-      :position="[0, 0, -50]"
-    >
+    <TresDirectionalLight :intensity="1" color="indianred" />
+    <TresGroup ref="rig" :position="[0, 0, -50]">
       <slot />
     </TresGroup>
   </TresGroup>
