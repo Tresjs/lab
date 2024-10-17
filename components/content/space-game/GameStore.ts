@@ -166,8 +166,7 @@ gameStore.actions.update = () => {
             , 1000)
         gameStore.points = gameStore.points + rocksHit.length * 100 + enemiesHit.length * 200,
             gameStore.rocks = gameStore.rocks.filter(rock => !rocksHit.find(r => r.guid === rock.guid)),
-            console.log('CHANGE!!!!')
-        gameStore.enemies = gameStore.enemies.filter(enemy => !enemiesHit.find(e => e.guid === enemy.guid))
+            gameStore.enemies = gameStore.enemies.filter(enemy => !enemiesHit.find(e => e.guid === enemy.guid))
     }
 }
 
