@@ -1,29 +1,29 @@
 <script setup lang="ts">
-import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { inject, shallowRef } from 'vue'
 import { useLoader, useLoop } from '@tresjs/core'
 import type { GameStore } from '../TheExperience.vue'
+import { BoxGeometry, Color, Group, MeshBasicMaterial, PointLight, Vector3 } from 'three';
 
-const geometry = new THREE.BoxGeometry(1, 1, 40)
-const lightgreen = new THREE.Color('lightgreen')
-const hotpink = new THREE.Color('hotpink')
-const laserMaterial = new THREE.MeshBasicMaterial({ color: lightgreen })
-const crossMaterial = new THREE.MeshBasicMaterial({ color: hotpink, fog: false })
-const position = new THREE.Vector3()
-const direction = new THREE.Vector3()
+const geometry = new BoxGeometry(1, 1, 40)
+const lightgreen = new Color('lightgreen')
+const hotpink = new Color('hotpink')
+const laserMaterial = new MeshBasicMaterial({ color: lightgreen })
+const crossMaterial = new MeshBasicMaterial({ color: hotpink, fog: false })
+const position = new Vector3()
+const direction = new Vector3()
 
 const { nodes } = await useLoader(GLTFLoader, '/models/space-game/ship.gltf')
 const gameStore = inject('gameStore') as GameStore
 const mutation = gameStore.mutation
 const { clock, mouse, ray } = mutation
 
-const main = shallowRef(new THREE.Group())
-const laserGroup = shallowRef(new THREE.Group())
-const laserLight = shallowRef(new THREE.PointLight())
-const exhaust = shallowRef(new THREE.Group())
-const cross = shallowRef(new THREE.Group())
-const target = shallowRef(new THREE.Group())
+const main = shallowRef(new Group())
+const laserGroup = shallowRef(new Group())
+const laserLight = shallowRef(new PointLight())
+const exhaust = shallowRef(new Group())
+const cross = shallowRef(new Group())
+const target = shallowRef(new Group())
 
 useLoop().onBeforeRender(() => {
   main.value.position.z = Math.sin(clock.getElapsedTime() * 40) * Math.PI * 0.2

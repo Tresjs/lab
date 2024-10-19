@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import * as THREE from 'three'
 import { useLoader, useLoop } from '@tresjs/core'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { inject, shallowRef } from 'vue'
 import type { GameStore } from '../TheExperience.vue'
+import { Box3, Vector3, MeshBasicMaterial, Color, MeshPhongMaterial, Group } from 'three';
 
 const gameStore = inject('gameStore') as GameStore
 const clock = gameStore.mutation.clock
 
-const box = new THREE.Box3()
-box.setFromCenterAndSize(new THREE.Vector3(0, 0, 1), new THREE.Vector3(3, 3, 3))
-const glowMaterial = new THREE.MeshBasicMaterial({ color: new THREE.Color('lightblue') })
-const bodyMaterial = new THREE.MeshPhongMaterial({ color: new THREE.Color('black') })
+const box = new Box3()
+box.setFromCenterAndSize(new Vector3(0, 0, 1), new Vector3(3, 3, 3))
+const glowMaterial = new MeshBasicMaterial({ color: new Color('lightblue') })
+const bodyMaterial = new MeshPhongMaterial({ color: new Color('black') })
 
 const { nodes, materials } = await useLoader(GLTFLoader, '/models/space-game/spacedrone.gltf')
-const ref = shallowRef([new THREE.Group()])
+const ref = shallowRef([new Group()])
 
 useLoop().onBeforeRender(() => {
   let i = 0

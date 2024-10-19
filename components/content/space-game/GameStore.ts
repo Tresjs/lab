@@ -1,12 +1,12 @@
 import { GrannyKnot } from 'three-stdlib'
-import * as THREE from 'three'
-import { onMounted, reactive, shallowRef } from 'vue'
+import { reactive, shallowRef } from 'vue'
 import * as audio from './audio'
 import type { ExplosionData } from './3d/Explosions.vue'
+import { Box3, Clock, Euler, Matrix4, Object3D, PerspectiveCamera, Ray, TubeGeometry, Vector2, Vector3 } from 'three'
 
 let guid = 0
 const spline = new GrannyKnot()
-const track = new THREE.TubeGeometry(spline, 250, 0.2, 10, true)
+const track = new TubeGeometry(spline, 250, 0.2, 10, true)
 
 export const gameStore = reactive({
     spline,
@@ -17,41 +17,41 @@ export const gameStore = reactive({
     rocks: randomData(100, track, 150, 8, () => 1 + Math.random() * 2.5),
     enemies: randomData(10, track, 20, 15, 1),
     rings: randomRings(30, track),
-    camera: new THREE.PerspectiveCamera(),
+    camera: new PerspectiveCamera(),
     sound: false,
     mutation: {
         t: 0,
-        position: new THREE.Vector3(),
+        position: new Vector3(),
         startTime: Date.now(),
 
-        track: track as THREE.TubeGeometry,
+        track: track as TubeGeometry,
         scale: 15,
         fov: 70,
         hits: 0,
 
         particles: randomData(1500, track, 100, 1, () => 0.5 + Math.random() * 0.8),
         looptime: 40 * 1000,
-        binormal: new THREE.Vector3(),
-        normal: new THREE.Vector3(),
-        clock: new THREE.Clock(false),
-        mouse: new THREE.Vector2(-250, 50),
+        binormal: new Vector3(),
+        normal: new Vector3(),
+        clock: new Clock(false),
+        mouse: new Vector2(-250, 50),
 
         // Re-usable objects
-        dummy: new THREE.Object3D(),
-        ray: new THREE.Ray(),
-        box: new THREE.Box3(),
+        dummy: new Object3D(),
+        ray: new Ray(),
+        box: new Box3(),
 
-        cancelExplosionTO: -1,
-        cancelLaserTO: -1,
+        cancelExplosionTO: setTimeout(() => { }, 1),
+        cancelLaserTO: setTimeout(() => { }, 1)
     },
 
     actions: {
         playAudio: (audio: HTMLAudioElement, volume = 1, loop = false) => { },
         toggleSound: (sound: boolean) => { },
         shoot: () => { },
-        test: (_data: { size: number; offset: THREE.Vector3; scale: number; hit: any; distance: number }) => { },
+        test: (_data: { size: number; offset: Vector3; scale: number; hit: any; distance: number }) => { },
         updateMouse: (mouse: { clientX: number; clientY: number }) => { },
-        init: (camera: THREE.PerspectiveCamera) => { },
+        init: (camera: PerspectiveCamera) => { },
         update: () => { },
     },
 })
@@ -76,7 +76,7 @@ gameStore.actions.toggleSound = (sound?: boolean) => {
     gameStore.actions.playAudio(audio.bg, 1, true)
 }
 
-gameStore.actions.init = (camera: THREE.PerspectiveCamera) => {
+gameStore.actions.init = (camera: PerspectiveCamera) => {
     gameStore.mutation.clock.start()
     gameStore.camera = camera
     gameStore.camera.far = 10000
@@ -144,8 +144,8 @@ gameStore.actions.update = () => {
             ...data,
             color: 'white',
             particles: Array.from({ length: 20 }).fill(0).map(_ => ({
-                position: new THREE.Vector3(),
-                dPos: new THREE.Vector3(-1 + Math.random() * 2, -1 + Math.random() * 2, -1 + Math.random() * 2).normalize().multiplyScalar(.40),
+                position: new Vector3(),
+                dPos: new Vector3(-1 + Math.random() * 2, -1 + Math.random() * 2, -1 + Math.random() * 2).normalize().multiplyScalar(.40),
             })),
         }))
         allHit.forEach(data => updates.push({
@@ -153,8 +153,8 @@ gameStore.actions.update = () => {
             ...data,
             color: 'orange',
             particles: Array.from({ length: 20 }).fill(0).map(_ => ({
-                position: new THREE.Vector3(),
-                dPos: new THREE.Vector3(-1 + Math.random() * 2, -1 + Math.random() * 2, -1 + Math.random() * 2).normalize().multiplyScalar(.60),
+                position: new Vector3(),
+                dPos: new Vector3(-1 + Math.random() * 2, -1 + Math.random() * 2, -1 + Math.random() * 2).normalize().multiplyScalar(.60),
             })),
         }))
         gameStore.explosions = [...gameStore.explosions, ...updates]
@@ -172,20 +172,20 @@ gameStore.actions.update = () => {
 
 export type GameStore = typeof gameStore
 
-function randomData(count: number, track: THREE.TubeGeometry, radius: number, size: number, scale: number | (() => number)) {
+function randomData(count: number, track: TubeGeometry, radius: number, size: number, scale: number | (() => number)) {
     return new Array(count).fill({}).map(() => {
         const t = Math.random()
         const pos = track.parameters.path.getPointAt(t)
         pos.multiplyScalar(15)
         const offset = pos
             .clone()
-            .add(new THREE.Vector3(-radius + Math.random() * radius * 2, -radius + Math.random() * radius * 2, -radius + Math.random() * radius * 2))
+            .add(new Vector3(-radius + Math.random() * radius * 2, -radius + Math.random() * radius * 2, -radius + Math.random() * radius * 2))
         const speed = 0.1 + Math.random()
-        return { guid: guid++, scale: typeof scale === 'function' ? scale() : scale, size, offset, pos, speed, radius, t, hit: new THREE.Vector3(), distance: 1000, rotation: new THREE.Euler(Math.random(), Math.random(), Math.random()) }
+        return { guid: guid++, scale: typeof scale === 'function' ? scale() : scale, size, offset, pos, speed, radius, t, hit: new Vector3(), distance: 1000, rotation: new Euler(Math.random(), Math.random(), Math.random()) }
     })
 }
 
-function randomRings(count: number, track: THREE.TubeGeometry) {
+function randomRings(count: number, track: TubeGeometry) {
     const temp = []
     let t = 0.4
     for (let i = 0; i < count; i++) {
@@ -196,15 +196,15 @@ function randomRings(count: number, track: THREE.TubeGeometry) {
         const pickt = t * segments
         const pick = Math.floor(pickt)
         const lookAt = track.parameters.path.getPointAt((t + 1 / track.parameters.path.getLength()) % 1).multiplyScalar(15)
-        const matrix = new THREE.Matrix4().lookAt(pos, lookAt, track.binormals[pick])
-        const rotation = new THREE.Euler().setFromVector3((new THREE.Vector3(0, 1, 0).applyMatrix4(matrix)))
+        const matrix = new Matrix4().lookAt(pos, lookAt, track.binormals[pick])
+        const rotation = new Euler().setFromVector3((new Vector3(0, 1, 0).applyMatrix4(matrix)))
 
         temp.push({ position: pos.toArray(), rotation, scale: 30 + i * 5 * Math.sin(i * 0.1) * Math.PI / 2 })
     }
     return temp
 }
 
-const camera = shallowRef(new THREE.PerspectiveCamera())
+const camera = shallowRef(new PerspectiveCamera())
 onMounted(() => {
     gameStore.actions.init(camera.value)
 })
