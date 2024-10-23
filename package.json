@@ -12,7 +12,7 @@
     "@tresjs/post-processing": "1.0.0-next.1",
     "mdast-util-to-string": "^4.0.0",
     "three": "^0.169.0",
-    "three-custom-shader-material": "^5.4.0",
+    "three-custom-shader-material": "^6.0.0",
     "unist-util-stringify-position": "^4.0.0"
   },
   "devDependencies": {
