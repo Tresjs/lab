@@ -18,8 +18,8 @@ importers:
         specifier: ^0.169.0
         version: 0.169.0
       three-custom-shader-material:
-        specifier: ^5.4.0
-        version: 5.4.0(three@0.169.0)
+        specifier: ^6.0.0
+        version: 6.1.1(three@0.169.0)
       unist-util-stringify-position:
         specifier: ^4.0.0
         version: 4.0.0
@@ -5923,6 +5923,18 @@ packages:
       '@react-three/fiber': '>=8.0'
       react: '>=18.0'
       three: '>=0.154'
+    peerDependenciesMeta:
+      '@react-three/fiber':
+        optional: true
+      react:
+        optional: true
+
+  three-custom-shader-material@6.1.1:
+    resolution: {integrity: sha512-GUvUpMUghOf1EWKaulqPyGCiOAgYMDWvaFEZMam1umqH5Ga+EfKlO7S2r6a9TGSj0Ay+N3wLObHmGdxXWEWJ+g==}
+    peerDependencies:
+      '@react-three/fiber': '>=8.0'
+      react: '>=18.0'
+      three: '>=0.170'
     peerDependenciesMeta:
       '@react-three/fiber':
         optional: true
@@ -15018,6 +15030,10 @@ snapshots:
       glsl-token-string: 1.0.1
       glsl-tokenizer: 2.1.5
       object-hash: 3.0.0
+      three: 0.169.0
+
+  three-custom-shader-material@6.1.1(three@0.169.0):
+    dependencies:
       three: 0.169.0
 
   three-stdlib@2.32.2(three@0.169.0):
