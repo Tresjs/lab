@@ -1,19 +1,7 @@
 <script setup lang="ts">
+import { PI, colors } from './constants'
 import { MathUtils } from 'three'
-
-const PI = Math.PI
-const { clamp, lerp } = MathUtils
-
-const colors = {
-  TEAL: '#7fdac6',
-  ORANGE: '#eeac35',
-  PURPLE: '#9b51e0',
-  YELLOW: '#f7d060',
-  BLUE: '#00b4d8',
-  RED: '#ef476f',
-  DARK: '#1e1f22',
-  LIGHT: '#f8f8f8',
-}
+const { clamp } = MathUtils
 
 const pyramidRef = ref()
 const boxRef = ref()
@@ -22,6 +10,7 @@ const sphereRef = ref()
 const { onBeforeRender } = useLoop()
 
 onBeforeRender(({ elapsed }) => {
+  if (!pyramidRef.value || !boxRef.value || !sphereRef.value) return
   elapsed = elapsed * 3 + 7
   pyramidRef.value.position.y = Math.tan(clamp((1 + elapsed) % 9, 0, PI))
   boxRef.value.position.y = Math.tan(clamp((0.5 + elapsed) % 9, 0, PI))

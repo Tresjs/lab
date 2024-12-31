@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Imagotype from './Imagotype.vue';
+import BrownianDistributionGroup from './BrownianDistributionGroup.vue'
 </script>
 
 <template>
@@ -13,6 +14,7 @@ import Imagotype from './Imagotype.vue';
   <OrbitControls />
   <TresAmbientLight :intensity="0.5" />
   <Imagotype />
+  <BrownianDistributionGroup />
   <TresDirectionalLight
     :position="[0, 8, 4]"
     :intensity="0.7"
