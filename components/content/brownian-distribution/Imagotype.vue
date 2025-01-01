@@ -1,7 +1,11 @@
 <script setup lang="ts">
-import { PI, colors } from './constants'
 import { MathUtils } from 'three'
+import { useDark } from '@vueuse/core'
+
+import { PI, colors } from './constants'
 const { clamp } = MathUtils
+
+const isDark = useDark()
 
 const pyramidRef = ref()
 const boxRef = ref()
@@ -23,6 +27,10 @@ onBeforeRender(({ elapsed }) => {
   boxRef.value.scale.set(scale1, scale1, scale1)
   sphereRef.value.scale.set(scale2, scale2, scale2)
 })
+
+watch(isDark, (newVal) => {
+  boxRef.value.material.color.set(newVal ? colors.LIGHT : colors.DARK)
+})
 </script>
 
 <template>
@@ -40,7 +48,7 @@ onBeforeRender(({ elapsed }) => {
       ref="boxRef"
     >
       <TresBoxGeometry :args="[1, 1, 1]" />
-      <TresMeshToonMaterial :color="colors.LIGHT" />
+      <TresMeshToonMaterial :color="isDark ? colors.LIGHT : colors.DARK" />
     </TresMesh>
     <TresMesh 
       name="sphere"

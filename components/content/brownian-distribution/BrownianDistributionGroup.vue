@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { useDark } from '@vueuse/core'
 import { MathUtils, Vector3, Euler } from 'three'
+
 import { colors } from './constants'
 import { BoxGeometry, CylinderGeometry, SphereGeometry, MeshToonMaterial } from 'three'
 const { lerp } = MathUtils
@@ -28,8 +30,10 @@ const sphereGeometry = new SphereGeometry()
 const cubeGeometry = new BoxGeometry()
 const pyramidGeometry = new CylinderGeometry(0, 0.6, 1)
 
+const isDark = useDark()
+
 const mainMaterial = new MeshToonMaterial({
-  color: colors.DARK,
+  color: isDark.value ? colors.DARK : colors.LIGHT,
 })
 
 const hoverMaterial = new MeshToonMaterial({
@@ -51,6 +55,10 @@ function onPointerEnter(ev: ThreeEvent<PointerEvent>) {
 function onPointerLeave(ev: ThreeEvent<PointerEvent>) {
   ev.eventObject.material = ev.eventObject.userData.material ?? mainMaterial
 }
+
+watch(isDark, (newVal) => {
+  mainMaterial.color.set(newVal ? colors.DARK : colors.LIGHT)
+})
 </script>
 
 <template>
