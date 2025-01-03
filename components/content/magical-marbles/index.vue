@@ -106,6 +106,8 @@ const uniforms = reactive({
 })
 
 onMounted(() => {
+  if (!mainRef.value) return
+  
   ctx = gsap.context(() => { }, mainRef.value)
 })
 
@@ -135,9 +137,8 @@ const updateBackground = (immediate = false) => {
   }
   else {
     ctx.add(() => {
-      console.log(backgroundRef.value)
-      console.log(backgroundGradient.value)
-      console.log(sphereRef.value.instance)
+      if(!sphereRef.value) return
+
       tl = gsap.timeline({
         onStart: () => {
           tlInProgress.value = true
