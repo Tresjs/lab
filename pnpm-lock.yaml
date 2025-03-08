@@ -61,8 +61,8 @@ importers:
         specifier: ^0.2.1
         version: 0.2.1(@typescript-eslint/eslint-plugin@6.21.0(@typescript-eslint/parser@6.21.0(eslint@9.17.0(jiti@2.4.2))(typescript@5.7.2))(eslint@9.17.0(jiti@2.4.2))(typescript@5.7.2))(eslint@9.17.0(jiti@2.4.2))(typescript@5.7.2)
       '@tresjs/leches':
-        specifier: 0.15.0-next.1
-        version: 0.15.0-next.1(vite@6.0.11(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.2)(yaml@2.7.0))(vue@3.5.13(typescript@5.7.2))
+        specifier: 0.15.0-next.3
+        version: 0.15.0-next.3(three@0.171.0)(vite@6.0.11(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.2)(yaml@2.7.0))(vue@3.5.13(typescript@5.7.2))
       '@tresjs/nuxt':
         specifier: 3.0.8
         version: 3.0.8(change-case@5.4.4)(magicast@0.3.5)(postcss@8.5.1)(rollup@4.32.1)(three@0.171.0)(typescript@5.7.2)(vite@6.0.11(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.2)(yaml@2.7.0))(vue@3.5.13(typescript@5.7.2))(webpack@5.97.1(esbuild@0.24.2))
@@ -1272,9 +1272,10 @@ packages:
       eslint: '>=7.4.0'
       typescript: '>=3.9'
 
-  '@tresjs/leches@0.15.0-next.1':
-    resolution: {integrity: sha512-2kZ8Lh4x03xCBM0X/XSAp2uEBIO4o1F7IP2U5SBeexppeZKqHaO9JSM0eXP5hJiGAQGmmj7uOKMDNWA0nae8VQ==}
+  '@tresjs/leches@0.15.0-next.3':
+    resolution: {integrity: sha512-kI8DovuzZ/mnSY3ifEiKJ1fd3aBoM5hYSfX0uwlJ6KWblVafrhds1J8j5aoFq6Kx0pjDVsY72fL8itAfm0ZrzQ==}
     peerDependencies:
+      three: '>=0.133'
       vue: '>=3.3.4'
 
   '@tresjs/nuxt@3.0.8':
@@ -5297,9 +5298,6 @@ packages:
     peerDependencies:
       three: '>=0.128.0'
 
-  three@0.159.0:
-    resolution: {integrity: sha512-eCmhlLGbBgucuo4VEA9IO3Qpc7dh8Bd4VKzr7WfW4+8hMcIfoAVi1ev0pJYN9PTTsCslbcKgBwr2wNZ1EvLInA==}
-
   three@0.171.0:
     resolution: {integrity: sha512-Y/lAXPaKZPcEdkKjh0JOAHVv8OOnv/NDJqm0wjfCzyQmfKxV7zvkwsnBgPBKTzJHToSOhRGQAGbPJObT59B/PQ==}
 
@@ -7419,11 +7417,11 @@ snapshots:
       - react
       - typescript
 
-  '@tresjs/core@3.5.1(three@0.159.0)(vue@3.5.13(typescript@5.7.2))':
+  '@tresjs/core@3.5.1(three@0.171.0)(vue@3.5.13(typescript@5.7.2))':
     dependencies:
       '@alvarosabu/utils': 3.2.0
       '@vueuse/core': 10.11.1(vue@3.5.13(typescript@5.7.2))
-      three: 0.159.0
+      three: 0.171.0
       vue: 3.5.13(typescript@5.7.2)
     transitivePeerDependencies:
       - '@vue/composition-api'
@@ -7498,13 +7496,13 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
-  '@tresjs/leches@0.15.0-next.1(vite@6.0.11(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.2)(yaml@2.7.0))(vue@3.5.13(typescript@5.7.2))':
+  '@tresjs/leches@0.15.0-next.3(three@0.171.0)(vite@6.0.11(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.2)(yaml@2.7.0))(vue@3.5.13(typescript@5.7.2))':
     dependencies:
-      '@tresjs/core': 3.5.1(three@0.159.0)(vue@3.5.13(typescript@5.7.2))
+      '@tresjs/core': 3.5.1(three@0.171.0)(vue@3.5.13(typescript@5.7.2))
       '@types/three': 0.158.3
       '@unocss/core': 0.57.7
       '@vueuse/components': 10.11.1(vue@3.5.13(typescript@5.7.2))
-      three: 0.159.0
+      three: 0.171.0
       vite-plugin-css-injected-by-js: 3.3.0(vite@6.0.11(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.2)(yaml@2.7.0))
       vue: 3.5.13(typescript@5.7.2)
     transitivePeerDependencies:
@@ -12681,8 +12679,6 @@ snapshots:
       fflate: 0.6.10
       potpack: 1.0.2
       three: 0.171.0
-
-  three@0.159.0: {}
 
   three@0.171.0: {}
 
