@@ -28,7 +28,7 @@
     "@tresjs/cientos": "4.2.0",
     "@tresjs/core": "4.3.3",
     "@tresjs/eslint-config-vue": "^0.2.1",
-    "@tresjs/leches": "0.15.0-next.1",
+    "@tresjs/leches": "0.15.0-next.3",
     "@tresjs/nuxt": "3.0.8",
     "@tweakpane/plugin-essentials": "^0.2.1",
     "@types/three": "^0.171.0",
