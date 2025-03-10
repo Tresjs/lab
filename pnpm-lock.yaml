@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@tresjs/post-processing':
-        specifier: 1.0.0-next.1
-        version: 1.0.0-next.1(@tresjs/core@4.3.3(three@0.171.0)(typescript@5.7.2)(vue@3.5.13(typescript@5.7.2)))(three@0.171.0)(vue@3.5.13(typescript@5.7.2))
+        specifier: 2.2.0
+        version: 2.2.0(@tresjs/core@4.3.3(three@0.171.0)(typescript@5.7.2)(vue@3.5.13(typescript@5.7.2)))(three@0.171.0)(typescript@5.7.2)(vue@3.5.13(typescript@5.7.2))
       mdast-util-to-string:
         specifier: ^4.0.0
         version: 4.0.0
@@ -1282,11 +1282,11 @@ packages:
     peerDependencies:
       three: '>=0.133'
 
-  '@tresjs/post-processing@1.0.0-next.1':
-    resolution: {integrity: sha512-ZjhA+pQO+hehHoGXzZKSXWB+CPjNoHoxiXE+H1d56/dXHP2CXMooMmXG4a9Cy4G6XNC9jibZpuJ+oHPKAiU4Nw==}
+  '@tresjs/post-processing@2.2.0':
+    resolution: {integrity: sha512-eYnMgCxxENroukj1CH2Vk9tTVcrnC0VRtGigxpZFLlUtTpxBK005reStyFfqy1EFw5bq6Sd11ekcPju8sJYNPw==}
     peerDependencies:
       '@tresjs/core': '>=4.0'
-      three: '>=0.133'
+      three: '>=0.169'
       vue: '>=3.4'
 
   '@trysound/sax@0.2.0':
@@ -5287,11 +5287,6 @@ packages:
       react:
         optional: true
 
-  three-stdlib@2.32.2:
-    resolution: {integrity: sha512-ZN25Na/Xg7APhGKwJ1zhGdhZDsDGGnnm1k5Z+9LLlnfsFye4jigvbN3eA/Ta8hQmBNmEHXoozpmpKK1x8dCePQ==}
-    peerDependencies:
-      three: '>=0.128.0'
-
   three-stdlib@2.35.8:
     resolution: {integrity: sha512-qmLRtIGIRDgW9PNEc1xkcFL94JrJqX1f1+o2A8T5A2y3DKm8GWxWjwSZh8VEORDVKJvOgzReHVsQAFFu+aeiZg==}
     peerDependencies:
@@ -7546,16 +7541,15 @@ snapshots:
       - vue
       - webpack
 
-  '@tresjs/post-processing@1.0.0-next.1(@tresjs/core@4.3.3(three@0.171.0)(typescript@5.7.2)(vue@3.5.13(typescript@5.7.2)))(three@0.171.0)(vue@3.5.13(typescript@5.7.2))':
+  '@tresjs/post-processing@2.2.0(@tresjs/core@4.3.3(three@0.171.0)(typescript@5.7.2)(vue@3.5.13(typescript@5.7.2)))(three@0.171.0)(typescript@5.7.2)(vue@3.5.13(typescript@5.7.2))':
     dependencies:
       '@tresjs/core': 4.3.3(three@0.171.0)(typescript@5.7.2)(vue@3.5.13(typescript@5.7.2))
-      '@vueuse/core': 10.11.1(vue@3.5.13(typescript@5.7.2))
+      '@vueuse/core': 12.7.0(typescript@5.7.2)
       postprocessing: 6.37.1(three@0.171.0)
       three: 0.171.0
-      three-stdlib: 2.32.2(three@0.171.0)
       vue: 3.5.13(typescript@5.7.2)
     transitivePeerDependencies:
-      - '@vue/composition-api'
+      - typescript
 
   '@trysound/sax@0.2.0': {}
 
@@ -12660,16 +12654,6 @@ snapshots:
 
   three-custom-shader-material@6.3.1(three@0.171.0):
     dependencies:
-      three: 0.171.0
-
-  three-stdlib@2.32.2(three@0.171.0):
-    dependencies:
-      '@types/draco3d': 1.4.10
-      '@types/offscreencanvas': 2019.7.3
-      '@types/webxr': 0.5.20
-      draco3d: 1.5.7
-      fflate: 0.6.10
-      potpack: 1.0.2
       three: 0.171.0
 
   three-stdlib@2.35.8(three@0.171.0):
