@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ExperimentItem, AuthorItem } from '@/types'
+import type { ExperimentItem } from '@/types'
 
 // Fetch all experiments ordered by date using useAsyncData
 const { data: experiments } = await useAsyncData('experiments', () =>
@@ -81,48 +81,13 @@ function getRepoTitleFromExperiment(experiment: ExperimentItem): string {
 <template>
   <UContainer class="py-12">
     <div class="flex flex-col items-center mb-12">
-      <h1 class="text-4xl font-display font-bold text-center mb-4">TresJS Experiments</h1>
       <p class="text-lg text-gray-600 dark:text-gray-400 text-center max-w-2xl">
         Explore creative WebGL experiments built with TresJS, the declarative ThreeJS framework for Vue
       </p>
     </div>
 
     <div v-if="formattedExperiments?.length" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <UCard v-for="experiment in formattedExperiments" :key="experiment.slug" :to="`${experiment.stem}`">
-        <template #header>
-          <div class="relative aspect-video overflow-hidden bg-gray-100 dark:bg-gray-800 rounded-t-md">
-            <img :src="`/${experiment.stem}.png`" :alt="experiment.title"
-              class="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105">
-          </div>
-        </template>
-
-        <h3 class="font-display font-medium text-lg">{{ experiment.title }}</h3>
-        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
-          {{ new Date(experiment.date).toLocaleDateString('en-US', {
-            year: 'numeric', month: 'short', day:
-              'numeric'
-          }) }}
-        </p>
-        <div v-if="experiment.author">
-          <UBadge color="neutral" variant="soft" :avatar="{
-            src: experiment.author.avatar,
-            alt: experiment.author.name,
-          }">
-            {{ experiment.author.name }}
-          </UBadge>
-        </div>
-        <template #footer>
-          <div class="flex items-center justify-between" />
-
-          <div class="mt-4 flex justify-between items-center">
-            <UBadge v-for="tag in experiment.tags" :key="tag" :label="tag" color="primary" variant="soft" size="sm" />
-            <UTooltip :text="experiment.repoTitle">
-              <UButton color="primary" variant="ghost" icon="i-heroicons-code-bracket" size="xs"
-                :to="experiment.repoPath" target="_blank" />
-            </UTooltip>
-          </div>
-        </template>
-      </UCard>
+      <TheCard v-for="experiment in formattedExperiments" :key="experiment.slug" :experiment="experiment" />
     </div>
 
     <div v-else class="flex flex-col items-center py-16">

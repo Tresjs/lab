@@ -1,63 +1,64 @@
 <script setup lang="ts">
-import TheCodeButton from './TheCodeButton.vue'
+import type { ExperimentItem } from '@/types'
 
-defineProps<{
-  title: string
-  path: string
-  repoTitle: string
-  repoPath: string
-  media: string
-  description: string
-  author: {
-    name: string
-    avatar: string
+interface Props {
+  experiment: ExperimentItem & {
+    stem: string
+    slug: string
+    title: string
+    thumbnail: string
+    author?: {
+      name: string
+      avatar: string
+    } | null
+    repoPath: string
+    repoTitle: string
   }
-  tags: string[]
-}>()
+}
+
+const props = defineProps<Props>()
+
+const formattedDate = computed(() =>
+  new Date(props.experiment.date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+  })
+)
 </script>
 
 <template>
-  <div class="relative">
-    <NuxtLink :to="path">
-      <div class="absolute h-full w-full" />
-    </NuxtLink>
-    <div class="shadow-lg rounded-lg overflow-hidden">
-      <img
-        class="aspect-video object-cover"
-        :src="media"
-      >
-      <div class="p-4">
-        <div class="flex gap-2 mb-2">
-          <h2 class="grow font-bold text-lg">
-            {{ title }}
-          </h2>
-          <TheCodeButton
-            :to="repoPath"
-            :title="repoTitle"
-          />
-        </div>
-        <p class="text-sm text-gray-400 mb-2 min-h-75px">
-          {{ description }}
-        </p>
-        <div class="flex gap-4">
-          <TheTag
-            v-for="tag in tags"
-            :key="tag"
-            :tag="tag"
-          >
-            {{ tag }}
-          </TheTag>
-        </div>
+  <NuxtLink :to="`${experiment.stem}`">
+    <UCard class="transition-all duration-300 hover:shadow-lg hover:scale-102 hover:-translate-y-1">
+      <div class="relative aspect-video overflow-hidden bg-gray-100 dark:bg-gray-800 rounded-md">
+        <img :src="`/${experiment.stem}.png`" :alt="experiment.title"
+          class="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105">
       </div>
-      <footer class="flex px-4 pb-4 gap-4">
-        <div class="flex items-center">
-          <img
-            :src="author.avatar"
-            class="border-2 border-gray-200 w-8 h-8 mr-4 rounded-full"
-          />
-          <span class="font-bold text-sm">{{ author.name }}</span>
+
+      <!-- Tags -->
+      <div class="py-4 flex gap-2 flex-wrap">
+        <UBadge v-for="tag in experiment.tags" :key="tag" :label="tag" color="primary" variant="soft" size="sm" />
+      </div>
+
+      <h3 class="font-display font-bold text-lg">{{ experiment.title }}</h3>
+      <p class="font-mono text-xs text-gray-500 dark:text-gray-400 mt-1">
+        {{ formattedDate }}
+      </p>
+
+      <div class="mt-4 flex justify-between items-center">
+        <div v-if="experiment.author">
+          <UBadge color="neutral" variant="soft" :avatar="{
+            src: experiment.author.avatar,
+            alt: experiment.author.name,
+          }">
+            {{ experiment.author.name }}
+          </UBadge>
         </div>
-      </footer>
-    </div>
-  </div>
+        <UTooltip :text="experiment.repoTitle">
+          <UButton color="primary" variant="ghost" icon="i-heroicons-code-bracket" size="xs" :to="experiment.repoPath"
+            target="_blank" />
+        </UTooltip>
+      </div>
+    </UCard>
+  </NuxtLink>
 </template>

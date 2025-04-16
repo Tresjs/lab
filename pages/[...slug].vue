@@ -2,32 +2,33 @@
 definePageMeta({
   layout: 'experiment',
 })
-const { path } = useRoute()
-const { data } = await useAsyncData(`content-${path}`, () => queryContent().where({ _path: path }).findOne())
-
+const route = useRoute()
+const { data: page } = await useAsyncData(route.path, () => {
+  return queryCollection('experiments').path(route.path).first()
+})
 useHead({
-  title: `${data?.value?.title} - Tres`,
+  title: `${page?.value?.title} - Tres`,
   meta: [
     {
       hid: 'description',
       name: 'description',
-      content: data?.value?.description,
+      content: page?.value?.description,
     },
     {
       hid: 'keywords',
       property: 'keywords',
-      keywords: data?.value?.tags?.join(', '),
+      keywords: page?.value?.tags?.join(', '),
     },
     // og
     {
       hid: 'og:description',
       property: 'og:description',
-      content: data?.value?.description,
+      content: page?.value?.description,
     },
     {
       hid: 'og:title',
       property: 'og:title',
-      content: `${data?.value?.title} made with TresJS by @${data?.value?.author}`,
+      content: `${page?.value?.title} made with TresJS by @${page?.value?.author}`,
     },
     {
       hid: 'og:type',
@@ -37,12 +38,12 @@ useHead({
     {
       hid: 'og:image',
       property: 'og:image',
-      content: data?.value?.thumbnail ?? `/${data?.value?._path?.split('/').pop()}.png`,
+      content: page?.value?.thumbnail ?? `/${page?.value?._path?.split('/').pop()}.png`,
     },
     {
       hid: 'og:image:alt',
       property: 'og:image:alt',
-      content: data?.value?.title,
+      content: page?.value?.title,
     },
     // Twitter
     { name: 'twitter:card', content: 'summary_large_image' },
@@ -50,22 +51,22 @@ useHead({
     {
       hid: 'twitter:title',
       property: 'twitter:title',
-      content: `${data?.value?.title} - Tres`,
+      content: `${page?.value?.title} - Tres`,
     },
     {
       hid: 'twitter:description',
       name: 'twitter:description',
-      content: data?.value?.description,
+      content: page?.value?.description,
     },
     {
       hid: 'twitter:image',
       name: 'twitter:image',
-      content: data?.value?.thumbnail ?? `/${data?.value?._path?.split('/').pop()}.png`,
+      content: page?.value?.thumbnail ?? `/${page?.value?._path?.split('/').pop()}.png`,
     },
     {
       hid: 'twitter:image:alt',
       name: 'twitter:image:alt',
-      content: data?.value?.title,
+      content: page?.value?.title,
     },
   ],
 })
@@ -74,11 +75,7 @@ useHead({
 <template>
   <main>
     <ClientOnly>
-      <ContentRenderer
-        v-if="data"
-        :value="data"
-        class="w-full h-100vh relative"
-      />
+      <ContentRenderer v-if="page" :value="page" class="w-full h-[100vh]" />
     </ClientOnly>
   </main>
 </template>

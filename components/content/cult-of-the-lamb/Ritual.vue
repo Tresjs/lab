@@ -1,25 +1,28 @@
 <script setup lang="ts">
 import { Color, DoubleSide, MeshStandardMaterial } from 'three'
 
-const { nodes, scene, materials } = await useGLTF('/models/cult-of-the-lamb/Ritual.glb', { draco: true })
+const { state, nodes, materials } = useGLTF('/models/cult-of-the-lamb/Ritual.glb', { draco: true })
 
-const pentagram = nodes['Pentagram']
+const pentagram = computed(() => nodes.value?.['Pentagram'])
 const pentagramTexture = await useTexture(['/models/cult-of-the-lamb/pentagram.png'])
 pentagramTexture.flipY = false
 
-pentagram.material = new MeshStandardMaterial({
-  alphaMap: pentagramTexture,
-  transparent: true,
-  side: DoubleSide,
-  emissive: 0xff0000,
-  emissiveIntensity: 8,
-  emissiveMap: pentagramTexture,
+
+watch(pentagram, (pentagramObject) => {
+  pentagramObject.material = new MeshStandardMaterial({
+    alphaMap: pentagramTexture,
+    transparent: true,
+    side: DoubleSide,
+  })
 })
 
-// Symbols 
-const { seekAllByName } = await useSeek()
+const symbols = computed(() => {
+  if (!nodes.value) return []
+  return Object.entries(nodes.value)
+    .filter(([key]) => key.includes('Symbol'))
+    .map(([_, node]) => node)
+})
 
-const symbols = seekAllByName(scene, 'Symbol')
 
 const symbolsTexture = await useTexture(['/models/cult-of-the-lamb/symbols.png'])
 
@@ -33,30 +36,39 @@ const symbolsMaterial = new MeshStandardMaterial({
   emissiveIntensity: 8,
   emissiveMap: symbolsTexture,
 })
-symbols.forEach((symbol) => {
-  symbol.material = symbolsMaterial
+
+watch(symbols, (value) => {
+  value.forEach((items) => {
+    items.material = symbolsMaterial
+  })
 })
 
 // Candles
 
-const candles = seekAllByName(scene, 'Candle')
+// const candles = seekAllByName(state.value?.scene, 'Candle')
+const candles = computed(() => {
+  if (!nodes.value) return []
+  return Object.entries(nodes.value)
+    .filter(([key]) => key.includes('Candle'))
+    .map(([_, node]) => node)
+})
 
-materials['Flame'].emissiveIntensity = 8
-materials['Flame'].emissive = new Color('#C55B37')
+watch(materials, (value) => {
+  value['Flame'].emissiveIntensity = 8
+  value['Flame'].emissive = new Color('#C55B37')
+})
 </script>
 
 <template>
   <TresGroup>
-    <primitive :object="pentagram" />
-    <template v-for="symbol in symbols">
+    <primitive v-if="pentagram" :object="pentagram" />
+    <template v-for="(symbol, index) in symbols" :key="index">
       <Levioso>
-        <primitive :object="symbol" />
+        <primitive v-if="symbol" :object="symbol" />
       </Levioso>
     </template>
-  
-    <primitive
-      v-for="candle in candles"
-      :object="candle"
-    />
+    <template v-for="(candle, index) in candles" :key="index">
+      <primitive v-if="candle" :object="candle" />
+    </template>
   </TresGroup>
 </template>

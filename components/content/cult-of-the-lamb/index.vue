@@ -2,7 +2,7 @@
 import { TresCanvas } from '@tresjs/core'
 import { BasicShadowMap, SRGBColorSpace, NoToneMapping } from 'three'
 
-/* import { EffectComposer, Bloom } from '@tresjs/post-processing' */
+import { EffectComposerPmndrs, BloomPmndrs } from '@tresjs/post-processing'
 import { BlendFunction } from 'postprocessing'
 
 const gl = {
@@ -27,34 +27,21 @@ const bloomParams = reactive({
 
 <template>
   <TresCanvas v-bind="gl">
-    <TresPerspectiveCamera
-      :position="[0, 1, 5]"
-      :look-at="[0, 0.4, 0]"
-    />
-    <Suspense>
-      <Lamb />
-    </Suspense>
+    <TresPerspectiveCamera :position="[0, 1, 5]" :look-at="[0, 0.4, 0]" />
+    <Lamb />
 
     <TresAmbientLight :args="[0xffffff, 0.5]" />
-   
+
     <Suspense>
-      <EffectComposer>
-        <Bloom v-bind="bloomParams" />
-      </EffectComposer>
+      <EffectComposerPmndrs>
+        <BloomPmndrs v-bind="bloomParams" />
+      </EffectComposerPmndrs>
     </Suspense>
     <Suspense>
       <Ritual />
     </Suspense>
-    <Backdrop  
-      :floor="1.5" 
-      :segments="20"
-      :scale="[20, 8, 4]"
-      :position="[0, -0.01, -4]"
-    >
-      <TresMeshStandardMaterial
-        color="#8D404A"
-        :roughness="1"
-      />
+    <Backdrop :floor="1.5" :segments="20" :scale="[20, 8, 4]" :position="[0, -0.01, -4]">
+      <TresMeshStandardMaterial color="#8D404A" :roughness="1" />
     </Backdrop>
   </TresCanvas>
 </template>

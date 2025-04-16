@@ -7,7 +7,8 @@ export default defineAppConfig({
     },
     card: {
       slots: {
-        header: 'p-0 sm:p-0'
+        root: 'hover:bg-linear-[115deg,#272727 .06%,#171717]',
+        body: 'p-2 sm:p-3'
       }
     }
   }

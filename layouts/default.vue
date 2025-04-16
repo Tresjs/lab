@@ -3,11 +3,14 @@
 <template>
   <TheHeader />
   <NuxtLoadingIndicator />
-  <UContainer class="pt-56px">
-    <main class="min-h-[calc(100vh-var(--ui-header-height))]">
-      <slot />
-    </main>
-  </UContainer>
+  <div class="pattern-bg">
+    <UContainer class="pt-56px">
+      <main
+        class="bg-(--ui-bg) border-x border-gray-100 dark:border-gray-800 min-h-[calc(100vh-var(--ui-header-height))]">
+        <slot />
+      </main>
+    </UContainer>
+  </div>
 </template>
 
 <style scoped></style>
