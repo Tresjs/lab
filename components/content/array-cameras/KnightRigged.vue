@@ -1,14 +1,26 @@
 <script setup lang="ts">
-const { scene: model, animations } = await useGLTF(
+const { nodes, state } = useGLTF(
   'https://raw.githubusercontent.com/Tresjs/assets/main/models/gltf/warcraft-3-alliance-footmanfanmade/source/Footman_RIG.glb',
 )
+
+watch(nodes, (newState) => {
+  console.log(newState)
+})
+
+const model = computed(() => nodes.value.Footman_rig)
+const animations = computed(() => state.value?.animations || [])
+
 const { actions, mixer } = useAnimations(animations, model)
 
-let currentAction = actions.Idle
+const currentAction = ref()
 
-currentAction.play()
 
-const { value: animation } = useControls({
+watch(actions, (newActions) => {
+  currentAction.value = newActions.Idle
+  currentAction.value.play()
+})
+
+const { animation } = useControls({
   animation: {
     value: 'Idle',
     options: [
@@ -26,21 +38,21 @@ const { value: animation } = useControls({
   },
 })
 
-watch(animation, (value) => {
-  currentAction.stop()
-  currentAction = actions[value as unknown as string]
-  currentAction.play()
-})
+/* watch(animation, (value) => {
+  currentAction.value.stop()
+  currentAction.value = actions.value[value as unknown as string]
+  currentAction.value.play()
+}) */
 
 const { onBeforeRender } = useLoop()
 
-onBeforeRender(() => {
+/* onBeforeRender(() => {
   if (mixer) {
     mixer.update(0.01)
   }
-})
+}) */
 </script>
 
 <template>
-  <primitive :object="model" />
+  <primitive v-if="model" :object="model" />
 </template>

@@ -46,53 +46,17 @@ cameraOptions.forEach((data) => {
   currentCam.updateMatrixWorld()
   cameras.push(currentCam)
 })
-
-const { hasFinishLoading, progress } = await useProgress()
-
 useControls('fpsgraph')
 </script>
 
 <template>
-  <TresLeches />
-  <Transition
-    name="fade-overlay"
-    enter-active-class="opacity-1 transition-opacity duration-200"
-    leave-active-class="opacity-0 transition-opacity duration-200"
-  >
-    <div
-      v-show="!hasFinishLoading"
-      class="absolute bg-grey-600 t-0 l-0 w-full h-full z-20 flex justify-center items-center text-black font-mono"
-    >
-      <div class="w-200px">
-        Loading... {{ progress }} %
-      </div>
-    </div>
-  </Transition>
-  <TresCanvas
-    window-size
-    clear-color="#82DBC5"
-    class="over-hidden"
-  >
-    <TresArrayCamera
-      :args="[cameras]"
-      :position="[0, 2, 5]"
-    />
-    <Suspense>
-      <KnightRigged />
-    </Suspense>
-    <TresAmbientLight
-      :color="0xffffff"
-      :intensity="1"
-    />
-    <TresSpotLight
-      :color="0xffffff"
-      :intensity="100"
-      :position="[0, 0, 5]"
-    />
-    <TresDirectionalLight
-      :color="0xffffff"
-      :intensity="5"
-    />
+  <TresCanvas window-size clear-color="#82DBC5">
+    <TresArrayCamera :args="[cameras]" :position="[0, 2, 5]" />
+    <KnightRigged />
+    <TresAmbientLight :color="0xffffff" :intensity="1" />
+    <TresSpotLight :color="0xffffff" :intensity="100" :position="[0, 0, 5]" />
+    <TresDirectionalLight :color="0xffffff" :intensity="5" />
     <TresHemisphereLight />
+    <TresGridHelper :size="10" :divisions="10" />
   </TresCanvas>
 </template>

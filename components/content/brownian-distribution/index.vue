@@ -11,19 +11,6 @@ const toggleDark = useToggle(isDark)
   <TresCanvas :clear-color="isDark ? colors.DARK : colors.LIGHT" window-size>
     <BrownianDistributionExperiment />
   </TresCanvas>
-  <button
-    title="Toggle dark mode"
-    class="rounded-full fixed z-10 bottom-5 right-15 p-1"
-    :class="{ 'bg-white': !isDark, 'bg-dark': isDark }"
-    @click="toggleDark()"
-  >
-    <i
-      v-if="isDark"
-      class="i-carbon-sun w-5 h-5 "
-    />
-    <i
-      v-else
-      class="i-carbon-moon w-5 h-5 "
-    />
-  </button>
+  <UButton variant="subtle" color="neutral" :icon="isDark ? 'i-carbon-sun' : 'i-carbon-moon'"
+    class="fixed z-10 bottom-5 right-15 p-1" @click="toggleDark()" />
 </template>
