@@ -37,7 +37,7 @@ export default defineNuxtConfig({
 
   modules: [
     '@tresjs/nuxt',
-    '@nuxt/ui',
+    '@nuxt/ui-pro',
     'nuxt-svgo',
     '@nuxt/content',
     '@nuxt/image',

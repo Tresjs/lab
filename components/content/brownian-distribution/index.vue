@@ -12,5 +12,5 @@ const toggleDark = useToggle(isDark)
     <BrownianDistributionExperiment />
   </TresCanvas>
   <UButton variant="subtle" color="neutral" :icon="isDark ? 'i-carbon-sun' : 'i-carbon-moon'"
-    class="fixed z-10 bottom-5 right-15 p-1" @click="toggleDark()" />
+    class="fixed rounded-full z-10 bottom-5 right-15 p-1" @click="toggleDark()" />
 </template>
