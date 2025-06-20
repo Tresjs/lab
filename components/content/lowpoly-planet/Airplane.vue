@@ -1,57 +1,59 @@
 <script setup lang="ts">
-import type { Object3D } from 'three'
-import { shallowRef, watch } from 'vue'
+import { Mesh } from 'three';
+import { watch } from 'vue'
 
 const props = defineProps<{
-  planet: Object3D
+  planet: TresObject
 }>()
 
-const { scene } = await useGLTF(
+const { nodes } = useGLTF(
   'https://raw.githubusercontent.com/Tresjs/assets/main/models/gltf/low-poly/airplane.gltf',
 )
 
-const airplaneRef = shallowRef()
 
-const airplane = scene
-airplane.rotation.set(0, Math.PI, 0)
-scene.traverse((child) => {
-  if (child.isMesh) {
-    child.castShadow = true
-  }
+const airplane = computed(() => nodes.value.Low_Poly_Airplane)
+
+watch(airplane, (airplane) => {
+  airplane.rotation.set(0, Math.PI, 0)
+  airplane.traverse((child) => {
+    if (child instanceof Mesh) {
+      child.castShadow = true
+    }
+  })
+  airplane.updateMatrixWorld()
 })
-airplane.updateMatrixWorld()
 
-const { onLoop } = useRenderLoop()
 
 watch(
   () => props.planet,
   (planet) => {
     if (!planet) return
-    planet.geometry.computeBoundingSphere()
     const radius = Math.abs(planet.geometry.boundingSphere?.radius | 1)
-    airplane.position.set(radius, 0, 0)
+    airplane.value.position.set(radius, 0, 0)
 
-    airplane.lookAt(planet.position)
+    airplane.value.lookAt(planet.position)
   },
 )
 
 let angle = 0
 const speed = 0.2
-onLoop(({ delta }) => {
-  if (!airplane || !props.planet) return
 
+const { onBeforeRender } = useLoop()
+
+onBeforeRender(({ delta }) => {
+  if (!airplane.value || !props.planet) return
   const radius = Math.abs(props.planet.geometry.boundingSphere.radius) + 0.5
   angle += delta * speed
   const x = radius * Math.cos(angle)
   const z = radius * Math.sin(angle)
-  airplane.position.x = x
-  airplane.position.z = z
-  airplane.rotation.z = -Math.PI / 2
-  airplane.rotation.y = -angle
-  airplane.updateMatrixWorld()
+  airplane.value.position.x = x
+  airplane.value.position.z = z
+  airplane.value.rotation.z = -Math.PI / 2
+  airplane.value.rotation.y = -angle
+  airplane.value.updateMatrixWorld()
 })
 </script>
 
 <template>
-  <primitive :object="airplane" />
+  <primitive v-if="airplane" ref="airplaneRef" :object="airplane" />
 </template>

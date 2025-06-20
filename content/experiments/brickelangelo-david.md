@@ -2,7 +2,7 @@
 title: Brickelangelo David
 author: alvarosabu
 description: Bricks ThreeJS Journey challenge
-tags: ['basic', 'cientos', 'MeshSurfaceSampler']
+tags: ['cientos', 'MeshSurfaceSampler']
 date: 2023-08-21
 ---
 
