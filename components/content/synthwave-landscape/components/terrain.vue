@@ -129,7 +129,9 @@ function easeOutSine(x: number): number {
 }
 
 const v = new Vector3(0, 0, 0)
-useRenderLoop().onLoop(({ delta }) => {
+
+const { onBeforeRender } = useLoop()
+onBeforeRender(({ delta }) => {
   group.position.z += delta * props.speed
   let p = group.children[NUM_CHUNKS - 1].worldToLocal(v.set(0, 0, props.cameraZ)).z
   let progress = p * NUM_CHUNKS * -1 - 1

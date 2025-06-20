@@ -30,14 +30,14 @@ function setup(renderer: WebGLRenderer, scene: Scene, camera: Camera) {
 
   watch(useWindowSize, onUpdateWindowSize)
 }
-
-useRenderLoop().onLoop(() => {
+const { onBeforeRender } = useLoop()
+onBeforeRender(() => {
   effectComposer?.render()
 })
 
-const { renderer, scene, camera } = useTresContext()
+const { renderer, scene, camera } = useTres()
 
-setTimeout(() => setup(renderer.value, scene.value, camera.value ?? new Camera()), 10)
+setTimeout(() => setup(renderer, scene.value, camera.value ?? new Camera()), 10)
 </script>
 
 <template></template>

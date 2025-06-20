@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { AdditiveBlending, Color, Mesh, MeshBasicMaterial, PlaneGeometry } from 'three'
-import { Line2 } from 'three/examples/jsm/lines/Line2'
-import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry'
-import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial'
+import { Line2, LineGeometry, LineMaterial } from 'three-stdlib'
 
 interface ColFill {
   colNum: number
@@ -10,10 +8,10 @@ interface ColFill {
 }
 
 export interface TerrainProps {
-  color: string
+  color?: string
   fill: string
-  numDivisions: number
-  colFills: ColFill[]
+  numDivisions?: number
+  colFills?: ColFill[]
   progress?: number
 }
 
@@ -32,7 +30,6 @@ const OPACITY = 0.2
 const lineGeometry = new LineGeometry()
 const numDivisions = props.numDivisions
 const linePositions: number[] = []
-const i = 0
 for (let row = 0; row < numDivisions; row++) {
   linePositions.push(row % 2 ? 0.5 : -0.5)
   linePositions.push(row / numDivisions - 0.5)

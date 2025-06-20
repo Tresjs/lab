@@ -52,88 +52,41 @@ const y = shallowRef(0)
 const z = shallowRef(0)
 const dayProgress = shallowRef(0)
 
-useRenderLoop().onLoop(({ elapsed }) => {
+const onLoop = ({ elapsed }: { elapsed: number }) => {
   const [xx, yy, _] = pathGen(elapsed * SPEED)
   x.value = xx * TERRAIN_SCALE[0]
   y.value = yy * TERRAIN_SCALE[1] + 3
   z.value = 0
   dayProgress.value = clamp(Math.cos(elapsed * SPEED * 2) + 0.5, 0, 1)
-})
+}
 </script>
 
 <template>
   <MusicPlayer />
-  <TresCanvas
-    v-bind="gl"
-    :disable-render="false"
-  >
+  <TresCanvas v-bind="gl" :disable-render="false" @loop="onLoop">
     <Postprocessing />
 
     <TresPerspectiveCamera :position="[x, y, z]">
-      <TresPointLight
-        :intensity="1000"
-        :position="[0, 3, 0]"
-        :color="PALETTE[6]"
-      />
-      <Mountain
-        :color="PALETTE[8]"
-        :position="[0, 0, -500]"
-        :scale="[24, 24, 12]"
-      />
+      <TresPointLight :intensity="1000" :position="[0, 3, 0]" :color="PALETTE[6]" />
+      <Mountain :color="PALETTE[8]" :position="[0, 0, -500]" :scale="[24, 24, 12]" />
 
-      <Sun
-        :scale="100"
-        :color-a="PALETTE[3]"
-        :color-b="PALETTE[7]"
-        :position="[0, 133, -600]"
-      />
+      <Sun :scale="100" :color-a="PALETTE[3]" :color-b="PALETTE[7]" :position="[0, 133, -600]" />
 
-      <Grid
-        :scale="2660"
-        :position="[0, 71, -600]"
-        :progress="dayProgress"
-        :num-divisions="39"
-        :color="PALETTE[1]"
-        :fill="PALETTE[2]"
-        :col-fills="[
+      <Grid :scale="2660" :position="[0, 71, -600]" :progress="dayProgress" :num-divisions="39" :color="PALETTE[1]"
+        :fill="PALETTE[2]" :col-fills="[
           { color: PALETTE[6], colNum: -1 },
           { color: PALETTE[6], colNum: 0 },
           { color: PALETTE[6], colNum: 1 },
-        ]"
-      />
-      <Stars :scale="5" />
+        ]" />
+      <Stars :scale="5" :count="1000" />
     </TresPerspectiveCamera>
-    <TresAmbientLight
-      :color="PALETTE[3]"
-      :intensity="40 * (1 - dayProgress)"
-    />
-    <TresDirectionalLight
-      :intensity="20 + 80 * dayProgress"
-      :position="[0, 70, -400]"
-      :color="PALETTE[3]"
-    />
-    <TresDirectionalLight
-      :intensity="100 * dayProgress"
-      :position="[200, 0, 100]"
-      :color="PALETTE[1]"
-    />
+    <TresAmbientLight :color="PALETTE[3]" :intensity="40 * (1 - dayProgress)" />
+    <TresDirectionalLight :intensity="20 + 80 * dayProgress" :position="[0, 70, -400]" :color="PALETTE[3]" />
+    <TresDirectionalLight :intensity="100 * dayProgress" :position="[200, 0, 100]" :color="PALETTE[1]" />
 
-    <Terrain
-      :terrain-gen-fn="terrainGen"
-      :camera-z="z"
-      :color-fills="PALETTE[2]"
-      :color-lines="dayProgress > 0.5 ? PALETTE[4] : PALETTE[8]"
-      :color-dust="PALETTE[3]"
-      :scale="TERRAIN_SCALE"
-      :speed="SPEED"
-      :shininess="dayProgress"
-    />
-    <GradientSky
-      :color-sky="PALETTE[3]"
-      :color-ground="PALETTE[5]"
-      :size="1000"
-      :offset="0.3"
-      :scale="2"
-    />
+    <Terrain :terrain-gen-fn="terrainGen" :camera-z="z" :color-fills="PALETTE[2]"
+      :color-lines="dayProgress > 0.5 ? PALETTE[4] : PALETTE[8]" :color-dust="PALETTE[3]" :scale="TERRAIN_SCALE"
+      :speed="SPEED" :shininess="dayProgress" />
+    <GradientSky :color-sky="PALETTE[3]" :color-ground="PALETTE[5]" :size="1000" :offset="0.3" :scale="2" />
   </TresCanvas>
 </template>
