@@ -15,8 +15,8 @@ importers:
         specifier: ^3.1.3
         version: 3.1.3(@babel/parser@7.27.5)(db0@0.3.2)(embla-carousel@8.6.0)(ioredis@5.6.1)(jwt-decode@4.0.0)(magicast@0.3.5)(typescript@5.8.3)(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.0)(yaml@2.8.0))(vue-router@4.5.1(vue@3.5.17(typescript@5.8.3)))(vue@3.5.17(typescript@5.8.3))(zod@3.25.67)
       '@tresjs/post-processing':
-        specifier: https://pkg.pr.new/@tresjs/post-processing@49c44b0
-        version: https://pkg.pr.new/@tresjs/post-processing@49c44b0(@tresjs/core@5.0.0-next.5(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3)))(@types/three@0.177.0)(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3))
+        specifier: 3.0.0-next.0
+        version: 3.0.0-next.0(@tresjs/core@5.0.0-next.6(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3)))(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3))
       mdast-util-to-string:
         specifier: ^4.0.0
         version: 4.0.0
@@ -64,11 +64,11 @@ importers:
         specifier: ^3.5.2
         version: 3.5.2(magicast@0.3.5)
       '@tresjs/cientos':
-        specifier: 5.0.0-next.2
-        version: 5.0.0-next.2(@tresjs/core@5.0.0-next.5(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3)))(@types/three@0.177.0)(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3))
+        specifier: 5.0.0-next.3
+        version: 5.0.0-next.3(@tresjs/core@5.0.0-next.6(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3)))(@types/three@0.177.0)(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3))
       '@tresjs/core':
-        specifier: 5.0.0-next.5
-        version: 5.0.0-next.5(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3))
+        specifier: 5.0.0-next.6
+        version: 5.0.0-next.6(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3))
       '@tresjs/eslint-config-vue':
         specifier: ^0.2.1
         version: 0.2.1(@typescript-eslint/eslint-plugin@6.21.0(@typescript-eslint/parser@8.34.1(eslint@8.57.1)(typescript@5.8.3))(eslint@8.57.1)(typescript@5.8.3))(eslint@8.57.1)(typescript@5.8.3)
@@ -1457,15 +1457,15 @@ packages:
     peerDependencies:
       vue: ^2.7.0 || ^3.0.0
 
-  '@tresjs/cientos@5.0.0-next.2':
-    resolution: {integrity: sha512-e0u0gkPGYlj5sNNwM9BrRxxVU6Gz44oj9cFljC/2aS2AhewkNOjL5dzaJZo/s08K3L8N8DPuvGUSYEdU8hyx+g==}
+  '@tresjs/cientos@5.0.0-next.3':
+    resolution: {integrity: sha512-p5Yezv32SitCQ8UN2TFgP4tDRodORJbyCpKACDjg0P0/rzZ98MXQiyV9vztO8HHVCfMLrtzMNZTmeate0KKFKw==}
     peerDependencies:
       '@tresjs/core': '>=4.2.1'
       three: '>=0.133'
       vue: '>=3.3'
 
-  '@tresjs/core@5.0.0-next.5':
-    resolution: {integrity: sha512-2MMzKpMe3Wc1J06/5y43SAedqn/yGUF3u4qIDipZ2KBvLJzfecnFPpl0c9Fx+scwPoTvNvPslGYaAMNG0cHyMg==}
+  '@tresjs/core@5.0.0-next.6':
+    resolution: {integrity: sha512-zahNFe77Tbwe/hF8kz0FGnVbn9fBp0Dy/xhrQYIfQ0ZYmc1SQrz5WnN3Q1xp6PrkIlxxbN6GXQalXYGTXkIyaA==}
     peerDependencies:
       three: '>=0.133'
       vue: '>=3.4'
@@ -1506,11 +1506,10 @@ packages:
     peerDependencies:
       three: '>=0.133'
 
-  '@tresjs/post-processing@https://pkg.pr.new/@tresjs/post-processing@49c44b0':
-    resolution: {tarball: https://pkg.pr.new/@tresjs/post-processing@49c44b0}
-    version: 2.4.0
+  '@tresjs/post-processing@3.0.0-next.0':
+    resolution: {integrity: sha512-EK2W+h9UxzzpBXiE7EowjZngw7k97TonIGhp5b6jshyrRrhsq4EPi92l6yF7zyWaXjVHKcse+Jf6OCNwK5EJwg==}
     peerDependencies:
-      '@tresjs/core': '>=4.0'
+      '@tresjs/core': '>=5.0'
       three: '>=0.169'
       vue: '>=3.4'
 
@@ -9089,9 +9088,9 @@ snapshots:
       '@tanstack/virtual-core': 3.13.10
       vue: 3.5.17(typescript@5.8.3)
 
-  '@tresjs/cientos@5.0.0-next.2(@tresjs/core@5.0.0-next.5(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3)))(@types/three@0.177.0)(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3))':
+  '@tresjs/cientos@5.0.0-next.3(@tresjs/core@5.0.0-next.6(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3)))(@types/three@0.177.0)(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3))':
     dependencies:
-      '@tresjs/core': 5.0.0-next.5(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3))
+      '@tresjs/core': 5.0.0-next.6(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3))
       '@vueuse/core': 12.8.2(typescript@5.8.3)
       camera-controls: 2.10.1(three@0.177.0)
       stats-gl: 2.4.2(@types/three@0.177.0)(three@0.177.0)
@@ -9106,7 +9105,7 @@ snapshots:
       - react
       - typescript
 
-  '@tresjs/core@5.0.0-next.5(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3))':
+  '@tresjs/core@5.0.0-next.6(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3))':
     dependencies:
       '@alvarosabu/utils': 3.2.0
       '@pmndrs/pointer-events': 6.6.17
@@ -9230,18 +9229,14 @@ snapshots:
       - yup
       - zod
 
-  '@tresjs/post-processing@https://pkg.pr.new/@tresjs/post-processing@49c44b0(@tresjs/core@5.0.0-next.5(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3)))(@types/three@0.177.0)(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3))':
+  '@tresjs/post-processing@3.0.0-next.0(@tresjs/core@5.0.0-next.6(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3)))(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3))':
     dependencies:
-      '@tresjs/cientos': 5.0.0-next.2(@tresjs/core@5.0.0-next.5(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3)))(@types/three@0.177.0)(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3))
-      '@tresjs/core': 5.0.0-next.5(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3))
+      '@tresjs/core': 5.0.0-next.6(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3))
       '@vueuse/core': 12.8.2(typescript@5.8.3)
       postprocessing: 6.37.4(three@0.177.0)
       three: 0.177.0
       vue: 3.5.17(typescript@5.8.3)
     transitivePeerDependencies:
-      - '@react-three/fiber'
-      - '@types/three'
-      - react
       - typescript
 
   '@trysound/sax@0.2.0': {}
