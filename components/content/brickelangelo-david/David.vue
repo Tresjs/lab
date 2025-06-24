@@ -4,6 +4,8 @@ import { InstancedMesh, MeshPhongMaterial, Vector3, Object3D } from 'three'
 import { MeshSurfaceSampler } from 'three/addons/math/MeshSurfaceSampler.js'
 import { useMouse } from '@vueuse/core'
 
+const emit = defineEmits(['ready'])
+
 const groupRef = ref<Group>()
 
 const { nodes } = useGLTF('/models/brickelangelo/david.glb')
@@ -26,7 +28,7 @@ const brickMaterial = new MeshPhongMaterial({ color: 'lightgray' })
 const brickInstancedMesh = computed(() => new InstancedMesh(brick.value?.geometry, brickMaterial, instanceCount))
 
 useControls('fpsgraph')
-
+const isReady = ref(false)
 watch([david, brickInstancedMesh], ([davidModel, brickInstancedMesh]) => {
   if (!davidModel || !brickInstancedMesh) return
   const sampler = new MeshSurfaceSampler(davidModel)
@@ -53,6 +55,8 @@ watch([david, brickInstancedMesh], ([davidModel, brickInstancedMesh]) => {
   }
 
   brickInstancedMesh.instanceMatrix.needsUpdate = true
+  isReady.value = true
+  emit('ready')
 })
 
 
@@ -60,6 +64,6 @@ watch([david, brickInstancedMesh], ([davidModel, brickInstancedMesh]) => {
 
 <template>
   <TresGroup ref="groupRef">
-    <primitive v-if="brickInstancedMesh" :object="brickInstancedMesh" />
+    <primitive v-if="isReady" :object="brickInstancedMesh" />
   </TresGroup>
 </template>

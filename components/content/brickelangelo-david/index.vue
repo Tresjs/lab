@@ -16,6 +16,8 @@ const gl = {
   toneMapping: NoToneMapping,
 }
 
+useControls('fpsgraph')
+
 const lightRef = ref()
 
 watch([x, y], () => {
@@ -36,8 +38,7 @@ useControls({ cameraPosition })
 
 const { hasFinishLoading, progress } = await useProgress()
 
-watch(hasFinishLoading, (hasFinishLoading) => {
-  if (!cameraRef.value || !hasFinishLoading) return
+const onDavidReady = () => {
   gsap.to(cameraRef.value.position, {
     duration: 10,
     x: -0.63,
@@ -48,7 +49,7 @@ watch(hasFinishLoading, (hasFinishLoading) => {
       cameraRef.value.lookAt(0, 3, 0)
     },
   })
-})
+}
 </script>
 
 <template>
@@ -62,11 +63,11 @@ watch(hasFinishLoading, (hasFinishLoading) => {
     </div>
   </Transition>
   <div class="cursor fixed w-16 h-16 bg-white bg-opacity-40 rounded-full" :style="{ left: `${x}px`, top: `${y}px` }" />
-  <!--   <TresLeches /> -->
+  <TresLeches />
   <TresCanvas v-bind="gl">
     <TresPerspectiveCamera ref="cameraRef" :position="cameraPosition" :look-at="[0, 5, 0]" />
     <TresFog color="black" />
-    <David />
+    <David @ready="onDavidReady" />
     <TresSpotLight ref="lightRef" :position="[5, 5, 5]" :intensity="8" cast-shadow />
   </TresCanvas>
   <div
