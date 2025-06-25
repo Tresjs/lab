@@ -1,16 +1,18 @@
 <script setup lang="ts">
 import type { ExperimentItem } from '@/types'
 
+interface Author {
+  name: string
+  avatar: string
+}
+
 interface Props {
   experiment: ExperimentItem & {
     stem: string
     slug: string
     title: string
     thumbnail: string
-    author?: {
-      name: string
-      avatar: string
-    } | null
+    author?: Author[] | null
     repoPath: string
     repoTitle: string
   }
@@ -45,14 +47,24 @@ const formattedDate = computed(() =>
         {{ formattedDate }}
       </p>
 
-      <div class="mt-4 flex justify-between items-center">
-        <div v-if="experiment.author">
-          <UBadge color="neutral" variant="soft" :avatar="{
-            src: experiment.author.avatar,
-            alt: experiment.author.name,
+      <div class="mt-4 flex justify-between items-center flex-wrap gap-2">
+
+        <div v-if="experiment.authors?.length === 1">
+          <UBadge v-for="author in experiment.authors" :key="author" color="neutral" variant="soft" :avatar="{
+            src: author.avatar,
+            alt: author.name,
           }">
-            {{ experiment.author.name }}
+            {{ author.name }}
           </UBadge>
+        </div>
+        <div v-else>
+          <UAvatarGroup>
+            <template v-for="author in experiment.authors" :key="author">
+              <UTooltip :text="author.name">
+                <UAvatar :src="author.avatar" :alt="author.name" size="xs" />
+              </UTooltip>
+            </template>
+          </UAvatarGroup>
         </div>
         <UTooltip :text="experiment.repoTitle">
           <UButton color="primary" variant="ghost" icon="i-heroicons-code-bracket" size="xs" :to="experiment.repoPath"

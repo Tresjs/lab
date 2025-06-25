@@ -15,21 +15,28 @@ const { data: formattedExperiments } = await useAsyncData('formatted-experiments
       experiments.value.map(async (experiment) => {
         const slug = getSlugFromExperiment(experiment)
 
+        const authorSlugs = Array.isArray(experiment.author)
+          ? experiment.author
+          : [experiment.author]
+
         // Fetch the author using useAsyncData to leverage caching
-        const { data: author } = experiment.author
-          ? await useAsyncData(`author-${experiment.author}`, () =>
+        const authorPromises = authorSlugs.map(authorSlug =>
+          useAsyncData(`author-${authorSlug}`, () =>
             queryCollection('authors')
-              .where('slug', '=', experiment.author)
+              .where('slug', '=', authorSlug)
               .first()
           )
-          : { data: null }
+        )
+
+        const authorResults = await Promise.all(authorPromises)
+        const authors = authorResults.map(result => result.data?.value).filter(Boolean)
 
         return {
           ...experiment,
           slug,
           title: getTitleFromExperiment(experiment),
           thumbnail: getThumbnailFromExperiment(experiment),
-          author: author?.value,
+          authors,
           repoPath: getRepoPathFromExperiment(experiment),
           repoTitle: getRepoTitleFromExperiment(experiment),
         }

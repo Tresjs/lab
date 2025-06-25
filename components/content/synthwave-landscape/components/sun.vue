@@ -32,17 +32,6 @@ void main() {
   gl_FragColor = mix(color_main, color_accent, vPos.y * .7 - 0.1);
 }
 `
-
-const uniforms = {
-  color_main: {
-    // sun's top color
-    value: new Vector3().setFromColor(new Color(props.colorA)),
-  },
-  color_accent: {
-    // sun's bottom color
-    value: new Vector3().setFromColor(new Color(props.colorB)),
-  },
-}
 </script>
 
 <template>
@@ -50,10 +39,7 @@ const uniforms = {
     <slot />
     <TresMesh :render-order="0">
       <TresSphereGeometry :args="[1, 64, 64]" />
-      <TresShaderMaterial
-        :vertex-shader="vertexShader"
-        :fragment-shader="fragmentShader"
-      />
+      <TresShaderMaterial :vertex-shader="vertexShader" :fragment-shader="fragmentShader" />
     </TresMesh>
   </TresGroup>
 </template>

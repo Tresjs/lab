@@ -3,6 +3,7 @@ import { SRGBColorSpace, CineonToneMapping } from 'three'
 import { ImprovedNoise } from 'three/examples/jsm/math/ImprovedNoise'
 import { clamp } from 'three/src/math/MathUtils'
 import { PALETTE } from './components/palette'
+import { EffectComposerPmndrs } from '@tresjs/post-processing'
 
 const gl = {
   clearColor: PALETTE[0],
@@ -64,7 +65,10 @@ const onLoop = ({ elapsed }: { elapsed: number }) => {
 <template>
   <MusicPlayer />
   <TresCanvas v-bind="gl" :disable-render="false" @loop="onLoop">
-    <Postprocessing />
+    <EffectComposerPmndrs>
+      <BloomPmndrs :radius="4" :intensity="0.4" :luminance-threshold="0" :luminance-smoothing="0.3" mipmap-blur />
+      <ScanlinePmndrs :density="642" />
+    </EffectComposerPmndrs>
 
     <TresPerspectiveCamera :position="[x, y, z]">
       <TresPointLight :intensity="1000" :position="[0, 3, 0]" :color="PALETTE[6]" />

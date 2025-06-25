@@ -22,7 +22,7 @@ export default defineContentConfig({
         title: z.string(),
         description: z.string(),
         thumbnail: z.string(),
-        author: z.string(),
+        author: z.union([z.string(), z.array(z.string())]),
         tags: z.array(z.string()),
         date: z.string(),
       }),

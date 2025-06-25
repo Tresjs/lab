@@ -8,7 +8,7 @@ export interface ExperimentItem {
   slug?: string
   date: string
   description?: string
-  author?: string
+  authors?: string[]
   thumbnail?: string
   tags?: string[]
 }

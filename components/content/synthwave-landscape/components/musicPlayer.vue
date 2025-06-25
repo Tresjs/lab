@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { MathUtils } from 'three-stdlib'
+import { MathUtils } from 'three'
 
 const playing = shallowRef(false)
 

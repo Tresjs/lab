@@ -1,8 +1,10 @@
 ---
-author: andretchen0
+title: Synthwave Landscape
+author: [andretchen0, alvarosabu]
 description: Infinite procedural landscape
 tags: ['procedural', 'shader', 'post-processing']
 date: 2024-08-29
+updated: 2025-06-25
 ---
 
 ::synthwave-landscape
