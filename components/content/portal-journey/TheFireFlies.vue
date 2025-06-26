@@ -28,19 +28,16 @@ for (let i = 0; i < firefliesCount; i++) {
   scaleArray[i] = Math.random()
 }
 
-const { onLoop } = useRenderLoop()
+const { onBeforeRender } = useLoop()
 
-onLoop(({ elapsed }) => {
-  shader.uniforms.uTime.value = elapsed
+onBeforeRender(({ delta }) => {
+  shader.uniforms.uTime.value += delta
 })
 </script>
 
 <template>
   <TresPoints>
-    <TresBufferGeometry
-      :position="[positionArray, 3]"
-      :a-scale="[scaleArray, 1]"
-    />
+    <TresBufferGeometry :position="[positionArray, 3]" :a-scale="[scaleArray, 1]" />
     <TresShaderMaterial v-bind="shader" />
   </TresPoints>
 </template>

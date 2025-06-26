@@ -1,56 +1,35 @@
 <script setup lang="ts">
 import type { Mesh } from 'three'
-import { SRGBColorSpace, DoubleSide, MeshBasicMaterial, ShaderMaterial, Color } from 'three'
-
+import { DoubleSide, MeshBasicMaterial, ShaderMaterial, Color } from 'three'
 import PortalVertex from './shaders/portal/vertex.glsl'
 import PortalFragment from './shaders/portal/fragment.glsl'
 
 const experiment = {
-  portalColorStart: '#7030eb',
-  portalColorEnd: '#ddc0ff',
+  portalColorStart: '#82DBC5',
+  portalColorEnd: '#EBFFEE',
 }
 
-/* const portalCtrls = pane.addFolder({ title: 'Portal' })
-portalCtrls
-  .addInput(experiment, 'portalColorStart', {
-    label: 'color start',
-    min: 0,
-    max: 1,
-    step: 0.01,
-  })
-  .on('change', ({ value }) => {
-    portalLightMaterial.uniforms.uColorStart.value.set(value)
-  })
-portalCtrls
-  .addInput(experiment, 'portalColorEnd', {
-    label: 'color end',
-    min: 0,
-    max: 1,
-    step: 0.01,
-  })
-  .on('change', ({ value }) => {
-    portalLightMaterial.uniforms.uColorEnd.value.set(value)
-  }) */
 
-const { scene: portal } = await useGLTF(
+const { state: portal } = useGLTF(
   'https://raw.githubusercontent.com/Tresjs/assets/main/models/gltf/portal/portal.glb',
   {
     draco: true,
   },
 )
 
-const bakedTexture = await useTexture([
-  'https://raw.githubusercontent.com/Tresjs/assets/main/models/gltf/portal/baked.jpg',
-])
+const { state: bakedTexture } = useTexture('https://raw.githubusercontent.com/Tresjs/assets/main/models/gltf/portal/baked.jpg')
 
-bakedTexture.flipY = false
-bakedTexture.encoding = SRGBColorSpace
+watch(bakedTexture, (value) => {
+  if (value) {
+    value.flipY = false
+  }
+})
 
 // Baked material
-const bakedMaterial = new MeshBasicMaterial({
-  map: bakedTexture,
+const bakedMaterial = computed(() => new MeshBasicMaterial({
+  map: bakedTexture.value,
   side: DoubleSide,
-})
+}))
 
 const portalLightMaterial = new ShaderMaterial({
   uniforms: {
@@ -63,19 +42,22 @@ const portalLightMaterial = new ShaderMaterial({
   side: DoubleSide,
 })
 
-const portalObj = portal
-const bakedMesh = portalObj.children.find(child => child.name === 'baked')
-;(bakedMesh as Mesh).material = bakedMaterial
-const portalCircle = portalObj.children.find(child => child.name === 'portalCircle')
-;(portalCircle as Mesh).material = portalLightMaterial
+watch(portal, (value) => {
+  if (value) {
+    const bakedMesh = value?.scene?.children?.find(child => child.name === 'baked')
+      ; (bakedMesh as Mesh).material = bakedMaterial.value
+    const portalCircle = value?.scene?.children?.find(child => child.name === 'portalCircle')
+      ; (portalCircle as Mesh).material = portalLightMaterial
+  }
+})
 
-const { onLoop } = useRenderLoop()
+const { onBeforeRender } = useLoop()
 
-onLoop(({ _delta, elapsed }) => {
-  portalLightMaterial.uniforms.uTime.value = elapsed
+onBeforeRender(({ delta }) => {
+  portalLightMaterial.uniforms.uTime.value += delta
 })
 </script>
 
 <template>
-  <TresMesh v-bind="portal" />
+  <primitive v-if="portal" :object="portal.scene" />
 </template>
