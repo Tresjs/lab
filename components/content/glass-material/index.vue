@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BasicShadowMap, EquirectangularReflectionMapping, NoToneMapping, SRGBColorSpace } from 'three'
+import { EquirectangularReflectionMapping } from 'three'
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader'
 
 const gl = {
@@ -8,28 +8,19 @@ const gl = {
   alpha: true,
 }
 
-const { map, normalMap } = await useTexture({
-  map: 'https://raw.githubusercontent.com/Tresjs/assets/main/textures/glass-effect/bg-texture.jpg',
-  normalMap: 'https://raw.githubusercontent.com/Tresjs/assets/main/textures/glass-effect/normal-example.jpg',
-})
+const { state: map } = useTexture('https://raw.githubusercontent.com/Tresjs/assets/main/textures/glass-effect/bg-texture.jpg')
+const { state: normalMap } = useTexture('https://raw.githubusercontent.com/Tresjs/assets/main/textures/glass-effect/normal-example.jpg')
+const { state: hdrEquirect } = useLoader<typeof RGBELoader>(RGBELoader, 'https://raw.githubusercontent.com/Tresjs/assets/main/textures/glass-effect/glass-effect.hdr')
 
 const planeRef = shallowRef(null)
 
-const hdrEquirect = await new RGBELoader().load(
-  'https://raw.githubusercontent.com/Tresjs/assets/main/textures/glass-effect/glass-effect.hdr',
-  () => {
-    hdrEquirect.mapping = EquirectangularReflectionMapping
-  },
-)
 
-const options = reactive({
-  transmission: 1,
-  thickness: 0.5,
-  roughness: 0,
-  envMap: hdrEquirect,
-  clearcoatNormalMap: normalMap,
-  envMapIntensity: 1.5,
+watch(hdrEquirect, (value) => {
+  if (value) {
+    value.mapping = EquirectangularReflectionMapping
+  }
 })
+
 
 const { transmission, thickness, roughness, envMapIntensity, useHDR } = useControls({
   transmission: {
@@ -59,58 +50,31 @@ const { transmission, thickness, roughness, envMapIntensity, useHDR } = useContr
   useHDR: true,
 })
 
-watch([transmission.value, thickness.value, roughness.value, envMapIntensity.value], (state) => {
-  state.forEach((value, index) => {
-    options[Object.keys(options)[index] as string] = value.value
-  })
-})
 
-watch(useHDR.value, (value) => {
-  options.envMap = value ? hdrEquirect : null
+const envMap = computed(() => {
+  return useHDR.value ? hdrEquirect.value : null
 })
 </script>
 
 <template>
   <TresLeches />
-  <TresCanvas
-    window-size
-    v-bind="gl"
-  >
-    <TresPerspectiveCamera
-      :position="[0, 0, 3]"
-      :fov="45"
-      :aspect="1"
-      :near="0.1"
-      :far="1000"
-    />
+  <TresCanvas window-size v-bind="gl">
+    <TresPerspectiveCamera :position="[0, 0, 3]" :fov="45" :aspect="1" :near="0.1" :far="1000" />
     <OrbitControls />
-    <TresGridHelper
-      :args="[30, 30]"
-      :position="[0, -2.5, 0]"
-    />
+    <TresGridHelper :args="[30, 30]" :position="[0, -2.5, 0]" />
     <TresMesh :position="[-0, 0, 0]">
       <TresIcosahedronGeometry :args="[1, 10]" />
-      <TresMeshPhysicalMaterial 
-        :transmission="options.transmission" 
-        :thickness="options.thickness" 
-        :roughness="options.roughness" 
-        :env-map="options.envMap" 
-        :env-map-intensity="options.envMapIntensity" 
-        :clearcoat-normal-map="normalMap"
-      />
+      <TresMeshPhysicalMaterial v-if="normalMap" :transmission="transmission" :thickness="thickness"
+        :roughness="roughness" :env-map="envMap" :env-map-intensity="envMapIntensity"
+        :clearcoat-normal-map="normalMap" />
     </TresMesh>
-    <TresMesh
-      ref="planeRef"
-      :position="[0, 0, -1]"
-    >
-      <TresPlaneGeometry :args="[5, 5]" />
-      <TresMeshBasicMaterial :map="map" />
-    </TresMesh>
-    <TresDirectionalLight
-      :position="[0, 2, 4]"
-      :intensity="0.5"
-      cast-shadow
-    />
+    <Suspense>
+      <TresMesh ref="planeRef" :position="[0, 0, -1]">
+        <TresPlaneGeometry :args="[5, 5]" />
+        <TresMeshBasicMaterial v-if="map" :map="map" />
+      </TresMesh>
+    </Suspense>
+    <TresDirectionalLight :position="[0, 2, 4]" :intensity="0.5" cast-shadow />
     <TresAmbientLight :intensity="0.2" />
   </TresCanvas>
 </template>

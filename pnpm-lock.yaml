@@ -76,8 +76,8 @@ importers:
         specifier: https://pkg.pr.new/@tresjs/leches@5536ad5
         version: https://pkg.pr.new/@tresjs/leches@5536ad5(magicast@0.3.5)(unocss@66.2.3(@unocss/webpack@66.2.3(webpack@5.99.9(esbuild@0.25.5)))(postcss@8.5.6)(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.0)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3)))(vue@3.5.17(typescript@5.8.3))
       '@tresjs/nuxt':
-        specifier: https://pkg.pr.new/@tresjs/nuxt@59b56e4
-        version: https://pkg.pr.new/@tresjs/nuxt@59b56e4(jwt-decode@4.0.0)(magicast@0.3.5)(postcss@8.5.6)(rollup@4.43.0)(three@0.177.0)(typescript@5.8.3)(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.0)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))(webpack@5.99.9(esbuild@0.25.5))(zod@3.25.67)
+        specifier: 4.1.0-next.1
+        version: 4.1.0-next.1(jwt-decode@4.0.0)(magicast@0.3.5)(postcss@8.5.6)(rollup@4.43.0)(three@0.177.0)(typescript@5.8.3)(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.0)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))(webpack@5.99.9(esbuild@0.25.5))(zod@3.25.67)
       '@tweakpane/plugin-essentials':
         specifier: ^0.2.1
         version: 0.2.1(tweakpane@4.0.5)
@@ -1470,13 +1470,6 @@ packages:
       three: '>=0.133'
       vue: '>=3.4'
 
-  '@tresjs/core@https://pkg.pr.new/@tresjs/core@0e8ac2b':
-    resolution: {tarball: https://pkg.pr.new/@tresjs/core@0e8ac2b}
-    version: 5.0.0-next.0
-    peerDependencies:
-      three: '>=0.133'
-      vue: '>=3.4'
-
   '@tresjs/eslint-config-base@0.2.1':
     resolution: {integrity: sha512-9fkwDaNu4nLKujeERi5d1S7+ZdZpxBE+g/jUbM4ywhn/+5P7Qv8dXlo1vB05LteX5cTBnZxHQTFrJGK+sMcFdg==}
     peerDependencies:
@@ -1500,9 +1493,8 @@ packages:
     peerDependencies:
       vue: '>=3.3.4'
 
-  '@tresjs/nuxt@https://pkg.pr.new/@tresjs/nuxt@59b56e4':
-    resolution: {tarball: https://pkg.pr.new/@tresjs/nuxt@59b56e4}
-    version: 4.0.0
+  '@tresjs/nuxt@4.1.0-next.1':
+    resolution: {integrity: sha512-jJMUs475572fCCAcRBXtCE6nigv7wpXw6rFmujnytYkG8BkSmZTKB/X7m6vPimyhZFeghPsemq5h0B9Xs3bMew==}
     peerDependencies:
       three: '>=0.133'
 
@@ -9116,16 +9108,6 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  '@tresjs/core@https://pkg.pr.new/@tresjs/core@0e8ac2b(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3))':
-    dependencies:
-      '@alvarosabu/utils': 3.2.0
-      '@vue/devtools-api': 7.7.7
-      '@vueuse/core': 12.8.2(typescript@5.8.3)
-      three: 0.177.0
-      vue: 3.5.17(typescript@5.8.3)
-    transitivePeerDependencies:
-      - typescript
-
   '@tresjs/eslint-config-base@0.2.1(@typescript-eslint/eslint-plugin@6.21.0(@typescript-eslint/parser@8.34.1(eslint@8.57.1)(typescript@5.8.3))(eslint@8.57.1)(typescript@5.8.3))(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.8.3))(eslint@8.57.1)':
     dependencies:
       eslint: 8.57.1
@@ -9190,11 +9172,11 @@ snapshots:
       - magicast
       - unocss
 
-  '@tresjs/nuxt@https://pkg.pr.new/@tresjs/nuxt@59b56e4(jwt-decode@4.0.0)(magicast@0.3.5)(postcss@8.5.6)(rollup@4.43.0)(three@0.177.0)(typescript@5.8.3)(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.0)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))(webpack@5.99.9(esbuild@0.25.5))(zod@3.25.67)':
+  '@tresjs/nuxt@4.1.0-next.1(jwt-decode@4.0.0)(magicast@0.3.5)(postcss@8.5.6)(rollup@4.43.0)(three@0.177.0)(typescript@5.8.3)(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.0)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))(webpack@5.99.9(esbuild@0.25.5))(zod@3.25.67)':
     dependencies:
       '@nuxt/kit': 3.17.5(magicast@0.3.5)
       '@nuxt/ui': 2.22.0(jwt-decode@4.0.0)(magicast@0.3.5)(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.0)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))(zod@3.25.67)
-      '@tresjs/core': https://pkg.pr.new/@tresjs/core@0e8ac2b(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3))
+      '@tresjs/core': 5.0.0-next.6(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3))
       '@unocss/nuxt': 66.2.3(magicast@0.3.5)(postcss@8.5.6)(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.0)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))(webpack@5.99.9(esbuild@0.25.5))
       defu: 6.1.4
       mlly: 1.7.4

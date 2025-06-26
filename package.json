@@ -33,7 +33,7 @@
     "@tresjs/core": "5.0.0-next.6",
     "@tresjs/eslint-config-vue": "^0.2.1",
     "@tresjs/leches": "https://pkg.pr.new/@tresjs/leches@5536ad5",
-    "@tresjs/nuxt": "https://pkg.pr.new/@tresjs/nuxt@59b56e4",
+    "@tresjs/nuxt": "4.1.0-next.1",
     "@tweakpane/plugin-essentials": "^0.2.1",
     "@types/three": "^0.177.0",
     "gsap": "^3.13.0",
