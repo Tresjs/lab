@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import type { ExperimentItem } from '@/types'
 
+useHead({
+  title: 'TresJS Lab',
+  meta: [
+    { name: 'description', content: 'Explore creative WebGL experiments built with TresJS, the declarative ThreeJS framework for Vue' },
+  ],
+})
+
 // Fetch all experiments ordered by date using useAsyncData
 const { data: experiments } = await useAsyncData('experiments', () =>
   queryCollection('experiments').order('date', 'DESC').all()

@@ -68,7 +68,7 @@ const formattedDate = computed(() =>
         </div>
         <UTooltip :text="experiment.repoTitle">
           <UButton color="primary" variant="ghost" icon="i-heroicons-code-bracket" size="xs" :to="experiment.repoPath"
-            target="_blank" />
+            target="_blank" @click.stop />
         </UTooltip>
       </div>
     </UCard>

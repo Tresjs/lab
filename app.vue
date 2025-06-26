@@ -19,8 +19,8 @@ useHead({
 })
 
 useSeoMeta({
-  titleTemplate: `%s - ${seo?.siteName}`,
-  ogSiteName: seo?.siteName,
+  titleTemplate: `%s - TresJS Lab`,
+  ogSiteName: 'TresJS Lab',
   twitterCard: 'summary_large_image'
 })
 
