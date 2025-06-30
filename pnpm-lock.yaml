@@ -64,8 +64,8 @@ importers:
         specifier: ^3.5.2
         version: 3.5.2(magicast@0.3.5)
       '@tresjs/cientos':
-        specifier: 5.0.0-next.3
-        version: 5.0.0-next.3(@tresjs/core@5.0.0-next.6(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3)))(@types/three@0.177.0)(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3))
+        specifier: 5.0.0-next.4
+        version: 5.0.0-next.4(@tresjs/core@5.0.0-next.6(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3)))(@types/three@0.177.0)(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3))
       '@tresjs/core':
         specifier: 5.0.0-next.6
         version: 5.0.0-next.6(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3))
@@ -1457,8 +1457,8 @@ packages:
     peerDependencies:
       vue: ^2.7.0 || ^3.0.0
 
-  '@tresjs/cientos@5.0.0-next.3':
-    resolution: {integrity: sha512-p5Yezv32SitCQ8UN2TFgP4tDRodORJbyCpKACDjg0P0/rzZ98MXQiyV9vztO8HHVCfMLrtzMNZTmeate0KKFKw==}
+  '@tresjs/cientos@5.0.0-next.4':
+    resolution: {integrity: sha512-1ygoZuoErCJnr/ecqG6bOFx0/R4RGc94h/Bo2pXETsM2EbD+iTMQrIg7ijpnyZn9zw2NXvzbzhlcjj4SNwEJSw==}
     peerDependencies:
       '@tresjs/core': '>=4.2.1'
       three: '>=0.133'
@@ -9080,7 +9080,7 @@ snapshots:
       '@tanstack/virtual-core': 3.13.10
       vue: 3.5.17(typescript@5.8.3)
 
-  '@tresjs/cientos@5.0.0-next.3(@tresjs/core@5.0.0-next.6(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3)))(@types/three@0.177.0)(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3))':
+  '@tresjs/cientos@5.0.0-next.4(@tresjs/core@5.0.0-next.6(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3)))(@types/three@0.177.0)(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3))':
     dependencies:
       '@tresjs/core': 5.0.0-next.6(three@0.177.0)(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3))
       '@vueuse/core': 12.8.2(typescript@5.8.3)

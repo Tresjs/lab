@@ -1,15 +1,11 @@
 <script setup lang="ts">
 import { TresCanvas } from '@tresjs/core'
 import type { PerspectiveCamera } from 'three'
-import { BasicShadowMap, SRGBColorSpace, NoToneMapping } from 'three'
 import gsap from 'gsap'
 
 const gl = {
   shadows: true,
   alpha: true,
-  shadowMapType: BasicShadowMap,
-  outputColorSpace: SRGBColorSpace,
-  toneMapping: NoToneMapping,
 }
 
 const cameraRef = ref<PerspectiveCamera | null>(null)
@@ -44,55 +40,28 @@ const { hasFinishLoading, progress } = await useProgress()
       Only $2999.99
     </p>
   </div>
-  <Transition
-    name="fade-overlay"
-    enter-active-class="opacity-1 transition-opacity duration-200"
-    leave-active-class="opacity-0 transition-opacity duration-200"
-  >
-    <div
-      v-show="!hasFinishLoading"
-      class="absolute t-0 l-0 w-full h-full z-20 flex justify-center items-center text-black font-mono"
-    >
+  <Transition name="fade-overlay" enter-active-class="opacity-1 transition-opacity duration-200"
+    leave-active-class="opacity-0 transition-opacity duration-200">
+    <div v-show="!hasFinishLoading"
+      class="absolute t-0 l-0 w-full h-full z-20 flex justify-center items-center text-black font-mono">
       <div class="w-200px text-black text-center">
         <p class="animate-tada">
-          🤳 
+          🤳
         </p>
         Loading... {{ progress }} %
       </div>
     </div>
   </Transition>
   <TresCanvas v-bind="gl">
-    <TresPerspectiveCamera
-      ref="cameraRef"
-      :position="[5, 5, 5]"
-      :look-at="[0, 2, 0]"
-    />
+    <TresPerspectiveCamera ref="cameraRef" :position="[4, 4, 4]" :look-at="[0, 2, 0]" />
+    <IPhone @view-clicked="onViewClicked" />
+    <ContactShadows :blur="3.5" :resolution="512" :opacity="1" />
     <Suspense>
-      <IPhone @view-clicked="onViewClicked" />
-    </Suspense>
-    <ContactShadows
-      :blur="3.5"
-      :resolution="512"
-      :opacity="1"
-    />
-    <Suspense>
-      <Environment
-        background
-        :blur="0.9"
-        preset="city"
-      />
+      <Environment background :blur="0.9" preset="city" />
     </Suspense>
     <TresAmbientLight :intensity="1" />
-    <TresDirectionalLight
-      :intensity="2"
-      :position="[2, 3, 0]"
-      :cast-shadow="true"
-      :shadow-camera-far="50"
-      :shadow-camera-left="-10"
-      :shadow-camera-right="10"
-      :shadow-camera-top="10"
-      :shadow-camera-bottom="-10"
-    />
+    <TresDirectionalLight :intensity="2" :position="[2, 3, 0]" :cast-shadow="true" :shadow-camera-far="50"
+      :shadow-camera-left="-10" :shadow-camera-right="10" :shadow-camera-top="10" :shadow-camera-bottom="-10" />
   </TresCanvas>
 </template>
 
