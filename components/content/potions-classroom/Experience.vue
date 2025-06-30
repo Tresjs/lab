@@ -1,37 +1,31 @@
 <script setup lang="ts">
-const tableTexture = await useTexture(['/models/potions-classroom/table.png'])
-tableTexture.flipY = false
-const roomTexture = await useTexture(['/models/potions-classroom/room.png'])
-roomTexture.flipY = false
+const { state: tableTexture, isReady: isTableTextureReady } = useTexture('/models/potions-classroom/table.png')
+const { state: roomTexture, isReady: isRoomTextureReady } = useTexture('/models/potions-classroom/room.png')
+
+watch(tableTexture, (texture) => {
+  texture.flipY = false
+})
+
+watch(roomTexture, (texture) => {
+  texture.flipY = false
+})
 </script>
 
 <template>
-  <Suspense>
-    <template v-if="tableTexture">
-      <Table :texture="tableTexture" />
-      <Room :texture="roomTexture" />
-      <Cauldron :texture="tableTexture" />
-      <Stands :texture="roomTexture" />
-      <Bricks :texture="roomTexture" />
-      <Books :texture="tableTexture" />
-      <Bottles />
-      <Chalkboard :texture="roomTexture" />
-      <Lamp :texture="tableTexture" />
-      <Mortar :texture="tableTexture" />
-      <Windows :texture="tableTexture" />
-      <Skulls :texture="tableTexture" />
-      <FloatingCandles />
-      <Jars />
-      <!-- <Cauldron :texture="tableTexture" />
-        <Stands :texture="roomTexture" />
-        <Bricks :texture="roomTexture" />
-        <Books :texture="tableTexture" />
-        <Bottles />
-        <Skulls :texture="tableTexture" />
-        <Lamp :texture="tableTexture" />
-        <Mortar :texture="tableTexture" />
-        <Windows :texture="tableTexture" />
-        <Chalkboard :texture="roomTexture" /> -->
-    </template>
-  </Suspense>
+  <template v-if="isTableTextureReady && isRoomTextureReady">
+    <Room :texture="roomTexture" />
+    <Bricks :texture="roomTexture" />
+    <Table :texture="tableTexture" />
+    <Stands :texture="roomTexture" />
+    <Books :texture="tableTexture" />
+    <Bottles />
+    <Chalkboard :texture="roomTexture" />
+    <Cauldron :texture="tableTexture" />
+    <Windows :texture="tableTexture" />
+    <Skulls />
+    <FloatingCandles />
+    <Mortar :texture="tableTexture" />
+    <Lamp :texture="tableTexture" />
+    <Jars />
+  </template>
 </template>

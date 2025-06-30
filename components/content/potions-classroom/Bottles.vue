@@ -1,18 +1,18 @@
 <script setup lang="ts">
-const { nodes } = await useGLTF(
+// Load GLTF model without await to get reactive reference
+const { nodes } = useGLTF(
   '/models/potions-classroom/wizard-potions-classroom.glb',
   {
     draco: true,
   },
 )
 
-const bottles = Object.values(nodes).filter(node => node.name.includes('Bottle'))
+// Filter bottle nodes reactively using computed
+const bottles = computed(() => Object.values(nodes.value).filter(node => node.name.includes('Bottle')))
 </script>
 
 <template>
-  <primitive
-    v-for="(bottle, $index) of bottles"
-    :key="$index"
-    :object="bottle"
-  />
+  <template v-if="bottles">
+    <primitive v-for="(bottle, $index) of bottles" :key="$index" :object="bottle" />
+  </template>
 </template>

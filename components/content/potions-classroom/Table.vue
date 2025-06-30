@@ -6,32 +6,33 @@ const props = defineProps<{
   texture: Texture
 }>()
 
-const { nodes } = await useGLTF('/models/potions-classroom/wizard-potions-classroom.glb', {
+const { nodes } = useGLTF('/models/potions-classroom/wizard-potions-classroom.glb', {
   draco: true,
 })
 
-const bakedMaterial = new MeshBasicMaterial({
+const bakedMaterial = computed(() => new MeshBasicMaterial({
   map: props.texture,
   side: DoubleSide,
+}))
+
+watch([nodes, bakedMaterial], ([nodes, texture]) => {
+  nodes.Table.children.forEach((child) => {
+    if (child.isMesh) {
+      child.material = texture
+    }
+  })
 })
 
-nodes.Table.children.forEach((child) => {
-  if (child.isMesh) {
-    child.material = bakedMaterial
-  }
-})
+const stools = computed(() => Object.values(nodes.value).filter(node => node.name.includes('Stool')))
 
-const stools = Object.values(nodes).filter(node => node.name.includes('Stool'))
-
-stools.forEach((stool) => {
-  stool.material = bakedMaterial
+watch([stools, bakedMaterial], ([stools, texture]) => {
+  stools.forEach((stool) => {
+    stool.material = texture
+  })
 })
 </script>
 
 <template>
-  <primitive :object="nodes.Table" />
-  <primitive
-    v-for="stool of stools"
-    :object="stool"
-  />
+  <primitive v-if="nodes.Table" :object="nodes.Table" />
+  <primitive v-for="stool of stools" :key="stool.id" :object="stool" />
 </template>

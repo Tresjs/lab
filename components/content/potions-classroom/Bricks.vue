@@ -1,34 +1,37 @@
 <script setup lang="ts">
 import type { Texture } from 'three'
 import { DoubleSide, MeshBasicMaterial } from 'three'
+import { computed, watch } from 'vue'
 
 const props = defineProps<{
   texture: Texture
 }>()
 
-const { nodes } = await useGLTF(
+// Load GLTF model without await to get reactive reference
+const { nodes } = useGLTF(
   '/models/potions-classroom/wizard-potions-classroom.glb',
   {
     draco: true,
   },
 )
 
-const bricks = Object.values(nodes).filter(node => node.name.includes('Brick'))
+// Filter brick nodes reactively using computed
+const bricks = computed(() => Object.values(nodes.value).filter(node => node.name.includes('Brick')))
 
-const bakedMaterial = new MeshBasicMaterial({
+// Create baked material reactively using computed
+const bakedMaterial = computed(() => new MeshBasicMaterial({
   map: props.texture,
   side: DoubleSide,
-})
+}))
 
-bricks.forEach((brick) => {
-  brick.material = bakedMaterial
+// Watch for changes in bricks and material to apply materials
+watch([bricks, bakedMaterial], ([bricks, material]) => {
+  bricks.forEach((brick) => {
+    brick.material = material
+  })
 })
 </script>
 
 <template>
-  <primitive
-    v-for="brick of bricks"
-    :key="brick.uuid"
-    :object="brick"
-  />
+  <primitive v-for="brick of bricks" :key="brick.uuid" :object="brick" />
 </template>
