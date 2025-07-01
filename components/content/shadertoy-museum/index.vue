@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { Camera, Light, Mesh, Clock, PlaneGeometry } from 'three';
+import type { Camera, Light} from 'three';
+import { Mesh, Clock, PlaneGeometry } from 'three';
 import type { LightFn } from './fns/shaderToyLights';
 import { shaderToySrc } from './fns/shaderToySrc';
 import TheExperience from './TheExperience.vue'
@@ -63,7 +64,7 @@ function click() {
   <Suspense>
     <div>
       <TextUi />
-      <TresCanvas @pointerup="click" clear-color="#000" :anti-alias="false" window-size>
+      <TresCanvas clear-color="#000" :anti-alias="false" window-size @pointerup="click">
         <TheExperience />
       </TresCanvas>
     </div>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { Group, Light, Vector2 } from 'three';
+import type { Light} from 'three';
+import { Group, Vector2 } from 'three';
 import type { State } from '../index.vue';
 import { lerp, pingpong } from 'three/src/math/MathUtils.js';
 
@@ -50,5 +51,5 @@ useLoop().onBeforeRender(
 </script>
 
 <template>
-    <TresGroup ref="lightsGroup"></TresGroup>
+    <TresGroup ref="lightsGroup"/>
 </template>

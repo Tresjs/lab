@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { Box3, Camera, Color, Light, Mesh, MeshPhongMaterial, Quaternion, Vector3 } from 'three';
+import type { Camera, Light, Mesh} from 'three';
+import { Box3, Color, MeshPhongMaterial, Quaternion, Vector3 } from 'three';
 import { inject } from 'vue';
 import { shaderToySrc } from '../fns/shaderToySrc';
 import type { State } from '../index.vue';

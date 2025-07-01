@@ -1,4 +1,4 @@
-import { Color, Vector2, type Light } from "three";
+import type { Vector2, Color, type Light } from "three";
 import type { shaderToySrc } from "./shaderToySrc";
 import { clamp } from "three/src/math/MathUtils.js";
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PerspectiveCamera } from 'three';
+import type { PerspectiveCamera } from 'three';
 import type { State } from '../index.vue';
 
 const state = inject('state') as State

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { DoubleSide, Material, MeshNormalMaterial, ShaderMaterial, Vector2 } from 'three';
+import type { Material} from 'three';
+import { DoubleSide, MeshNormalMaterial, ShaderMaterial, Vector2 } from 'three';
 import type { State } from '../index.vue';
 
 const state = inject('state') as State

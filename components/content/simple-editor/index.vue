@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type Object3D } from 'three'
+import type { Object3D } from 'three'
 import { TresCanvas } from '@tresjs/core'
 import { TransformControls } from '@tresjs/cientos'
 import { useElementSize, useRefHistory, useDark } from '@vueuse/core'
