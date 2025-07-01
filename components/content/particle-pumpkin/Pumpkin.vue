@@ -1,20 +1,11 @@
 <script setup lang="ts">
 import {
   AmbientLight,
-  BoxGeometry,
-  Mesh,
-  MeshPhongMaterial,
-  MeshStandardMaterial,
-  PerspectiveCamera,
-  PointLight,
   Points,
   PointsMaterial,
-  SphereGeometry,
-  TextureLoader,
   Vector3,
 } from 'three'
 
-// @ts-expect-error
 import CustomShaderMaterial from 'three-custom-shader-material/vanilla'
 import { patchShaders } from './glNosie'
 import fragmentShader from './shaders/fragment.glsl?raw'
@@ -24,15 +15,21 @@ const context = useTresContext()
 
 context.scene.value.add(new AmbientLight(0x404040))
 
-// add a box
+const { nodes } = useGLTF('/models/particle-pumpkin/pumpkin.glb')
 
-const logo = await useGLTF('/models/particle-pumpkin/pumpkin.glb')
+watch(nodes, (newNodes) => {
+  console.log(newNodes)
+})
 
 // convert object3d to geometry
+const pumpkin = computed(() => nodes.value.Pumpkin)
 
-logo.nodes.Pumpkin.geometry?.scale(0.025, 0.025, 0.025)
+watch(pumpkin, (newPumpkin) => {
+  newPumpkin.geometry?.scale(0.025, 0.025, 0.025)
+})
 
-const pointsParentGeometry = logo.nodes.Pumpkin.geometry?.clone()
+
+const pointsParentGeometry = computed(() => pumpkin.value?.geometry?.clone())
 
 const baseMaterial = new PointsMaterial({
   color: '#ffffff',
@@ -55,16 +52,22 @@ const shaderMaterial = new CustomShaderMaterial({
   },
 })
 
-const points = new Points(pointsParentGeometry, shaderMaterial)
+const points = computed(() => new Points(pointsParentGeometry.value, shaderMaterial))
 
-context.scene.value.add(points)
+watch(points, (newPoints) => {
+  context.scene.value.add(newPoints)
+})
 
-const { onLoop } = useRenderLoop()
 
-onLoop(({ elapsed }) => {
-  points.rotation.y += 0.005
+const { onBeforeRender } = useLoop()
 
-  points.position.y = Math.sin(elapsed * 0.75) * 0.125
+onBeforeRender(({ elapsed }) => {
+  if (points.value) {
+    points.value.rotation.y += 0.005
+
+    points.value.position.y = Math.sin(elapsed * 0.75) * 0.125
+  }
+
   shaderMaterial.uniforms.uTime.value += 0.001
 })
 </script>
