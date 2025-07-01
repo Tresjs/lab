@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import { degToRad } from 'three/src/math/MathUtils'
+import type { Group, Mesh } from 'three';
+import { ConeGeometry, CylinderGeometry, MathUtils, MeshPhysicalMaterial, TorusGeometry } from 'three'
 import { gsap } from 'gsap'
 
-const meshesRef = shallowRef(null)
-const shapesGroupRef = shallowRef(null)
+const { degToRad } = MathUtils
+
+const meshesRef = shallowRef<Mesh[]>([])
+const shapesGroupRef = shallowRef<Group>(null)
 const grid = reactive({ rows: 6, cols: 14, gutter: 2.2 })
 
 const gridOffset = computed(() => {
@@ -13,28 +16,30 @@ const gridOffset = computed(() => {
   return { x, z }
 })
 
-const { seekAll } = useSeek()
 
 watch(shapesGroupRef, () => {
-  meshesRef.value = seekAll(shapesGroupRef.value, 'type', 'Mesh')
+  meshesRef.value = shapesGroupRef.value?.children
+    .flatMap(child => child.children)
+    .flatMap(child => child.children)
+    .filter(child => child.type === 'Mesh') as Mesh[]
 
   meshesRef.value.forEach((mesh) => {
-    mesh.initialRotation = {
+    mesh.userData.initialRotation = {
       x: mesh.name === 'torus' ? degToRad(90) : mesh.rotation.x,
       y: mesh.rotation.y,
       z: mesh.name === 'cone' || mesh.name === 'cylinder' ? degToRad(-180) : mesh.rotation.z,
     }
 
-    mesh.rotation.x = mesh.initialRotation.x
-    mesh.rotation.y = mesh.initialRotation.y
-    mesh.rotation.z = mesh.initialRotation.z
+    mesh.rotation.x = mesh.userData.initialRotation.x
+    mesh.rotation.y = mesh.userData.initialRotation.y
+    mesh.rotation.z = mesh.userData.initialRotation.z
   })
 })
 
 const onPointerMove = ({ point }) => {
   if (!meshesRef.value) return
 
-  const { x, y, z } = point
+  const { x, z } = point
 
   meshesRef.value.forEach((mesh) => {
     const mouseDistance = distance(x, z,
@@ -60,19 +65,19 @@ const onPointerMove = ({ point }) => {
     gsap.to(mesh.rotation, {
       duration: .7,
       ease: 'expo.out',
-      x: map(mesh.position.y, -1, 1, degToRad(270), mesh.initialRotation.x),
-      z: map(mesh.position.y, -1, 1, degToRad(-90), mesh.initialRotation.z),
-      y: map(mesh.position.y, -1, 1, degToRad(45), mesh.initialRotation.y),
+      x: map(mesh.position.y, -1, 1, degToRad(270), mesh.userData.initialRotation.x),
+      z: map(mesh.position.y, -1, 1, degToRad(-90), mesh.userData.initialRotation.z),
+      y: map(mesh.position.y, -1, 1, degToRad(45), mesh.userData.initialRotation.y),
     })
   })
 
 }
 
-const distance = (x1, y1, x2, y2) => Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
+const distance = (x1: number, y1: number, x2: number, y2: number) => Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
 
-const map = (value, start1, stop1, start2, stop2) => (value - start1) / (stop1 - start1) * (stop2 - start2) + start2
+const map = (value: number, start1: number, stop1: number, start2: number, stop2: number) => (value - start1) / (stop1 - start1) * (stop2 - start2) + start2
 
-const getShapeType = (row, col) => {
+const getShapeType = () => {
   const randomIndex = Math.floor(Math.random() * 3) // Generate a random number between 0 and 2
 
   // Assigning shape types based on the random index
@@ -81,85 +86,35 @@ const getShapeType = (row, col) => {
   return 'cylinder'
 }
 
-const computePosition = (col, row) => [(col - 1) * grid.gutter - gridOffset.value.x, 0, (row - 1) * grid.gutter - gridOffset.value.z]
+const computePosition = (col: number, row: number) => [(col - 1) * grid.gutter - gridOffset.value.x, 0, (row - 1) * grid.gutter - gridOffset.value.z]
+
+
+const geometryMap = {
+  torus: new ConeGeometry(0.3, 0.5, 32),
+  cone: new CylinderGeometry(0.3, 0.3, 0.2, 64),
+  cylinder: new TorusGeometry(0.25, 0.08, 30, 200)
+
+} as const
+
+const chocolateMaterial = new MeshPhysicalMaterial({
+  color: '#3e2917',
+  metalness: 0.58,
+  emissive: '#000000',
+  roughness: 0.05,
+})
 </script>
 
 <template>
-  <Plane
-    receive-shadow
-    :args="[100, 100]"
-    :rotation-x="-Math.PI / 2"
-    :position="[0, 0, 0]"
-    @pointer-move="onPointerMove"
-  >
-    <TresShadowMaterial
-      transparent
-      :opacity=".3"
-    />
+  <Plane receive-shadow :args="[100, 100]" :rotation-x="-Math.PI / 2" :position="[0, 0, 0]"
+    @pointermove="onPointerMove">
+    <TresShadowMaterial transparent :opacity=".3" />
   </Plane>
 
-  <TresGroup
-    ref="shapesGroupRef"
-    name="shapes"
-  >
-    <TresGroup
-      v-for="row in grid.rows"
-      :key="`row-${row}`"
-    >
-      <TresGroup
-        v-for="col in grid.cols"
-        :key="`col-${col}-${row}`"
-      >
-        <!-- Torus Mesh -->
-        <TresMesh
-          v-if="getShapeType(row, col) === 'torus'"
-          name="torus"
-          cast-shadow
-          receive-shadow
-          :position="computePosition(col, row)"
-        >
-          <TresTorusGeometry :args="[.25, .08, 30, 200]" />
-          <TresMeshPhysicalMaterial
-            color="#3e2917"
-            :metalness=".58"
-            emissive="#000000"
-            :roughness=".05"
-          />
-        </TresMesh>
-
-        <!-- Cone -->
-        <Cone
-          v-else-if="getShapeType(row, col) === 'cone'"
-          name="cone"
-          :args="[.3, .5, 32]"
-          cast-shadow
-          receive-shadow
-          :position="computePosition(col, row)"
-        >
-          <TresMeshPhysicalMaterial
-            color="#3e2917"
-            :metalness=".58"
-            emissive="#000000"
-            :roughness=".05"
-          />
-        </Cone>
-
-        <!-- Cylinder Mesh -->
-        <TresMesh
-          v-else
-          name="cylinder"
-          cast-shadow
-          receive-shadow
-          :position="computePosition(col, row)"
-        >
-          <TresCylinderGeometry :args="[.3, .3, .2, 64]" />
-          <TresMeshPhysicalMaterial
-            color="#3e2917"
-            :metalness=".58"
-            emissive="#000000"
-            :roughness=".05"
-          />
-        </TresMesh>
+  <TresGroup ref="shapesGroupRef" name="shapes">
+    <TresGroup v-for="row in grid.rows" :key="`row-${row}`">
+      <TresGroup v-for="col in grid.cols" :key="`col-${col}-${row}`">
+        <TresMesh :geometry="geometryMap[getShapeType()]" :material="chocolateMaterial"
+          :position="computePosition(col, row)" />
       </TresGroup>
     </TresGroup>
   </TresGroup>

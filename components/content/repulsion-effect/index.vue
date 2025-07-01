@@ -1,9 +1,5 @@
 <script setup lang="ts">
-const gl = {
-  alpha: true,
-  shadows: true,
-  powerPreference: 'high-performance',
-}
+
 </script>
 
 <template>
@@ -12,14 +8,8 @@ const gl = {
     <h3>chocolaterie</h3>
   </div>
 
-  <NuxtLink
-    class="repulsion-effect__logo"
-    to="/"
-  >
-    <img
-      src="/lab.svg"
-      alt="TresJS Logo"
-    >
+  <NuxtLink class="repulsion-effect__logo" to="/">
+    <img src="/logos/tres_logo_white.svg" alt="TresJS Logo">
   </NuxtLink>
 
   <div class="repulsion-effect__infos">
@@ -28,10 +18,7 @@ const gl = {
     </NuxtLink>
     <p>
       Repulsion Effect inspired by the
-      <a
-        target="_blank"
-        href="https://tympanus.net/codrops/2018/12/06/interactive-repulsion-effect-with-three-js/"
-      >
+      <a target="_blank" href="https://tympanus.net/codrops/2018/12/06/interactive-repulsion-effect-with-three-js/">
         Codrops tutorial Interactive Repulsion Effect
       </a>
     </p>
@@ -39,61 +26,22 @@ const gl = {
 
   <div class="repulsion-effect__bg" />
 
-  <TresCanvas
-    window-size
-    v-bind="gl"
-  >
-    <TresPerspectiveCamera
-      :position="[0, 65, 0]"
-      :rotation-x="-1.57"
-      :fov="20"
-    />
+  <TresCanvas window-size alpha shadows powerPreference="high-performance" :clear-alpha="0">
+    <TresPerspectiveCamera :position="[0, 65, 0]" :rotation-x="-1.57" :fov="20" />
     <!-- <OrbitControls /> -->
 
     <TresAmbientLight color="#ffffff" />
 
-    <TresPointLight
-      color="#fff000"
-      :intensity="5"
-      :decay="0"
-      :position="[0, 5, -20]"
-    />
-    <TresPointLight
-      color="#79573e"
-      :intensity="5"
-      :decay="0"
-      :position="[35, 5, 0]"
-    />
-    <TresPointLight
-      color="#c27439"
-      :intensity="5"
-      :decay="0"
-      :position="[-35, 5, 0]"
-    />
-    <TresPointLight
-      color="#fff000"
-      :intensity="5"
-      :decay="0"
-      :position="[0, 5, 20]"
-    />
+    <TresPointLight color="#fff000" :intensity="5" :decay="0" :position="[0, 5, -20]" />
+    <TresPointLight color="#79573e" :intensity="5" :decay="0" :position="[35, 5, 0]" />
+    <TresPointLight color="#c27439" :intensity="5" :decay="0" :position="[-35, 5, 0]" />
+    <TresPointLight color="#fff000" :intensity="5" :decay="0" :position="[0, 5, 20]" />
 
-    <TresSpotLight
-      color="#7bccd7"
-      :decay="0"
-      cast-shadow
-      :shadow-mapSize-width="2048"
-      :shadow-mapSize-height="2048"
-      :position="[0, 25, 0]"
-    />
+    <TresSpotLight color="#7bccd7" :decay="0" cast-shadow :shadow-mapSize-width="2048" :shadow-mapSize-height="2048"
+      :position="[0, 25, 0]" />
 
-    <TresRectAreaLight
-      color="#341212"
-      :decay="0"
-      :width="1000"
-      :height="1000"
-      :position="[5, 20, 50]"
-      :look-at="[0, 0, 0]"
-    />
+    <TresRectAreaLight color="#341212" :decay="0" :width="1000" :height="1000" :position="[5, 20, 50]"
+      :look-at="[0, 0, 0]" />
     <Scene />
   </TresCanvas>
 </template>
