@@ -1,131 +1,133 @@
 <script setup lang="ts">
 import { gsap } from 'gsap'
-import { Color, RepeatWrapping, NearestFilter, MeshStandardMaterial } from 'three'
-import { vertex, fragment } from './shaders'
+import { EffectComposerPmndrs, ToneMappingPmndrs } from '@tresjs/post-processing'
+import { ToneMappingMode } from 'postprocessing'
+import { ContactShadows } from '@tresjs/cientos'
+import Marble from './Marble.vue'
 
 const gl = {
   alpha: true,
   shadows: false,
+  clearAlpha: 0,
 }
 
-let ctx, tl
+let ctx: gsap.Context
 
-const sphereRef = shallowRef(null)
+const marbleRef = shallowRef(null)
 const backgroundRef = ref(null)
 const mainRef = ref(null)
 const indexColor = ref(0)
-const tlInProgress = ref(false)
 
-const colors = ref([
-  [0, 100, 50],
-  [60, 100, 50],
-  [150, 100, 50],
-  [240, 70, 60],
-  [0, 0, 80],
-])
-
-const params = reactive({
-  timeOffset: 0,
+const marbleParams = reactive({
   roughness: 0.15,
-  speed: 0.05,
+  metalness: 0,
   iterations: 48,
   depth: 0.6,
   smoothing: 0.2,
   displacement: 0.1,
-  metalness: 0,
+  speed: 0.05,
 })
-
-const heightMap = await useTexture(['/magical-marbles/heightMap.jpeg'])
-const displacementMap = await useTexture(['/magical-marbles/displacementMap.jpeg'])
-heightMap.minFilter = displacementMap.minFilter = NearestFilter
-displacementMap.wrapS = displacementMap.wrapT = RepeatWrapping
-
-const { onLoop } = useRenderLoop()
 
 const { roughness, iterations, depth, smoothing, displacement, metalness, speed } = useControls({
   roughness: {
-    value: params.roughness,
+    value: marbleParams.roughness,
     min: 0,
     max: 1,
     step: 0.01,
   },
   metalness: {
-    value: params.metalness,
+    value: marbleParams.metalness,
     min: 0,
     max: 1,
     step: 0.01,
   },
   iterations: {
-    value: params.iterations,
+    value: marbleParams.iterations,
     min: 1,
     max: 64,
     step: 1,
   },
   depth: {
-    value: params.depth,
+    value: marbleParams.depth,
     min: 0,
     max: 1,
     step: 0.01,
   },
   smoothing: {
-    value: params.smoothing,
+    value: marbleParams.smoothing,
     min: 0,
     max: 1,
     step: 0.01,
   },
   displacement: {
-    value: params.displacement,
+    value: marbleParams.displacement,
     min: 0,
-    max: .35,
+    max: 0.35,
     step: 0.01,
   },
   speed: {
-    value: params.speed,
+    value: marbleParams.speed,
     min: 0,
-    max: .5,
+    max: 0.5,
     step: 0.001,
   },
 })
 
-const currentColor = computed(() => colors.value[indexColor.value])
+const { toneMappingMode, toneMappingExposure } = useControls('toneMapping', {
+  mode: {
+    options: Object.keys(ToneMappingMode).map(key => ({
+      text: key,
+      value: ToneMappingMode[key as keyof typeof ToneMappingMode],
+    })),
+    value: ToneMappingMode.NEUTRAL,
+  },
+  exposure: {
+    value: 1,
+    min: 0,
+    max: 10,
+    step: 0.1,
+  },
+})
 
-const colorFinalB = computed(() => new Color(`hsl(${currentColor.value[0]}, ${currentColor.value[1]}%, ${currentColor.value[2]}%)`))
+watchEffect(() => {
+  marbleParams.roughness = roughness.value
+  marbleParams.iterations = iterations.value
+  marbleParams.depth = depth.value
+  marbleParams.smoothing = smoothing.value
+  marbleParams.displacement = displacement.value
+  marbleParams.metalness = metalness.value
+  marbleParams.speed = speed.value
+})
+
+const colors: [number, number, number][] = [
+  [0, 100, 50],
+  [60, 100, 50],
+  [150, 100, 50],
+  [240, 70, 60],
+  [0, 0, 80],
+]
+
+const currentColor = computed(() => colors[indexColor.value])
 
 const backgroundGradient = computed(() => `radial-gradient(hsl(${currentColor.value[0]}, ${currentColor.value[1] * 0.7}%, ${currentColor.value[2]}%), hsl(${currentColor.value[0]},${currentColor.value[1] * 0.4}%, ${currentColor.value[2] * 0.2}%))`)
 
-const uniforms = reactive({
-  time: { value: 0 },
-  colorA: { value: new Color(0, 0, 0) },
-  colorB: { value: new Color(`hsl(${colors.value[0][0]}, ${colors.value[0][1]}%, ${colors.value[0][2]}%)`) },
-  heightMap: { value: heightMap },
-  displacementMap: { value: displacementMap },
-  iterations,
-  depth,
-  smoothing,
-  displacement,
-})
-
 onMounted(() => {
   ctx = gsap.context(() => { }, mainRef.value)
+
+  animateColorTransition(true)
 })
 
 onUnmounted(() => {
   ctx?.revert()
 })
 
-watch(sphereRef, (value) => {
-  updateBackground(true)
-})
+const handleSphereClick = () => {
+  indexColor.value = (indexColor.value + 1) % colors.length
 
-const onPointerClick = () => {
-  if (tlInProgress.value) return
-
-  indexColor.value = (indexColor.value + 1) % colors.value.length
-
-  updateBackground()
+  animateColorTransition()
 }
 
-const updateBackground = (immediate = false) => {
+const animateColorTransition = (immediate = false) => {
   if (immediate) {
     ctx.add(() => {
       gsap.set(backgroundRef.value, {
@@ -135,82 +137,31 @@ const updateBackground = (immediate = false) => {
   }
   else {
     ctx.add(() => {
-      tl = gsap.timeline({
-        onStart: () => {
-          tlInProgress.value = true
-        },
-        onComplete: () => {
-          tlInProgress.value = false
-        },
+      marbleRef.value?.animateSphereColor()
+
+      gsap.to(backgroundRef.value, {
+        background: `${backgroundGradient.value}`,
+        duration: 1.2,
+        ease: 'power2.out',
+        overwrite: 'auto'
       })
-        .addLabel('sphereAnimation')
-        .to(backgroundRef.value, {
-          background: `${backgroundGradient.value}`,
-          duration: .75,
-          ease: 'power1.out',
-        }, 'sphereAnimation+=.15')
-        .to(uniforms.colorB.value, {
-          r: colorFinalB.value.r,
-          g: colorFinalB.value.g,
-          b: colorFinalB.value.b,
-          duration: .75,
-          ease: 'power1.out',
-        }, 'sphereAnimation+=.15')
-        .to(sphereRef.value.value.scale, {
-          x: .95,
-          y: .95,
-          z: .95,
-          duration: 0.35,
-          ease: 'power1.inOut',
-        }, 'sphereAnimation+=.15')
-        .to(sphereRef.value.value.scale, {
-          x: 1,
-          y: 1,
-          z: 1,
-          duration: 0.5,
-          ease: 'elastic.out(1, 0.5)',
-        }, 'sphereAnimation+=85%')
-        .to(params, {
-          timeOffset: ((1 + indexColor.value) * 0.0035),
-          duration: 0.65,
-          ease: 'power1.inOut',
-        }, 'sphereAnimation')
-        .to(params, {
-          timeOffset: 0,
-          duration: 0.35,
-          ease: 'power1.out',
-        }, 'sphereAnimation+=.5')
     })
   }
 }
 
-onLoop(({ delta }) => {
-  uniforms.time.value += params.timeOffset + delta * speed.value.value
+const contactShadowColor = computed(() => {
+  const [h, s, l] = currentColor.value
+  return `hsl(${h}, ${s}%, ${Math.max(0, l - 30)}%)`
 })
 </script>
 
 <template>
+  <TresLeches />
+
   <div
     ref="mainRef"
     class="magical-marbles"
   >
-    <NuxtLink
-      class="magical-marbles__logo"
-      to="/"
-    >
-      <img
-        src="/lab.svg"
-        alt="TresJS Logo"
-      >
-    </NuxtLink>
-
-    <button
-      class="magical-marbles__cta"
-      @click.stop="onPointerClick"
-    >
-      shuffle colors
-    </button>
-
     <div class="magical-marbles__infos">
       <NuxtLink to="/">
         See more experiments and examples
@@ -221,7 +172,7 @@ onLoop(({ delta }) => {
           target="_blank"
           href="https://tympanus.net/codrops/2021/08/02/magical-marbles-in-three-js/"
         >
-          Codrops tutorial
+          Codrops tutorial {{ indexColor }}
         </a>
       </p>
     </div>
@@ -230,44 +181,47 @@ onLoop(({ delta }) => {
       ref="backgroundRef"
       class="magical-marbles__bg"
     />
-
-    <TresLeches />
+  </div>
 
     <TresCanvas
       window-size
       v-bind="gl"
+      :toneMappingExposure="toneMappingExposure"
     >
       <TresPerspectiveCamera
-        :position="[0, 0, 4.5]"
+        :position="[0, 0, 3.5]"
         :fov="45"
         :near=".1"
         :far="1000"
       />
+      
       <OrbitControls
         auto-rotate
+        :enable-rotate="false"
+        :enable-pan="false"
         make-default
       />
 
+      <Marble
+        ref="marbleRef" 
+        :colors="colors"
+        :params="marbleParams"
+        :indexColor="indexColor"
+        @sphere-click="handleSphereClick"
+      />
+
+    <ContactShadows :position-y="-1.1" :color="contactShadowColor" :blur="0.85" :scale="5" :opacity="0.35" />
       <Suspense>
-        <Environment preset="hangar" />
+        <Environment preset="urban" :environmentIntensity="0.85"  />
       </Suspense>
 
-      <Sphere
-        ref="sphereRef"
-        :args="[1, 64, 32]"
-      >
-        <CustomShaderMaterial
-          :roughness="roughness.value"
-          :metalness="metalness.value"
-          :base-material="MeshStandardMaterial"
-          :vertex-shader="vertex"
-          :fragment-shader="fragment"
-          :uniforms="uniforms"
-          silent
-        />
-      </Sphere>
+      <Suspense>
+        <EffectComposerPmndrs :multisampling="4">
+          <ToneMappingPmndrs :mode="toneMappingMode" />
+        </EffectComposerPmndrs>
+      </Suspense>
+
     </TresCanvas>
-  </div>
 </template>
 
 <style scoped>
@@ -289,47 +243,12 @@ onLoop(({ delta }) => {
     pointer-events: none;
 }
 
-.magical-marbles__logo {
-    align-self: flex-start;
-    position: absolute;
-    top: 40px;
-    left: 60px;
-    width: 5%;
-    z-index: 3;
-}
-
 .magical-marbles__infos {
     margin-top: auto;
     position: absolute;
     bottom: 40px;
     left: 60px;
-    z-index: 3;
-}
-
-.magical-marbles__cta {
-    z-index: 3;
-    background: white;
-    position: absolute;
-    bottom: 40px;
-    right: 60px;
-    padding: 10px 20px;
-    color: black;
-    border-radius: 5px;
-    transition: transform .3s cubic-bezier(0.33, 1, 0.68, 1);
-    will-change: transform;
-    text-transform: uppercase;
-    font-weight: 800;
-    font-size: 0.85vw;
-    transform: scale(1)
-}
-
-.magical-marbles__cta:hover {
-    transform: scale(1.05)
-}
-
-.magical-marbles p,
-.magical-marbles a {
-    font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    z-index: 5;
 }
 
 .magical-marbles__infos p {
@@ -352,8 +271,7 @@ canvas {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 2;
+    z-index: 4;
     /* pointer-events: none !important; */
-
 }
 </style>
