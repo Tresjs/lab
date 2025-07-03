@@ -172,7 +172,7 @@ const contactShadowColor = computed(() => {
           target="_blank"
           href="https://tympanus.net/codrops/2021/08/02/magical-marbles-in-three-js/"
         >
-          Codrops tutorial {{ indexColor }}
+          Codrops tutorial
         </a>
       </p>
     </div>
