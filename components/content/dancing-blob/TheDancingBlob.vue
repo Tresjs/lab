@@ -1,19 +1,20 @@
 <!-- Github Luckystriike: https://github.com/luckystriike22/TresJsPlayground/ -->
 <script lang="ts" setup>
+import type { Mesh } from 'three';
 import { Vector2 } from 'three'
 import vertexShader from './shaders/vertex.glsl'
 import fragmentShader from './shaders/fragment.glsl'
 
 const props = defineProps<{
-  analyser: any
-  dataArray: any
+  analyser: AnalyserNode
+  dataArray: Uint8Array
 }>()
 
 // composables
 const { onBeforeRender } = useLoop()
 
 // refs
-const blobRef = shallowRef<any>(null)
+const blobRef = shallowRef<Mesh | null>(null)
 
 onBeforeRender(({ elapsed }) => {
   if (blobRef.value && props.analyser && props.dataArray) {
@@ -46,12 +47,8 @@ const uniforms = ref({
   <OrbitControls />
   <TresMesh ref="blobRef">
     <TresIcosahedronGeometry :args="[4, 80]" />
-    <TresShaderMaterial
-      wireframe
-      :uniforms="uniforms"
-      :fragment-shader="fragmentShader"
-      :vertex-shader="vertexShader"
-    />
+    <TresShaderMaterial wireframe :uniforms="uniforms" :fragment-shader="fragmentShader"
+      :vertex-shader="vertexShader" />
   </TresMesh>
   <TresDirectionalLight :position="[1, 1, 1]" />
   <TresAmbientLight :intensity="1" />

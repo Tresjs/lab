@@ -73,8 +73,8 @@ importers:
         specifier: ^0.2.1
         version: 0.2.1(@typescript-eslint/eslint-plugin@6.21.0(@typescript-eslint/parser@8.34.1(eslint@8.57.1)(typescript@5.8.3))(eslint@8.57.1)(typescript@5.8.3))(eslint@8.57.1)(typescript@5.8.3)
       '@tresjs/leches':
-        specifier: https://pkg.pr.new/@tresjs/leches@5536ad5
-        version: https://pkg.pr.new/@tresjs/leches@5536ad5(magicast@0.3.5)(unocss@66.2.3(@unocss/webpack@66.2.3(webpack@5.99.9(esbuild@0.25.5)))(postcss@8.5.6)(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.0)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3)))(vue@3.5.17(typescript@5.8.3))
+        specifier: https://pkg.pr.new/@tresjs/leches@f356fed
+        version: https://pkg.pr.new/@tresjs/leches@f356fed(magicast@0.3.5)(unocss@66.2.3(@unocss/webpack@66.2.3(webpack@5.99.9(esbuild@0.25.5)))(postcss@8.5.6)(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.0)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3)))(vue@3.5.17(typescript@5.8.3))
       '@tresjs/nuxt':
         specifier: 4.1.0-next.1
         version: 4.1.0-next.1(jwt-decode@4.0.0)(magicast@0.3.5)(postcss@8.5.6)(rollup@4.43.0)(three@0.177.0)(typescript@5.8.3)(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.0)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))(webpack@5.99.9(esbuild@0.25.5))(zod@3.25.67)
@@ -1487,8 +1487,8 @@ packages:
       eslint: '>=7.4.0'
       typescript: '>=3.9'
 
-  '@tresjs/leches@https://pkg.pr.new/@tresjs/leches@5536ad5':
-    resolution: {tarball: https://pkg.pr.new/@tresjs/leches@5536ad5}
+  '@tresjs/leches@https://pkg.pr.new/@tresjs/leches@f356fed':
+    resolution: {tarball: https://pkg.pr.new/@tresjs/leches@f356fed}
     version: 0.14.1
     peerDependencies:
       vue: '>=3.3.4'
@@ -1750,11 +1750,11 @@ packages:
   '@unocss/core@65.5.0':
     resolution: {integrity: sha512-XYWdS09M2XOjZNDotGhI2TIW/6duLNiyssopwjCbv4AlPklF0bZI86SKI55syYDBt6GRadoQbuvUkhSiTV/hzQ==}
 
-  '@unocss/core@66.1.0-beta.7':
-    resolution: {integrity: sha512-l1/r+Jd9TbsRqR/geEdIV/Erzvs26GitTtMVsGcJfuaK1/WWOLtbSHRUDQAB/UpcOOWvuNuAv4UWsXX9Z0DFmw==}
-
   '@unocss/core@66.2.3':
     resolution: {integrity: sha512-mRpwm3HUAqCtQrBB7+vkCp0qDZT+G1s2EAVJIF6zzrnoqb2BmIlHgz7DXVDufRFMRJtQUCp2jVMtEQZCTXEVjQ==}
+
+  '@unocss/core@66.3.2':
+    resolution: {integrity: sha512-C8UbTenNb/pHo68Ob+G1DTKJkQOeWT8IXTzDV7Vq6hPa9R7eE1l2l20pDKGs6gXYEBYPpY9EV4f5E0vUKDf8sw==}
 
   '@unocss/extractor-arbitrary-variants@65.5.0':
     resolution: {integrity: sha512-7K3gftOdkv9jbWvbkExTcx6/FDP2Xk/NSsOYTvR9oITLnLjmdQvp+9276WSnNfKF3frBl8ZcqpkC2EsuL2Yutw==}
@@ -9161,9 +9161,9 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
-  '@tresjs/leches@https://pkg.pr.new/@tresjs/leches@5536ad5(magicast@0.3.5)(unocss@66.2.3(@unocss/webpack@66.2.3(webpack@5.99.9(esbuild@0.25.5)))(postcss@8.5.6)(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.0)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3)))(vue@3.5.17(typescript@5.8.3))':
+  '@tresjs/leches@https://pkg.pr.new/@tresjs/leches@f356fed(magicast@0.3.5)(unocss@66.2.3(@unocss/webpack@66.2.3(webpack@5.99.9(esbuild@0.25.5)))(postcss@8.5.6)(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.0)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3)))(vue@3.5.17(typescript@5.8.3))':
     dependencies:
-      '@unocss/core': 66.1.0-beta.7
+      '@unocss/core': 66.3.2
       '@vueuse/components': 13.3.0(vue@3.5.17(typescript@5.8.3))
       '@vueuse/motion': 3.0.3(magicast@0.3.5)(vue@3.5.17(typescript@5.8.3))
       unocss-preset-scrollbar: 3.2.0(unocss@66.2.3(@unocss/webpack@66.2.3(webpack@5.99.9(esbuild@0.25.5)))(postcss@8.5.6)(vite@6.3.5(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.0)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3)))
@@ -9559,9 +9559,9 @@ snapshots:
 
   '@unocss/core@65.5.0': {}
 
-  '@unocss/core@66.1.0-beta.7': {}
-
   '@unocss/core@66.2.3': {}
+
+  '@unocss/core@66.3.2': {}
 
   '@unocss/extractor-arbitrary-variants@65.5.0':
     dependencies:
