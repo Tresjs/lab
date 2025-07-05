@@ -46,7 +46,7 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
   ],
 
-  css: ['/styles/main.css', '@tresjs/leches/styles'],
+  css: ['/styles/main.css'],
   declare: ['*.glsl'],
 
   tres: {

@@ -5,80 +5,72 @@ export const vertex = /* glsl */ `
     void main() {
         v_pos = position;
         v_dir = position - cameraPosition; // Points from camera to vertex
-
-        // csm_Position = position;
     }
 `
 
 export const fragment = /* glsl */ `
-      #define FLIP vec2(1., -1.)
+#define FLIP vec2(1., -1.)
 
-      uniform vec3 colorA;
-      uniform vec3 colorB;
-      uniform sampler2D heightMap;
-      uniform sampler2D displacementMap;
-      uniform int iterations;
-      uniform float depth;
-      uniform float smoothing;
-      uniform float displacement;
-      uniform float time;
+uniform vec3 colorA;
+uniform vec3 colorB;
+uniform sampler2D heightMap;
+uniform sampler2D displacementMap;
+uniform int iterations;
+uniform float depth;
+uniform float smoothing;
+uniform float displacement;
+uniform float uTime;
+uniform float uDisplacementSpeed;
 
-      varying vec3 v_pos;
-      varying vec3 v_dir;
+varying vec3 v_pos;
+varying vec3 v_dir;
 
-         	/**
-         * @param p - Point to displace
-         * @param strength - How much the map can displace the point
-         * @returns Point with scrolling displacement applied
-         */
-        vec3 displacePoint(vec3 p, float strength) {
-        	vec2 uv = equirectUv(normalize(p));
-          vec2 scroll = vec2(time, 0.);
-          vec3 displacementA = texture(displacementMap, uv + scroll).rgb; // Upright
-					vec3 displacementB = texture(displacementMap, uv * FLIP - scroll).rgb; // Upside down
+vec2 getUv(vec3 p) {
+  vec3 n = normalize(p);
+  float u = atan(n.z, n.x) / (2.0 * 3.141592653589793238) + 0.5;
+  float v = asin(n.y) / 3.141592653589793238 + 0.5;
+  return vec2(u, v);
+}
 
-          // Center the range to [-0.5, 0.5], note the range of their sum is [-1, 1]
-          displacementA -= 0.5;
-          displacementB -= 0.5;
+vec3 displacePoint(vec3 p, float strength) {
+  vec2 uv = getUv(p);
+  vec2 scroll = vec2(((uTime + 1.0) * (uDisplacementSpeed * 0.5)), 0.0);
 
-          return p + strength * (displacementA + displacementB);
-        }
+  vec3 displaceA = texture(displacementMap, uv + scroll).rgb - 0.5;
+  vec3 displaceB = texture(displacementMap, uv * FLIP - scroll).rgb - 0.5;
 
-				/**
-          * @param rayOrigin - Point on sphere
-          * @param rayDir - Normalized ray direction
-          * @returns Diffuse RGB color
-          */
-        vec3 marchMarble(vec3 rayOrigin, vec3 rayDir) {
-          float perIteration = 1. / float(iterations);
-          vec3 deltaRay = rayDir * perIteration * depth;
+  return p + strength * uDisplacementSpeed * (displaceA + displaceB);
+}
 
-          // Start at point of intersection and accumulate volume
-          vec3 p = rayOrigin;
-          float totalVolume = 0.;
+vec3 marchMarble(vec3 rayOrigin, vec3 rayDir) {
+  float invIterations = 1.0 / float(iterations);
+  vec3 deltaRay = rayDir * invIterations * depth * uDisplacementSpeed;
+  vec3 p = rayOrigin;
+  float totalVolume = 0.0;
 
-          for (int i=0; i<iterations; ++i) {
-            // Read heightmap from spherical direction of displaced ray position
-            vec3 displaced = displacePoint(p, displacement);
-            vec2 uv = equirectUv(normalize(displaced));
-            float heightMapVal = texture(heightMap, uv).r;
+  for (int i = 0; i < 256; ++i) {
+    if (i >= iterations) break;
 
-            // Take a slice of the heightmap
-            float height = length(p); // 1 at surface, 0 at core, assuming radius = 1
-            float cutoff = 1. - float(i) * perIteration;
-            float slice = smoothstep(cutoff, cutoff + smoothing, heightMapVal);
+    vec3 displaced = displacePoint(p, displacement);
+    vec2 uv = getUv(displaced);
+    float heightMapVal = texture(heightMap, uv).r;
 
-            // Accumulate the volume and advance the ray forward one step
-            totalVolume += slice * perIteration;
-            p += deltaRay;
-          }
-          return mix(colorA, colorB, totalVolume);
-        }
+    float height = length(p);
+    float cutoff = 1.0 - float(i) * invIterations;
+    float slice = smoothstep(cutoff, cutoff + smoothing, heightMapVal);
 
-    void main() {
-      	vec3 rayDir = normalize(v_dir);
-        vec3 rayOrigin = v_pos;
+    totalVolume += slice * invIterations;
+    p += deltaRay;
+  }
 
-        vec3 rgb = marchMarble(rayOrigin, rayDir);
-				csm_DiffuseColor = vec4(rgb, 1.);
-    } `
+  return mix(colorA, colorB, totalVolume);
+}
+
+void main() {
+  vec3 rayDir = normalize(v_dir);
+  vec3 rayOrigin = v_pos;
+
+  vec3 rgb = marchMarble(rayOrigin, rayDir);
+  csm_DiffuseColor = vec4(rgb, 1.0);
+}
+`

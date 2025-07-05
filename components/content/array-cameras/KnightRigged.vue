@@ -5,14 +5,11 @@ const { nodes, state } = useGLTF(
   'https://raw.githubusercontent.com/Tresjs/assets/main/models/gltf/warcraft-3-alliance-footmanfanmade/source/Footman_RIG.glb',
 )
 
-watch(nodes, (newState) => {
-  console.log(newState)
-})
 
 const model = computed(() => nodes.value.Footman_rig)
 const animations = computed(() => state.value?.animations || [])
 
-const { actions } = useAnimations(animations, model)
+const { actions } = useAnimations(animations, model as TresObject)
 
 const currentAction = ref()
 
