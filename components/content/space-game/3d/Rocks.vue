@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { inject, shallowRef } from 'vue'
-import { useLoop, useLoader } from '@tresjs/core'
-import { GLTFLoader } from 'three-stdlib'
+import { useLoop } from '@tresjs/core'
 import { Group } from 'three'
 import type { GameStore } from '../GameStore'
 

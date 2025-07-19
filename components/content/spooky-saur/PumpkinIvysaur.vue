@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { nodes, materials } = await useGLTF('/models/halloween/pumpkin-ivysaur.glb', { draco: true })
+const { nodes } = await useGLTF('/models/halloween/pumpkin-ivysaur.glb', { draco: true })
 
 const pumpkinIvysaur = nodes['Scene']
 /* scene.traverse((child) => {
