@@ -6,7 +6,6 @@ import { useLoop, useTres } from '@tresjs/core'
 import { vertex, fragment } from './shaders'
 
 const ctx = gsap.context(() => { })
-let tl: gsap.core.Timeline
 
 const props = defineProps({
   colors: {
@@ -41,7 +40,7 @@ const onPointerHovered = ref(false)
 
 const { onRender } = useLoop()
 
-const { renderer, controls } = useTres()
+const { renderer } = useTres()
 
 const currentColor = computed(() => colors.value[indexColor.value])
 
@@ -50,29 +49,29 @@ const colorFinalB = computed(() => new Color(`hsl(${currentColor.value[0]}, ${cu
 const animateSphereColor = async () => {
   await nextTick()
 
-    ctx.add(() => {
-      tl = gsap.timeline({})
-        .addLabel('sphereAnimation')
-        .to(uniforms.colorB.value, {
-          r: colorFinalB.value.r,
-          g: colorFinalB.value.g,
-          b: colorFinalB.value.b,
-          duration: 1.2,
-          ease: 'power2.out',
-        }, 'sphereAnimation')
-        .to(uniforms.uDisplacementSpeed, {
-          overwrite: 'auto',
-          ease: 'power2.out',
-          keyframes: [
-            { value: 1.175, duration: 0.3 },
-            { value: 1, duration: 0.65, overwrite: 'auto' },
-          ],
-        }, 'sphereAnimation')
-    })
+  ctx.add(() => {
+    tl = gsap.timeline({})
+      .addLabel('sphereAnimation')
+      .to(uniforms.colorB.value, {
+        r: colorFinalB.value.r,
+        g: colorFinalB.value.g,
+        b: colorFinalB.value.b,
+        duration: 1.2,
+        ease: 'power2.out',
+      }, 'sphereAnimation')
+      .to(uniforms.uDisplacementSpeed, {
+        overwrite: 'auto',
+        ease: 'power2.out',
+        keyframes: [
+          { value: 1.175, duration: 0.3 },
+          { value: 1, duration: 0.65, overwrite: 'auto' },
+        ],
+      }, 'sphereAnimation')
+  })
 }
 
-const { state: heightMapTexture } =  useTexture('/magical-marbles/heightMap.jpeg')
-const { state: displacementMapTexture } =  useTexture('/magical-marbles/displacementMap.jpeg')
+const { state: heightMapTexture } = useTexture('/magical-marbles/heightMap.jpeg')
+const { state: displacementMapTexture } = useTexture('/magical-marbles/displacementMap.jpeg')
 
 const uniforms = reactive({
   uTime: { value: 1 },
@@ -81,10 +80,10 @@ const uniforms = reactive({
   colorB: { value: new Color(`hsl(${colors.value[indexColor.value][0]}, ${colors.value[indexColor.value][1]}%, ${colors.value[indexColor.value][2]}%)`) },
   heightMap: { value: heightMapTexture.value },
   displacementMap: { value: displacementMapTexture.value },
-  iterations: { value: params.value.iterations},
-  depth: { value: params.value.depth},
-  smoothing: { value: params.value.smoothing},
-  displacement: { value: params.value.displacement},
+  iterations: { value: params.value.iterations },
+  depth: { value: params.value.depth },
+  smoothing: { value: params.value.smoothing },
+  displacement: { value: params.value.displacement },
 })
 
 const uniformKeys = ['iterations', 'depth', 'smoothing', 'displacement'] as const
@@ -104,14 +103,14 @@ watch([heightMapTexture, displacementMapTexture], () => {
   displacementMapTexture.value.wrapS = displacementMapTexture.value.wrapT = RepeatWrapping
 
   heightMapTexture.value.minFilter = displacementMapTexture.value.minFilter = NearestFilter
-  
+
   uniforms.heightMap.value = heightMapTexture.value
   uniforms.displacementMap.value = displacementMapTexture.value
 })
 
 function animateScale(targetScale: number) {
-  if(!sphereRef.value || !sphereRef.value.instance) return
-  
+  if (!sphereRef.value || !sphereRef.value.instance) return
+
   gsap.to(sphereRef.value.instance.scale, {
     x: targetScale,
     y: targetScale,
@@ -147,12 +146,12 @@ onUnmounted(() => {
   ctx?.revert()
 })
 
-onRender(({ delta, elapsed }) => {
+onRender(({ elapsed }) => {
   if (!elapsedStart.value) {
     elapsedStart.value = elapsed
   }
-  
-  uniforms.uTime.value = ((elapsed - elapsedStart.value) * params.value.speed)
+
+  uniforms.uTime.value = ((elapsed - elapsedStart.value) * (params.value.speed ?? 1))
 })
 
 defineExpose({
@@ -161,22 +160,10 @@ defineExpose({
 </script>
 
 <template>
-  <Sphere
-    ref="sphereRef"
-    :args="[1, 64, 32]"
-    @pointerdown="onSpherePointerDown"
-    @pointerup="onSpherePointerUp"
-    @pointerenter="onSpherePointerEnter"
-    @pointerleave="onSpherePointerLeave"
-  >
-    <CustomShaderMaterial
-      :roughness="params.roughness"
-      :metalness="params.metalness"
-      :base-material="MeshStandardMaterial"
-      :vertex-shader="vertex"
-      :fragment-shader="fragment"
-      :uniforms="uniforms"
-      silent
-    />
+  <Sphere ref="sphereRef" :args="[1, 64, 32]" @pointerdown="onSpherePointerDown" @pointerup="onSpherePointerUp"
+    @pointerenter="onSpherePointerEnter" @pointerleave="onSpherePointerLeave">
+    <CustomShaderMaterial :roughness="params.roughness" :metalness="params.metalness"
+      :base-material="MeshStandardMaterial" :vertex-shader="vertex" :fragment-shader="fragment" :uniforms="uniforms"
+      silent />
   </Sphere>
 </template>

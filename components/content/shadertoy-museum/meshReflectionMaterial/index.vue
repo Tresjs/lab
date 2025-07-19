@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/attribute-hyphenation -->
 <script setup lang="ts">
-import { useLogger, useLoop, useTresContext } from '@tresjs/core'
+import { useLoop, useTresContext } from '@tresjs/core'
 import {
   Color,
   DepthTexture,
@@ -331,7 +331,7 @@ watch(materialRef, () => {
 // Workaround: Warn users if they trigger a recompile.
 //
 // TODO: This code can be removed when #615 is resolved
-watch(() => [hasBlur.value], () => {
+/* watch(() => [hasBlur.value], () => {
   useLogger().logWarning(
     'MeshReflectionMaterial: Setting blurMixRough or blurMixSmooth to 0, then non-zero triggers a recompile.'
     + 'The TresJS core cannot currently handle recompiled materials.',
@@ -360,7 +360,7 @@ watch(() => [props.normalMap], () => {
     'MeshReflectionMaterial: Toggling normalMap triggers a recompile.'
     + 'The TresJS core cannot currently handle recompiled materials.',
   )
-})
+}) */
 // End #615 warning
 
 onBeforeUnmount(() => {
@@ -369,10 +369,11 @@ onBeforeUnmount(() => {
   blurpass.dispose()
 })
 
-useLoop().onBeforeRender(({ renderer, scene, camera, invalidate }) => {
-  const parent = (materialRef.value as any)?.__tres?.parent
+const { onBeforeRender } = useLoop()
+onBeforeRender(({ renderer, scene, camera, invalidate }) => {
+  const parent = (materialRef.value)?.__tres?.parent
   if (!parent || !parent.isMesh) { return }
-  onBeforeRender(renderer, scene, camera, parent)
+  onBeforeRender(renderer as WebGLRenderer, scene as Scene, camera as Camera, parent as Object3D)
   invalidate()
 })
 defineExpose({ instance: materialRef })
