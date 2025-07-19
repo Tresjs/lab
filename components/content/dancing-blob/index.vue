@@ -1,94 +1,129 @@
-<!-- Github Luckystriike: https://github.com/luckystriike22/TresJsPlayground/ -->
 <script lang="ts" setup>
-const analyser = shallowRef()
-const audioStream = shallowRef()
-const dataArray = shallowRef()
-const showInfoDialog = shallowRef(false)
+import { shallowRef, watch } from 'vue'
+import { useOverlay } from '#imports' // Nuxt UI composable for overlays
+import { usePermission, useUserMedia } from '@vueuse/core' // VueUse composables
+import BlobPermissionModal from './BlobPermissionModal.vue'
+import { TresLeches } from '@tresjs/leches'
 
-// lifecycle
-onMounted(async () => {
-  await nextTick()
+// Audio analysis state
+const analyser = shallowRef<AnalyserNode | null>(null)
+const dataArray = shallowRef<Uint8Array | null>(null)
 
-  try {
-    const access = await navigator.permissions.query({ name: 'microphone' })
-    showInfoDialog.value = access.state != 'granted'
+// Use VueUse to reactively check microphone permission
+const micPermission = usePermission('microphone')
 
-    audioStream.value = await navigator.mediaDevices.getUserMedia({ audio: true })
-    showInfoDialog.value = false
-    handleMicrophoneAccess()
+// Use VueUse's useUserMedia for microphone stream
+const { stream, start, stop } = useUserMedia({ constraints: { audio: true } })
 
-  }
-  catch (error) {
-    showInfoDialog.value = true
-    alert('Not able to accessing microphone')
-  }
-})
+// Nuxt UI overlay composable
+const overlay = useOverlay()
+// Create the modal instance for permission dialog
+const permissionModal = overlay.create(BlobPermissionModal, { destroyOnClose: true })
 
-// handle the microphone connection
-const handleMicrophoneAccess = () => {
+/**
+ * Handles microphone stream and sets up the analyser node.
+ */
+const handleMicrophoneStream = () => {
+  if (!stream.value) return
+  // Create audio context and analyser
   const audioContext = new (window.AudioContext)()
-  const source = audioContext.createMediaStreamSource(audioStream.value)
-
+  const source = audioContext.createMediaStreamSource(stream.value)
   analyser.value = audioContext.createAnalyser()
   analyser.value.fftSize = 2048
   source.connect(analyser.value)
-
+  // Prepare data array for frequency data
   const bufferLength = analyser.value.frequencyBinCount
   dataArray.value = new Uint8Array(bufferLength)
 }
+
+// Watch for permission changes and open/close modal accordingly
+watch(
+  () => micPermission.value,
+  async (state) => {
+    if (state === 'granted') {
+      permissionModal.close()
+      try {
+        await start() // Start the user media stream
+        handleMicrophoneStream()
+      } catch {
+        permissionModal.open()
+      }
+    } else if (state === 'prompt') {
+      // Open modal and wait for user to click OK, then start stream to trigger browser dialog
+      const modalInstance = permissionModal.open()
+      await modalInstance.result
+      try {
+        await start()
+        handleMicrophoneStream()
+      } catch {
+        // If user cancels or denies, keep modal open
+        permissionModal.open()
+      }
+    } else if (state === 'denied') {
+      permissionModal.open()
+      stop()
+    }
+  },
+  { immediate: true }
+)
 </script>
 
 <template>
-  <button
-    class="gitBtn bg-gray-600 hover:bg-gray-700 opacity-40 transition-color shadow-lg hover:shadow-xl infline-flex w-12 h-12 justify-center items-center rounded-full absolute bottom-2 right-2"
-  >
-    <a
-      href="https://github.com/Tresjs/lab/tree/main/components/content/dancing-blob"
-      target="_blank"
-    >Code</a>
-  </button>
-
-  <TresCanvas
-    v-show="!showInfoDialog"
-    clear-color="#0c1a30"
-  >
-    <TheDancingBlob
-      :analyser="analyser"
-      :data-array="dataArray"
-    />
-  </TresCanvas>
-  <span
-    v-if="showInfoDialog"
-    class="blobPermissionDialog justify-center items-center infline-flex absolute"
-  >
-    <p>
-      Hey! <br>
-      This site requires microphone permissions. The
-      microphone is only used to calculate the frequency necessary for the blob to dance. A browser pop-up will ask you
-      for permission.
-    </p>
-  </span>
+  <div class="w-full h-full relative overflow-hidden">
+    <NuxtLink class="absolute top-12 left-12" to="/">
+      <img src="/logos/tres_logo_white.svg" alt="TresJS Logo">
+    </NuxtLink>
+    <ClientOnly>
+      <TresLeches collapsed />
+    </ClientOnly>
+    <TresCanvas alpha clear-color="#0c1a30" class="relative z-10">
+      <TheDancingBlob :analyser="analyser!" :data-array="dataArray!" />
+    </TresCanvas>
+    <div class="bg-dance-text z-20" aria-hidden="true">
+      SOUND
+    </div>
+    <div class="bg-track-text z-10" aria-hidden="true">
+      01/Track
+    </div>
+  </div>
 </template>
 
 <style scoped>
-.gitBtn {
-  margin-bottom: 10px;
-  margin-right: 10px;
-  z-index: 10;
-  color: white;
-}
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700&display=swap');
 
-.blobPermissionDialog {
-  height: 100vh;
-  justify-content: center;
+/* Your background text style */
+.bg-dance-text {
+  font-family: 'Anton', sans-serif;
+  font-size: 18vw;
+  color: #ffffff;
+  letter-spacing: 0.05em;
+  top: 50%;
+  position: absolute;
+  right: 6rem;
   display: flex;
-  background-color: #0c1a30;
-  width: 100vw;
-  color: white;
-  font-size: x-large;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  user-select: none;
 }
 
-.blobPermissionDialog p {
-  width: 700px;
+.bg-track-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 5vw;
+  color: #ffffff;
+  letter-spacing: 0.08em;
+  position: absolute;
+  left: 6rem;
+  bottom: 2rem;
+  transform: rotate(90deg) translateY(200%) translateX(-20%);
+  pointer-events: none;
+  user-select: none;
+  z-index: 10;
+  white-space: pre;
 }
 </style>
+
+<!--
+  All permission and stream logic is now handled by VueUse composables and Nuxt UI modal.
+-->

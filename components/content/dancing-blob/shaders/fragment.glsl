@@ -1,13 +1,10 @@
 uniform vec2 u_resolution;
+uniform vec3 u_colorStart;
+uniform vec3 u_colorEnd;
 
 void main(){
-  vec2 st=gl_FragCoord.xy/u_resolution;// Normalized screen coordinates
-  
-  float red=st.y+.3;// Red component increases horizontally
-  float green=st.y-.3;// Green component increases vertically
-  float blue=0.;// Blue component is kept at 0 for orange
-  
-  vec3 orange=vec3(red,green,blue);
-  
-  gl_FragColor=vec4(orange,1.);
+  vec2 st=gl_FragCoord.xy/u_resolution;
+  // Linear interpolation between start and end color based on y
+  vec3 color=mix(u_colorStart,u_colorEnd,st.y);
+  gl_FragColor=vec4(color,1.);
 }

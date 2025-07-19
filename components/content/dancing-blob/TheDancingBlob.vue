@@ -1,7 +1,7 @@
 <!-- Github Luckystriike: https://github.com/luckystriike22/TresJsPlayground/ -->
 <script lang="ts" setup>
 import type { Mesh } from 'three';
-import { Vector2 } from 'three'
+import { Vector2, Color } from 'three'
 import vertexShader from './shaders/vertex.glsl'
 import fragmentShader from './shaders/fragment.glsl'
 
@@ -9,6 +9,25 @@ const props = defineProps<{
   analyser: AnalyserNode
   dataArray: Uint8Array
 }>()
+
+const { wireframe, colorStart, colorEnd, amplitude } = useControls({
+  wireframe: true,
+  colorStart: '#ff9900', // bright orange
+  colorEnd: '#d7f250',
+  amplitude: {
+    value: 3,         // default value
+    min: 0.1,           // minimum value
+    max: 5,             // maximum value
+    step: 0.01,         // step size for the slider
+    label: 'Amplitude', // optional label
+  },
+})
+
+// Helper to convert hex to array
+function hexToRgbArray(hex: string): [number, number, number] {
+  const color = new Color(hex)
+  return [color.r, color.g, color.b]
+}
 
 // composables
 const { onBeforeRender } = useLoop()
@@ -38,7 +57,20 @@ const uniforms = ref({
   u_resolution: { type: 'V2', value: new Vector2(window.innerWidth, window.innerHeight) },
   u_time: { type: 'f', value: 0.0 },
   u_frequency: { type: 'f', value: 0.0 },
-  u_amplitude: { type: 'f', value: 1.5 },
+  u_amplitude: { type: 'f', value: amplitude.value },
+  u_colorStart: { type: 'V3', value: hexToRgbArray(colorStart.value) },
+  u_colorEnd: { type: 'V3', value: hexToRgbArray(colorEnd.value) },
+})
+
+// Watch for color changes and update uniforms
+watch([colorStart, colorEnd], ([start, end]) => {
+  uniforms.value.u_colorStart.value = hexToRgbArray(start)
+  uniforms.value.u_colorEnd.value = hexToRgbArray(end)
+})
+
+// Watch for amplitude changes and update the uniform
+watch(amplitude, (val) => {
+  uniforms.value.u_amplitude.value = val
 })
 </script>
 
@@ -47,32 +79,14 @@ const uniforms = ref({
   <OrbitControls />
   <TresMesh ref="blobRef">
     <TresIcosahedronGeometry :args="[4, 80]" />
-    <TresShaderMaterial wireframe :uniforms="uniforms" :fragment-shader="fragmentShader"
+    <TresShaderMaterial :wireframe="wireframe" :uniforms="uniforms" :fragment-shader="fragmentShader"
       :vertex-shader="vertexShader" />
   </TresMesh>
   <TresDirectionalLight :position="[1, 1, 1]" />
   <TresAmbientLight :intensity="1" />
+  <Suspense>
+    <EffectComposerPmndrs>
+      <VignettePmndrs :darkness="0.9" :offset="0.2" />
+    </EffectComposerPmndrs>
+  </Suspense>
 </template>
-
-<style scoped>
-.gitBtn {
-  margin-bottom: 10px;
-  margin-right: 10px;
-  z-index: 10;
-  color: white;
-}
-
-.blobPermissionDialog {
-  height: 100vh;
-  justify-content: center;
-  display: flex;
-  background-color: #0c1a30;
-  width: 100vw;
-  color: white;
-  font-size: x-large;
-}
-
-.blobPermissionDialog p {
-  width: 700px;
-}
-</style>
