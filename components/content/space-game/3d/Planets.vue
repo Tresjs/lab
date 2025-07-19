@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { useLoader } from '@tresjs/core'
-import { TextureLoader, type Texture } from 'three';
+/* const earth = await useLoader(TextureLoader, '/textures/space-game/earth.jpg') as Texture
+const moon = await useLoader(TextureLoader, '/textures/space-game/moon.png') as Texture */
 
-const earth = await useLoader(TextureLoader, '/textures/space-game/earth.jpg') as Texture
-const moon = await useLoader(TextureLoader, '/textures/space-game/moon.png') as Texture
+const { state: earth } = useTexture('/textures/space-game/earth.jpg')
+const { state: moon } = useTexture('/textures/space-game/moon.png')
 </script>
 
 <template>
@@ -12,17 +12,13 @@ const moon = await useLoader(TextureLoader, '/textures/space-game/moon.png') as 
       <TresBoxGeometry />
       <TresMeshNormalMaterial />
     </TresMesh>
-    <TresMesh>
+    <TresMesh v-if="earth">
       <TresSphereGeometry :args="[5, 32, 32]" />
-      <Suspense>
-        <TresMeshBasicMaterial :map="earth" :fog="false" color="#666666" />
-      </Suspense>
+      <TresMeshBasicMaterial :map="earth" :fog="false" color="#666666" />
     </TresMesh>
-    <TresMesh :position="[5, -5, -5]">
+    <TresMesh v-if="moon" :position="[5, -5, -5]">
       <TresSphereGeometry :args="[0.75, 32, 32]" />
-      <Suspense>
-        <TresMeshBasicMaterial :roughness="1" :map="moon" :fog="false" color="#666666" />
-      </Suspense>
+      <TresMeshBasicMaterial :roughness="1" :map="moon" :fog="false" color="#666666" />
     </TresMesh>
     <TresPointLight :position="[-5, -5, -5]" :distance="1000" :intensity="6" />
     <TresMesh :position="[-30, -10, -60]">

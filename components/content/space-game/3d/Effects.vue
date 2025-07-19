@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
+/* import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
 import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass'
 import { UnrealBloomPass } from 'three-stdlib'
@@ -14,11 +14,16 @@ useLoop().render(({ elapsed }) => {
   if (composer.value) {
     composer.value!.render()
   }
-})
+}) */
 </script>
 
 <template>
-  <TresEffectComposer
+  <Suspense>
+    <EffectComposer>
+      <UnrealBloom :radius="0.5" :strength="0.1" />
+    </EffectComposer>
+  </Suspense>
+  <!-- <TresEffectComposer
     ref="composer"
     :args="[renderer]"
     :set-size="[sizes.width.value, sizes.height.value]"
@@ -35,5 +40,5 @@ useLoop().render(({ elapsed }) => {
       attach="passes-2"
       :set-size="[sizes.width.value, sizes.height.value]"
     />
-  </TresEffectComposer>
+  </TresEffectComposer> -->
 </template>

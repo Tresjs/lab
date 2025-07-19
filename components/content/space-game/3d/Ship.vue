@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { inject, shallowRef } from 'vue'
-import { useLoader, useLoop } from '@tresjs/core'
 import type { GameStore } from '../TheExperience.vue'
 import { BoxGeometry, Color, Group, MeshBasicMaterial, PointLight, Vector3 } from 'three';
 
@@ -13,7 +11,7 @@ const crossMaterial = new MeshBasicMaterial({ color: hotpink, fog: false })
 const position = new Vector3()
 const direction = new Vector3()
 
-const { nodes } = await useLoader(GLTFLoader, '/models/space-game/ship.gltf')
+const { nodes } = useGLTF('/models/space-game/ship.gltf')
 const gameStore = inject('gameStore') as GameStore
 const mutation = gameStore.mutation
 const { clock, mouse, ray } = mutation
@@ -85,7 +83,7 @@ useLoop().onBeforeRender(() => {
         <TresMesh :position="[-2.8, 0, -0.8]" :geometry="geometry" :material="laserMaterial" />
         <TresMesh :position="[2.8, 0, -0.8]" :geometry="geometry" :material="laserMaterial" />
       </TresGroup>
-      <TresGroup :rotation="[Math.PI / 2, Math.PI, 0]">
+      <TresGroup v-if="nodes['Renault_(S,_T1)_0']" :rotation="[Math.PI / 2, Math.PI, 0]">
         <TresMesh name="Renault_(S,_T1)_0" :geometry="nodes['Renault_(S,_T1)_0'].geometry">
           <TresMeshStandardMaterial color="#070707" />
         </TresMesh>
