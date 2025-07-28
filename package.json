@@ -43,17 +43,11 @@
     "vite-svg-loader": "^5.1.0"
   },
   "pnpm": {
-    "ignoredBuiltDependencies": [
-      "@parcel/watcher",
-      "better-sqlite3",
-      "esbuild",
-      "sharp",
-      "vue-demi"
-    ],
     "onlyBuiltDependencies": [
-      "@tailwindcss/oxide",
-      "better-sqlite3",
-      "unrs-resolver"
-    ]
+      "better-sqlite3"
+    ],
+    "overrides": {
+      "ipx": "^3.0.3"
+    }
   }
 }
