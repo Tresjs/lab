@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ExperimentItem } from '@/types'
+import type { ExperimentItem } from '~/app/types'
 
 interface Author {
   name: string
