@@ -12,6 +12,7 @@
     "@nuxt/eslint": "^1.7.1",
     "@nuxt/ui-pro": "^3.3.0",
     "@tresjs/post-processing": "3.0.0-next.0",
+    "better-sqlite3": "^11.7.0",
     "mdast-util-to-string": "^4.0.0",
     "three": "^0.178.0",
     "three-custom-shader-material": "^6.3.7",
