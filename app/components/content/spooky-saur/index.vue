@@ -29,11 +29,11 @@ const { hasFinishLoading, progress } = await useProgress()
     </div>
   </Transition>
   <TresCanvas clear-color="#A590FF">
-    <TresPerspectiveCamera ref="cameraRef" :look-at="[0, 2, 0]" :position="[1, 1, 8]" />
+    <TresPerspectiveCamera ref="cameraRef" :look-at="[0, 1, 0]" :position="[1, 2, 8]" />
     <OrbitControls :max-distance="10" :min-azimuth-angle="-Math.PI / 6" :max-azimuth-angle="Math.PI / 6"
-      :min-polar-angle="0" :max-polar-angle="Math.PI / 2 - Math.PI / 18" />
+      :min-polar-angle="0" :max-polar-angle="Math.PI / 2 - Math.PI / 18" :target="[0, 1, 0]" />
     <Backdrop :floor="10" :scale="[150, 40, 10]" :position="[0, -0.05, -20]" receive-shadow>
-      <TresMeshStandardMaterial :color="gl.clearColor" :side="DoubleSide" />
+      <TresMeshStandardMaterial color="#A590FF" :side="DoubleSide" />
     </Backdrop>
     <Suspense>
       <Text3D text="SPOOKY" :font="fontPath" :size="2" :position="[-2, 4, -6]" :rotation="[0, Math.PI / 3, 0]">
@@ -41,16 +41,13 @@ const { hasFinishLoading, progress } = await useProgress()
       </Text3D>
     </Suspense>
     <InsideLight />
-    <TresFog :color="gl.clearColor" :near="2" :far="20" />
-    <Suspense>
-      <PumpkinIvysaur />
-    </Suspense>
-    <Suspense>
-      <HalloweenDecorations />
-    </Suspense>
-    <EffectComposer :depth-buffer="true">
-      <Bloom v-bind="bloomParams" />
-    </EffectComposer>
+    <TresFog color="#A590FF" :near="2" :far="20" />
+    <PumpkinIvysaur />
+    <HalloweenDecorations />
+
+    <EffectComposerPmndrs :depth-buffer="true">
+      <BloomPmndrs :luminance-threshold="0.2" :luminance-smoothing="0.3" :intensity="0.1" />
+    </EffectComposerPmndrs>
     <TresAmbientLight :intensity="0.1" />
     <TresDirectionalLight color="#FF3F00" :intensity="0.6" :position="[3, 3, 3]" :shadow-mapSize-width="1024"
       :shadow-mapSize-height="1024" :shadow-camera-far="50" :shadow-camera-left="-10" :shadow-camera-right="10"
