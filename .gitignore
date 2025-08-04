@@ -21,3 +21,9 @@ pnpm-debug.log*
 .nuxt/
 
 .data
+
+# AI Assistant configurations
+.cursor/
+.claude/
+CLAUDE.md
+
