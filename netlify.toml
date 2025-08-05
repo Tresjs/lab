@@ -1,6 +1,5 @@
 [build]
   command = "pnpm run generate -- --max-old-space-size=4096"
-  publish = ".output/public"
 
 [build.environment]
 COREPACK_INTEGRITY_KEYS = "0"
