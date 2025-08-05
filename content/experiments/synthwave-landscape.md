@@ -7,5 +7,4 @@ date: 2024-08-29
 updated: 2025-06-25
 ---
 
-::synthwave-landscape
-::
+

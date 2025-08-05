@@ -70,12 +70,21 @@ useHead({
     },
   ],
 })
+
+function toPascalCase(str: string) {
+  return str.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase()).replace(/^[a-z]/, (letter) => letter.toUpperCase())
+}
+
+const component = computed(() => toPascalCase(page.value?.stem.split('/').pop() ?? ''))
 </script>
 
 <template>
   <main>
     <ClientOnly>
-      <ContentRenderer v-if="page" :value="page" class="w-full h-[100vh]" />
+      <component :is="component" v-if="page" />
     </ClientOnly>
+    <!-- <ClientOnly>
+      <ContentRenderer v-if="page" :value="page" class="w-full h-[100vh]" />
+    </ClientOnly> -->
   </main>
 </template>

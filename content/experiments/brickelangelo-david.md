@@ -6,5 +6,3 @@ tags: ['cientos', 'MeshSurfaceSampler']
 date: 2023-08-21
 ---
 
-::brickelangelo-david
-::

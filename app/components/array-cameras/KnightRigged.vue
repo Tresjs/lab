@@ -1,15 +1,22 @@
 <script setup lang="ts">
-import type { TresObject } from '@tresjs/core'
+
 
 const { nodes, state } = useGLTF(
   'https://raw.githubusercontent.com/Tresjs/assets/main/models/gltf/warcraft-3-alliance-footmanfanmade/source/Footman_RIG.glb',
 )
 
 
-const model = computed(() => nodes.value.Footman_rig)
+const model = shallowRef()
 const animations = computed(() => state.value?.animations || [])
 
-const { actions } = useAnimations(animations, model as TresObject)
+// Update model reference when nodes are loaded
+watch(nodes, (newNodes) => {
+  if (newNodes?.Footman_rig) {
+    model.value = newNodes.Footman_rig
+  }
+}, { immediate: true })
+
+const { actions } = useAnimations(animations, model)
 
 const currentAction = ref()
 

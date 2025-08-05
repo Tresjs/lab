@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import BrownianDistributionExperiment from './BrownianDistributionExperiment.vue'
 import { useDark, useToggle } from '@vueuse/core'
 import { colors } from './constants'
 const isDark = useDark()

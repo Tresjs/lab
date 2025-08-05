@@ -6,5 +6,3 @@ tags: ['models']
 date: 2023-04-21
 ---
 
-::array-cameras
-::

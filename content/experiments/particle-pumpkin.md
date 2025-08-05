@@ -6,4 +6,4 @@ tags: ["cientos", "useGLTF", "blender", "shaders"]
 date: 2023-11-03
 ---
 
-<ParticlePumpkin />
+

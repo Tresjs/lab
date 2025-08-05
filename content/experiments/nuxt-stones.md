@@ -6,4 +6,4 @@ tags: ['gltf', 'baked', 'emission', 'post-processing', 'bloom']
 date: 2023-09-18
 ---
 
-<NuxtStones />
+
