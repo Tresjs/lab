@@ -1,5 +1,5 @@
 [build]
-  command = "pnpm run generate -- --max-old-space-size=4096"
+  command = "pnpm run generate"
 
 [build.environment]
 COREPACK_INTEGRITY_KEYS = "0"
