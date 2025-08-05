@@ -54,7 +54,7 @@ const { hasFinishLoading, progress } = await useProgress()
   </Transition>
   <TresCanvas v-bind="gl">
     <TresPerspectiveCamera ref="cameraRef" :position="[4, 4, 4]" :look-at="[0, 2, 0]" />
-    <IPhone @view-clicked="onViewClicked" />
+    <HtmlPhoneIPhone @view-clicked="onViewClicked" />
     <ContactShadows :blur="3.5" :resolution="512" :opacity="1" />
     <Suspense>
       <Environment background :blur="0.9" preset="city" />

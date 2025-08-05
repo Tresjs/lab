@@ -3,7 +3,7 @@ import { BasicShadowMap, SRGBColorSpace, NoToneMapping, Vector3 } from 'three'
 import { useMouse } from '@vueuse/core'
 import gsap from 'gsap'
 
-import David from './David.vue'
+
 
 const { x, y } = useMouse()
 
@@ -67,7 +67,7 @@ const onDavidReady = () => {
   <TresCanvas v-bind="gl">
     <TresPerspectiveCamera ref="cameraRef" :position="cameraPosition" :look-at="[0, 5, 0]" />
     <TresFog color="black" />
-    <David @ready="onDavidReady" />
+    <BrickelangeloDavidTheDavid @ready="onDavidReady" />
     <TresSpotLight ref="lightRef" :position="[5, 5, 5]" :intensity="8" cast-shadow />
   </TresCanvas>
   <div

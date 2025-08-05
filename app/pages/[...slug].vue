@@ -81,10 +81,9 @@ const component = computed(() => toPascalCase(page.value?.stem.split('/').pop() 
 <template>
   <main>
     <ClientOnly>
-      <component :is="component" v-if="page" />
+      <div class="w-full h-[100vh]">
+        <component :is="component" v-if="page" />
+      </div>
     </ClientOnly>
-    <!-- <ClientOnly>
-      <ContentRenderer v-if="page" :value="page" class="w-full h-[100vh]" />
-    </ClientOnly> -->
   </main>
 </template>

@@ -14,10 +14,6 @@ watch(nodes, (nodes) => {
 const cloud = computed(() => nodes.value.Low_Poly_Cloud)
 const cloudRef = shallowRef<TresObject>()
 
-watch(cloud, (cloud) => {
-  cloud.castShadow = true
-})
-
 // create a function to return a random number between two values with random sign
 function random(min: number, max: number): number {
   const randomNumber = Math.random() * (max - min) + min
@@ -25,6 +21,8 @@ function random(min: number, max: number): number {
 }
 
 watch(cloud, (cloud) => {
+  if (!cloud) return
+  cloud.castShadow = true
   cloud.position.set(random(-8, 8), random(0.5, 1), random(-8, 8))
   const size = random(0.5, 1)
   cloud.scale.set(size, size, size)

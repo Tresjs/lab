@@ -3,7 +3,7 @@ import { inject, shallowRef } from 'vue'
 import { useLoop } from '@tresjs/core'
 import type { Vector3 } from 'three'
 import { Matrix4 } from 'three'
-import type { GameStore } from '../GameStore'
+import type { GameStore } from './GameStore'
 
 const instancedMeshesRef = shallowRef()
 const gameStore = inject('gameStore') as GameStore

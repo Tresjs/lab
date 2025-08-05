@@ -40,10 +40,10 @@ const { hasFinishLoading, progress } = await useProgress()
         <TresMeshStandardMaterial />
       </Text3D>
     </Suspense>
-    <InsideLight />
+    <SpookySaurInsideLight />
     <TresFog color="#A590FF" :near="2" :far="20" />
-    <PumpkinIvysaur />
-    <HalloweenDecorations />
+    <SpookySaurPumpkinIvysaur />
+    <SpookySaurHalloweenDecorations />
 
     <EffectComposerPmndrs :depth-buffer="true">
       <BloomPmndrs :luminance-threshold="0.2" :luminance-smoothing="0.3" :intensity="0.1" />

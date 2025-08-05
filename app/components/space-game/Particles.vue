@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { inject, onMounted, shallowRef, watch } from 'vue'
-import type { GameStore } from '../GameStore'
+import type { GameStore } from './GameStore'
 
 const instancedMeshRef = shallowRef()
 const gameStore = inject('gameStore') as GameStore
@@ -26,11 +26,7 @@ function updateParticles() {
 </script>
 
 <template>
-  <TresInstancedMesh
-    ref="instancedMeshRef"
-    :args="[undefined, undefined, particles.length]"
-    :frustum-culled="false"
-  >
+  <TresInstancedMesh ref="instancedMeshRef" :args="[undefined, undefined, particles.length]" :frustum-culled="false">
     <TresConeGeometry :args="[2, 2, 3]" />
     <TresMeshStandardMaterial color="#606060" />
   </TresInstancedMesh>

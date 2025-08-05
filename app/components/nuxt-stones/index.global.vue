@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { BlendFunction } from 'postprocessing'
-import Stones from './Stones.vue'
+
 
 
 const bloomParams = reactive({
@@ -21,7 +21,7 @@ const bloomParams = reactive({
         <BloomPmndrs v-bind="bloomParams" />
       </EffectComposerPmndrs>
     </Suspense>
-    <Stones />
+    <NuxtStonesTheStones />
 
   </TresCanvas>
 </template>

@@ -13,19 +13,19 @@ watch(roomTexture, (texture) => {
 
 <template>
   <template v-if="isTableTextureReady && isRoomTextureReady">
-    <Room :texture="roomTexture" />
-    <Bricks :texture="roomTexture" />
-    <Table :texture="tableTexture" />
-    <Stands :texture="roomTexture" />
-    <Books :texture="tableTexture" />
-    <Bottles />
-    <Chalkboard :texture="roomTexture" />
-    <Cauldron :texture="tableTexture" />
-    <Windows :texture="tableTexture" />
-    <Skulls />
-    <FloatingCandles />
-    <Mortar :texture="tableTexture" />
-    <Lamp :texture="tableTexture" />
-    <Jars />
+    <PotionsClassroomRoom :texture="roomTexture" />
+    <PotionsClassroomBricks :texture="roomTexture" />
+    <PotionsClassroomTable :texture="tableTexture" />
+    <PotionsClassroomStands :texture="roomTexture" />
+    <PotionsClassroomBooks :texture="tableTexture" />
+    <PotionsClassroomBottles />
+    <PotionsClassroomChalkboard :texture="roomTexture" />
+    <PotionsClassroomCauldron :texture="tableTexture" />
+    <PotionsClassroomWindows :texture="tableTexture" />
+    <PotionsClassroomSkulls />
+    <PotionsClassroomFloatingCandles />
+    <PotionsClassroomMortar :texture="tableTexture" />
+    <PotionsClassroomLamp :texture="tableTexture" />
+    <PotionsClassroomJars />
   </template>
 </template>

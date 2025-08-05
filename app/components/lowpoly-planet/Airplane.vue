@@ -14,6 +14,7 @@ const { nodes } = useGLTF(
 const airplane = computed(() => nodes.value.Low_Poly_Airplane)
 
 watch(airplane, (airplane) => {
+  if (!airplane) return
   airplane.rotation.set(0, Math.PI, 0)
   airplane.traverse((child) => {
     if (child instanceof Mesh) {
@@ -27,7 +28,7 @@ watch(airplane, (airplane) => {
 watch(
   () => props.planet,
   (planet) => {
-    if (!planet) return
+    if (!planet || !airplane.value) return
     const radius = Math.abs(planet.geometry.boundingSphere?.radius | 1)
     airplane.value.position.set(radius, 0, 0)
 

@@ -42,7 +42,7 @@
 
     <TresRectAreaLight color="#341212" :decay="0" :width="1000" :height="1000" :position="[5, 20, 50]"
       :look-at="[0, 0, 0]" />
-    <Scene />
+    <RepulsionEffectScene />
   </TresCanvas>
 </template>
 

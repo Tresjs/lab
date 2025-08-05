@@ -16,7 +16,7 @@ useControls('fpsgraph', {
   </h1>
   <TresCanvas :clear-color="'black'">
     <TresPerspectiveCamera :position="[3, 3, 3]" />
-    <Galaxy />
+    <GalaxyGeneratorGalaxy />
     <OrbitControls />
   </TresCanvas>
 </template>

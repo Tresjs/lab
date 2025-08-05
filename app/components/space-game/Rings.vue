@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { inject } from 'vue'
-import type { GameStore } from '../GameStore'
+import type { GameStore } from './GameStore'
 import { Color, DoubleSide, MeshBasicMaterial, RingGeometry } from 'three';
 
 const geometry = new RingGeometry(1, 1.01, 64)

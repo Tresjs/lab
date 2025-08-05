@@ -77,7 +77,7 @@ watch(
       <TresLeches collapsed />
     </ClientOnly>
     <TresCanvas alpha clear-color="#0c1a30" class="relative z-10">
-      <TheDancingBlob :analyser="analyser!" :data-array="dataArray!" />
+      <DancingBlobTheDancingBlob :analyser="analyser!" :data-array="dataArray!" />
     </TresCanvas>
     <div class="bg-dance-text z-20" aria-hidden="true">
       SOUND

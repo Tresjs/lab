@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { Mesh } from 'three'
-import Airplane from './Airplane.vue'
-import Cloud from './Cloud.vue'
 
 const { nodes } = useGLTF(
   'https://raw.githubusercontent.com/Tresjs/assets/main/models/gltf/low-poly/planet.gltf',
@@ -38,6 +36,6 @@ watch(icosphere, (icosphere: TresObject) => {
 
 <template>
   <primitive v-if="planet" ref="planetRef" :object="planet" />
-  <Airplane v-if="icosphere" :planet="icosphere" />
-  <Cloud v-for="cloud of [1, 2, 3, 4, 5, 6, 7, 8, 9]" :key="cloud" :planet="icosphere" />
+  <LowpolyPlanetAirplane v-if="icosphere" :planet="icosphere" />
+  <LowpolyPlanetCloud v-for="cloud of [1, 2, 3, 4, 5, 6, 7, 8, 9]" :key="cloud" :planet="icosphere" />
 </template>

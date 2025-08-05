@@ -16,7 +16,7 @@ const { hasFinishLoading, progress } = await useProgress()
   <TresCanvas :clear-color="'#242424'" shadows>
     <TresPerspectiveCamera :position="[11, 15, 11]" :look-at="[0, 4, 0]" />
     <Suspense>
-      <Experience />
+      <PotionsClassroomExperience />
     </Suspense>
     <TresFog :color="'#242424'" :near="1" :far="100" />
     <TresAmbientLight :intensity="2" />

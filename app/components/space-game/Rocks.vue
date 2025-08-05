@@ -2,7 +2,7 @@
 import { inject, shallowRef } from 'vue'
 import { useLoop } from '@tresjs/core'
 import { Group } from 'three'
-import type { GameStore } from '../GameStore'
+import type { GameStore } from './GameStore'
 
 const gameStore: GameStore = inject('gameStore') as GameStore
 const rocksGroupRef = shallowRef(new Group())

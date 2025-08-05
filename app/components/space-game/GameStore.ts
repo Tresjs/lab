@@ -1,7 +1,7 @@
 import { GrannyKnot } from 'three-stdlib'
 import { reactive, shallowRef } from 'vue'
 import * as audio from './audio'
-import type { ExplosionData } from './3d/Explosions.vue'
+import type { ExplosionData } from './Explosions.vue'
 import { Box3, Clock, Euler, Matrix4, Object3D, PerspectiveCamera, Ray, TubeGeometry, Vector2, Vector3 } from 'three'
 
 let guid = 0

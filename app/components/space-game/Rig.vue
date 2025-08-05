@@ -3,7 +3,7 @@ import { useLoop } from '@tresjs/core'
 import type { PerspectiveCamera } from 'three'
 import { Group } from 'three'
 import { inject, shallowRef } from 'vue'
-import type { GameStore } from '../GameStore'
+import type { GameStore } from './GameStore'
 
 let offset = 0
 

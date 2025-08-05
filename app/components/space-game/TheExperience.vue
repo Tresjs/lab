@@ -9,16 +9,16 @@ onBeforeRender(gameStore.actions.update)
 
 <template>
   <TresAmbientLight :intensity="0.25" />
-  <Stars :radius="8000" :depth="8000" :count="5000" :size="15" />
-  <Track />
-  <Particles />
-  <Rings />
-  <Rocks />
-  <Rig>
-    <Ship />
-  </Rig>
-  <Enemies />
-  <Explosions />
-  <Planets />
-  <Effects />
+  <SpaceGameStars :radius="8000" :depth="8000" :count="5000" :size="15" />
+  <SpaceGameTrack />
+  <SpaceGameParticles />
+  <SpaceGameRings />
+  <SpaceGameRocks />
+  <SpaceGameRig>
+    <SpaceGameShip />
+  </SpaceGameRig>
+  <SpaceGameEnemies />
+  <SpaceGameExplosions />
+  <SpaceGamePlanets />
+  <SpaceGameEffects />
 </template>

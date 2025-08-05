@@ -2,9 +2,7 @@
 import { TresCanvas } from '@tresjs/core'
 import { SRGBColorSpace, NoToneMapping } from 'three'
 import { onMounted, provide, shallowRef } from 'vue'
-import TheExperience from './TheExperience.vue'
 import { gameStore } from './GameStore'
-import Hud from './Hud.vue'
 
 
 provide('gameStore', gameStore)
@@ -19,9 +17,9 @@ onMounted(() => { gameStore.actions.init(camera.value) })
       <TresPerspectiveCamera ref="camera" :position="[0, 0, 2000]" :near="0.01" :far="20000"
         :fov="gameStore.mutation.fov" />
       <TresFog color="#121225" :near="150" :far="600" />
-      <TheExperience />
+      <SpaceGameTheExperience />
     </TresCanvas>
-    <Hud />
+    <SpaceGameHud />
   </div>
 </template>
 

@@ -3,7 +3,7 @@ import { gsap } from 'gsap'
 import { EffectComposerPmndrs, ToneMappingPmndrs } from '@tresjs/post-processing'
 import { ToneMappingMode } from 'postprocessing'
 import { ContactShadows } from '@tresjs/cientos'
-import Marble from './Marble.vue'
+
 
 const gl = {
   alpha: true,
@@ -158,120 +158,92 @@ const contactShadowColor = computed(() => {
 <template>
   <TresLeches />
 
-  <div
-    ref="mainRef"
-    class="magical-marbles"
-  >
+  <div ref="mainRef" class="magical-marbles">
     <div class="magical-marbles__infos">
       <NuxtLink to="/">
         See more experiments and examples
       </NuxtLink>
       <p>
         Magical Marbles inspired by the
-        <a
-          target="_blank"
-          href="https://tympanus.net/codrops/2021/08/02/magical-marbles-in-three-js/"
-        >
+        <a target="_blank" href="https://tympanus.net/codrops/2021/08/02/magical-marbles-in-three-js/">
           Codrops tutorial
         </a>
       </p>
     </div>
 
-    <div
-      ref="backgroundRef"
-      class="magical-marbles__bg"
-    />
+    <div ref="backgroundRef" class="magical-marbles__bg" />
   </div>
 
-    <TresCanvas
-      window-size
-      v-bind="gl"
-      :toneMappingExposure="toneMappingExposure"
-    >
-      <TresPerspectiveCamera
-        :position="[0, 0, 3.5]"
-        :fov="45"
-        :near=".1"
-        :far="1000"
-      />
-      
-      <OrbitControls
-        auto-rotate
-        :enable-rotate="false"
-        :enable-pan="false"
-        make-default
-      />
+  <TresCanvas window-size v-bind="gl" :toneMappingExposure="toneMappingExposure">
+    <TresPerspectiveCamera :position="[0, 0, 3.5]" :fov="45" :near=".1" :far="1000" />
 
-      <Marble
-        ref="marbleRef" 
-        :colors="colors"
-        :params="marbleParams"
-        :indexColor="indexColor"
-        @sphere-click="handleSphereClick"
-      />
+    <OrbitControls auto-rotate :enable-rotate="false" :enable-pan="false" make-default />
+
+    <MagicalMarblesMarble ref="marbleRef" :colors="colors" :params="marbleParams" :indexColor="indexColor"
+      @sphere-click="handleSphereClick" />
 
     <ContactShadows :position-y="-1.1" :color="contactShadowColor" :blur="0.85" :scale="5" :opacity="0.35" />
-      <Suspense>
-        <Environment preset="urban" :environmentIntensity="0.85"  />
-      </Suspense>
+    <Suspense>
+      <Environment preset="urban" :environmentIntensity="0.85" />
+    </Suspense>
 
-      <Suspense>
-        <EffectComposerPmndrs :multisampling="4">
-          <ToneMappingPmndrs :mode="toneMappingMode" />
-        </EffectComposerPmndrs>
-      </Suspense>
+    <Suspense>
+      <EffectComposerPmndrs :multisampling="4">
+        <ToneMappingPmndrs :mode="toneMappingMode" />
+      </EffectComposerPmndrs>
+    </Suspense>
 
-    </TresCanvas>
+  </TresCanvas>
 </template>
 
 <style scoped>
 .magical-marbles {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .magical-marbles__bg {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 0;
-    background-color: #d8bcac;
-    pointer-events: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  background-color: #d8bcac;
+  pointer-events: none;
 }
 
 .magical-marbles__infos {
-    margin-top: auto;
-    position: absolute;
-    bottom: 40px;
-    left: 60px;
-    z-index: 5;
+  margin-top: auto;
+  position: absolute;
+  bottom: 40px;
+  left: 60px;
+  z-index: 5;
 }
 
 .magical-marbles__infos p {
-    color: #FFF;
+  color: #FFF;
 }
 
 .magical-marbles__infos a {
-    pointer-events: auto;
-    color: #ad836d;
-    transition: color 0.25s;
+  pointer-events: auto;
+  color: #ad836d;
+  transition: color 0.25s;
 }
 
 .magical-marbles__infos a:hover {
-    color: #79573e;
+  color: #79573e;
 }
 
 canvas {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 4;
-    /* pointer-events: none !important; */
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 4;
+  /* pointer-events: none !important; */
 }
 </style>
