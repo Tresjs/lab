@@ -35,6 +35,10 @@ export default defineNuxtConfig({
     '/': { prerender: true },
   },
 
+  image: {
+    format: ['webp', 'avif'],
+  },
+
   content: {
     highlight: {
       theme: {
