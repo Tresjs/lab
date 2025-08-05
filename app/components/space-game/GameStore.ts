@@ -46,12 +46,12 @@ export const gameStore = reactive({
     },
 
     actions: {
-        playAudio: (audio: HTMLAudioElement, volume = 1, loop = false) => { },
-        toggleSound: (sound: boolean) => { },
+        playAudio: () => { },
+        toggleSound: () => { },
         shoot: () => { },
         test: (_data: { size: number; offset: Vector3; scale: number; hit: any; distance: number }) => { },
-        updateMouse: (mouse: { clientX: number; clientY: number }) => { },
-        init: (camera: PerspectiveCamera) => { },
+        updateMouse: () => { },
+        init: () => { },
         update: () => { },
     },
 })

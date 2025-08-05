@@ -2,13 +2,6 @@
 import type { PerspectiveCamera } from 'three'
 import { DoubleSide } from 'three'
 
-const bloomParams = reactive({
-  luminanceThreshold: 0.2,
-  luminanceSmoothing: 0.3,
-  mipmapBlur: true,
-  intensity: 0.1,
-})
-
 const cameraRef = ref<PerspectiveCamera | null>(null)
 const fontPath = '/fonts/jetbrains-mono.json'
 

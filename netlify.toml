@@ -1,6 +1,7 @@
 [build]
-  command = "pnpm run build"
+  command = "pnpm run generate"
   publish = ".output/public"
 
 [build.environment]
-  NODE_VERSION = "20"
+COREPACK_INTEGRITY_KEYS = "0"
+NODE_VERSION = "22"

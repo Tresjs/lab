@@ -73,5 +73,5 @@ onBeforeRender(({ elapsed }) => {
 </script>
 
 <template>
-  <!-- <TresMesh :geometry="points.geometry" :material="points.material" /> -->
+  <TresMesh :geometry="points.geometry" :material="points.material" />
 </template>
