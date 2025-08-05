@@ -9,4 +9,3 @@ description: A sphere dancing to the sound of your microphone. This demo utilize
 tags: ['basic', 'audio', 'shaders']
 ---
 
-<DancingBlob />

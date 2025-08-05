@@ -6,5 +6,3 @@ tags: ['particles', 'shaders', 'glsl']
 date: 2023-04-25
 ---
 
-::galaxy-generator
-::

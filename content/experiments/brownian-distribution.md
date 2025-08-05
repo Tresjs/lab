@@ -6,5 +6,3 @@ tags: ['useLoop']
 date: 2025-01-01
 ---
 
-::brownian-distribution
-::

@@ -6,5 +6,3 @@ tags: ['lights', 'fog', 'backdrop', 'unrealbloom', useGLTF]
 date: 2023-10-17
 ---
 
-::spooky-saur
-::

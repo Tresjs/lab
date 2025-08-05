@@ -6,6 +6,4 @@ tags: ['post-processing', 'bloom']
 date: 2024-02-05
 ---
 
-::cult-of-the-lamb
-::
 
