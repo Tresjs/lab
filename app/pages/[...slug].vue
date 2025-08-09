@@ -19,7 +19,7 @@ const formattedPage = computed(() => {
 })
 
 useHead({
-  title: `${page?.value?.title} - Tres`,
+  title: `${page?.value?.title}`,
   meta: [
     {
       hid: 'description',
