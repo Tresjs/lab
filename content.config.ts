@@ -17,7 +17,10 @@ export default defineContentConfig({
     }),
     experiments: defineCollection({
       type: 'page',
-      source: 'experiments/**/*.md',
+      source: {
+        include: 'experiments/**/*.md',
+        exclude: ['experiments/CLAUDE.md']
+      },
       schema: z.object({
         title: z.string(),
         description: z.string(),
