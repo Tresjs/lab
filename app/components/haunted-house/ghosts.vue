@@ -5,8 +5,8 @@ const ghost1 = shallowRef(null)
 const ghost2 = shallowRef(null)
 const ghost3 = shallowRef(null)
 
-const { onLoop } = useRenderLoop()
-onLoop(({ elapsed }) => {
+const { onBeforeRender } = useLoop()
+onBeforeRender(({ elapsed }) => {
   const ghost1Angle = elapsed * 0.5
   const ghost2Angle = -elapsed * 0.32
   const ghost3Angle = -elapsed * 0.18
@@ -27,19 +27,7 @@ onLoop(({ elapsed }) => {
 </script>
 
 <template>
-  <TresPointLight
-    ref="ghost1"
-    :args="['#ff00ff', 3, 3]"
-    cast-shadow
-  />
-  <TresPointLight
-    ref="ghost2"
-    :args="['#00ffff', 3, 3]"
-    cast-shadow
-  />
-  <TresPointLight
-    ref="ghost3"
-    :args="['#ff7800', 3, 3]"
-    cast-shadow
-  />
+  <TresPointLight ref="ghost1" :args="['#ff00ff', 3, 3]" cast-shadow />
+  <TresPointLight ref="ghost2" :args="['#00ffff', 3, 3]" cast-shadow />
+  <TresPointLight ref="ghost3" :args="['#ff7800', 3, 3]" cast-shadow />
 </template>

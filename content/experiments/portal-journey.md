@@ -7,7 +7,7 @@ date: 2023-03-27
 updated: 2025-06-26
 ---
 
-This experiment recreates the iconic **portal scene** from Bruno Simon's famous Three.js Journey course, featuring a magical portal surrounded by floating fireflies. The scene demonstrates advanced lighting techniques, custom shaders, and atmospheric effects creating an enchanting fantasy environment.
+This experiment recreates the iconic **portal scene** from [Bruno Simon's famous Three.js Journey course](https://threejs-journey.com/), featuring a magical portal surrounded by floating fireflies. The scene demonstrates advanced lighting techniques, custom shaders, and atmospheric effects creating an enchanting fantasy environment.
 
 ### What You'll See
 
