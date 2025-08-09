@@ -43,3 +43,78 @@
   background-size: 10px 10px;
   background-attachment: fixed;
 }
+
+@layer utilities {
+  /* Base text-outline utilities that work with color modifiers */
+  .text-outline-1 {
+    --text-outline-color: #000;
+    text-shadow: 
+      -1px -1px 0 var(--text-outline-color),
+       1px -1px 0 var(--text-outline-color),
+      -1px  1px 0 var(--text-outline-color),
+       1px  1px 0 var(--text-outline-color);
+  }
+  
+  .text-outline-2 {
+    --text-outline-color: #000;
+    text-shadow: 
+      -2px -2px 0 var(--text-outline-color),
+       0px -2px 0 var(--text-outline-color),
+       2px -2px 0 var(--text-outline-color),
+       2px  0px 0 var(--text-outline-color),
+       2px  2px 0 var(--text-outline-color),
+       0px  2px 0 var(--text-outline-color),
+      -2px  2px 0 var(--text-outline-color),
+      -2px  0px 0 var(--text-outline-color);
+  }
+  
+  .text-outline-3 {
+    --text-outline-color: #000;
+    text-shadow: 
+      -3px -3px 0 var(--text-outline-color),
+       0px -3px 0 var(--text-outline-color),
+       3px -3px 0 var(--text-outline-color),
+       3px  0px 0 var(--text-outline-color),
+       3px  3px 0 var(--text-outline-color),
+       0px  3px 0 var(--text-outline-color),
+      -3px  3px 0 var(--text-outline-color),
+      -3px  0px 0 var(--text-outline-color),
+      -2px -2px 0 var(--text-outline-color),
+       0px -2px 0 var(--text-outline-color),
+       2px -2px 0 var(--text-outline-color),
+       2px  0px 0 var(--text-outline-color),
+       2px  2px 0 var(--text-outline-color),
+       0px  2px 0 var(--text-outline-color),
+      -2px  2px 0 var(--text-outline-color),
+      -2px  0px 0 var(--text-outline-color);
+  }
+  
+  .text-outline-4 {
+    --text-outline-color: #000;
+    text-shadow: 
+      -4px -4px 0 var(--text-outline-color),
+       0px -4px 0 var(--text-outline-color),
+       4px -4px 0 var(--text-outline-color),
+       4px  0px 0 var(--text-outline-color),
+       4px  4px 0 var(--text-outline-color),
+       0px  4px 0 var(--text-outline-color),
+      -4px  4px 0 var(--text-outline-color),
+      -4px  0px 0 var(--text-outline-color),
+      -3px -3px 0 var(--text-outline-color),
+       0px -3px 0 var(--text-outline-color),
+       3px -3px 0 var(--text-outline-color),
+       3px  0px 0 var(--text-outline-color),
+       3px  3px 0 var(--text-outline-color),
+       0px  3px 0 var(--text-outline-color),
+      -3px  3px 0 var(--text-outline-color),
+      -3px  0px 0 var(--text-outline-color),
+      -2px -2px 0 var(--text-outline-color),
+       0px -2px 0 var(--text-outline-color),
+       2px -2px 0 var(--text-outline-color),
+       2px  0px 0 var(--text-outline-color),
+       2px  2px 0 var(--text-outline-color),
+       0px  2px 0 var(--text-outline-color),
+      -2px  2px 0 var(--text-outline-color),
+      -2px  0px 0 var(--text-outline-color);
+  }
+}

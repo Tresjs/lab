@@ -37,11 +37,13 @@
     "@tresjs/nuxt": "4.1.0-next.1",
     "@tweakpane/plugin-essentials": "^0.2.1",
     "@types/three": "^0.178.1",
+    "@vueuse/nuxt": "13.6.0",
     "gsap": "^3.13.0",
     "nuxt": "^4.0.1",
     "nuxt-svgo": "^4.2.4",
     "postprocessing": "6.37.6",
-    "vite-svg-loader": "^5.1.0"
+    "vite-svg-loader": "^5.1.0",
+    "vue": "^3.5.0"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
