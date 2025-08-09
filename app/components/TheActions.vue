@@ -2,7 +2,7 @@
 import { useDark, useToggle } from '@vueuse/core'
 import type { Page } from '~/app/types'
 
-const props = defineProps<{
+defineProps<{
   page: Page
 }>()
 
@@ -28,12 +28,14 @@ defineShortcuts({
     }">
       <UButton :icon="'i-carbon-document'" color="neutral" variant="subtle" />
       <template #title>
-        <h2 class="text font-bold mb-2">{{ page.title }}</h2>
-        <UAvatarGroup size="xs">
-          <UTooltip v-for="author in page.authors" :key="author.slug" :text="author.name">
-            <UAvatar :src="author.avatar" :alt="author.name" />
-          </UTooltip>
-        </UAvatarGroup>
+        <div class="flex items-center gap-8">
+          <h2 class="text-2xl font-bold">{{ page.title }}</h2>
+          <UAvatarGroup size="xs">
+            <UTooltip v-for="author in page.authors" :key="author.slug" :text="author.name">
+              <UAvatar :src="author.avatar" :alt="author.name" />
+            </UTooltip>
+          </UAvatarGroup>
+        </div>
       </template>
       <template #body>
         <ContentRenderer :value="page" />
