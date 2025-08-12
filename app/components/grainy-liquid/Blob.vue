@@ -4,13 +4,29 @@ import { Vector3, Color } from 'three'
 import vertexShader from './shaders/vertex.glsl'
 import fragmentShader from './shaders/fragment.glsl'
 
+interface Props {
+  colorA?: string
+  colorB?: string
+  colorC?: string
+  speed?: number
+  amplitude?: number
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  colorA: '#6366f1',
+  colorB: '#ec4899',
+  colorC: '#f1f5f9',
+  speed: 0.8,
+  amplitude: 0.15
+})
+
 const { onBeforeRender } = useLoop()
 
 const blobRef = ref<Mesh | null>(null)
 
-const { amplitude, frequency, speed, colorA, colorB, colorC, noiseScale, grainIntensity, fresnelPower } = useControls({
+const controlsConfig = {
   amplitude: {
-    value: 0.15,
+    value: props.amplitude,
     min: 0,
     max: 0.5,
     step: 0.01,
@@ -24,15 +40,15 @@ const { amplitude, frequency, speed, colorA, colorB, colorC, noiseScale, grainIn
     label: 'Frequency'
   },
   speed: {
-    value: 0.8,
+    value: props.speed,
     min: 0.1,
     max: 2,
     step: 0.1,
     label: 'Speed'
   },
-  colorA: '#1a66cc',
-  colorB: '#cc3366',
-  colorC: '#e6e6e6',
+  colorA: props.colorA,
+  colorB: props.colorB,
+  colorC: props.colorC,
   noiseScale: {
     value: 2.0,
     min: 0.5,
@@ -41,7 +57,7 @@ const { amplitude, frequency, speed, colorA, colorB, colorC, noiseScale, grainIn
     label: 'Noise Scale'
   },
   grainIntensity: {
-    value: 0.05,
+    value: 0.08,
     min: 0,
     max: 0.2,
     step: 0.01,
@@ -54,7 +70,9 @@ const { amplitude, frequency, speed, colorA, colorB, colorC, noiseScale, grainIn
     step: 0.1,
     label: 'Fresnel'
   }
-})
+}
+
+const { amplitude, frequency, speed, colorA, colorB, colorC, noiseScale, grainIntensity, fresnelPower } = useControls(controlsConfig)
 
 function hexToVector3(hex: string): Vector3 {
   const color = new Color(hex)

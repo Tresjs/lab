@@ -1,8 +1,7 @@
 <script setup lang="ts">
-
+import WebsiteLayout from './WebsiteLayout.vue'
 </script>
+
 <template>
- <TresCanvas clear-color="white">
-    <GrainyLiquidExperience />
- </TresCanvas>
+  <WebsiteLayout />
 </template>

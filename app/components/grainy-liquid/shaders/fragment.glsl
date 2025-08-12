@@ -61,9 +61,12 @@ void main() {
     vec3 baseColor = mix(u_colorA, u_colorB, colorNoise);
     vec3 finalColor = mix(baseColor, u_colorC, fresnel);
     
-    // Add grain effect
-    float grain = random(v_uv + u_time * 0.01) * u_grainIntensity;
-    finalColor += vec3(grain);
+    // Enhanced grain effect for more texture
+    vec2 grainUv = v_uv * 100.0 + u_time * 0.02;
+    float grain1 = random(grainUv) * u_grainIntensity;
+    float grain2 = random(grainUv * 2.0 + 0.5) * u_grainIntensity * 0.5;
+    float totalGrain = grain1 + grain2;
+    finalColor += vec3(totalGrain);
     
     // Add some iridescence based on viewing angle
     float iridescence = sin(fresnel * 3.14159 + u_time) * 0.1;
