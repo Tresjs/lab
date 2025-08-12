@@ -37,7 +37,7 @@ const blobs: BlobConfig[] = [
     colorB: '#e2e8f0',
     colorC: '#cbd5e1',
     speed: 0.4,
-    amplitude: 0.06
+    amplitude: 0.8
   }
 ]
 </script>
