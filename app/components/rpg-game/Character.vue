@@ -1,6 +1,10 @@
 <script setup lang="ts">
+import usePlayerState from './usePlayerState'
+
 const { state: model, nodes } = useGLTF('/models/knight/Knight.glb')
 const animations = computed(() => model.value?.animations || [])
+
+const { selectedWeapon } = usePlayerState()
 
 const toggableObjects = ref<string[]>([
   'Badge_Shield',
@@ -22,6 +26,12 @@ watch(nodes, (nodes) => {
   })
 })
 
+watch([selectedWeapon, nodes], ([weapon, nodes]) => {
+  const weaponNode = nodes[weapon]
+  if (!weaponNode) return
+  weaponNode.visible = true
+  weaponNode.needUpdate = true
+}, { immediate: true })
 
 const rig = computed(() => nodes.value.Rig)
 const { actions } = useAnimations(animations, rig)
