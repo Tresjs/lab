@@ -18,7 +18,7 @@ const gl = {
     <OrbitControls />
 
     <Suspense>
-      <HauntedHouseHouse />
+      <HauntedHouseBuilding />
     </Suspense>
     <Suspense>
       <HauntedHouseFloor />

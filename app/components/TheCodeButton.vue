@@ -1,19 +1,23 @@
 <script setup lang="ts">
-defineProps<{
-  title: string
-  to: string
-}>()
+const route = useRoute()
 
-const visible = ref(true)
+function getSlugFromPath(path: string) {
+  return path.split('/').pop()
+}
 
-defineShortcuts({
-  h: () => {
-    visible.value = !visible.value
-  }
-})
+function getRepoPathFromPath(path: string) {
+  return `https://github.com/Tresjs/lab/tree/main/components/content/${getSlugFromPath(path)}`
+}
+
+function getRepoTitleFromPath(path: string) {
+  return `${getSlugFromPath(path)} – code on Github`
+}
+
+const to = getRepoPathFromPath(route.path)
+const title = getRepoTitleFromPath(route.path)
+
 </script>
 
 <template>
-  <UButton v-if="visible" :to="to" :title="title" icon="i-carbon-logo-github" class="rounded-full" color="neutral"
-    variant="subtle" size="sm" />
+  <UButton :to="to" :title="title" icon="i-carbon-logo-github" class="rounded-full" color="neutral" variant="subtle" />
 </template>

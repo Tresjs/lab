@@ -2,7 +2,6 @@
 import type { ExperimentItem } from '~/app/types'
 
 useHead({
-  title: 'TresJS Lab',
   meta: [
     { name: 'description', content: 'Explore creative WebGL experiments built with TresJS, the declarative ThreeJS framework for Vue' },
   ],
