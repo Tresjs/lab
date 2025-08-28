@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import usePlayerState from './usePlayerState'
+import usePlayerState from './composables/usePlayerState'
 
 const { ph, maxPH, ap, maxAP, level, exp } = usePlayerState()
 

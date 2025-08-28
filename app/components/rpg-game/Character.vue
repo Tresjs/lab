@@ -1,10 +1,15 @@
 <script setup lang="ts">
-import usePlayerState from './usePlayerState'
+import type { Object3D } from 'three'
+import useCharacterCtrl from './composables/useCharacterCtrl'
+import usePlayerState from './composables/usePlayerState'
 
 const { state: model, nodes } = useGLTF('/models/knight/Knight.glb')
+const rig = computed(() => nodes.value.Rig as Object3D)
+
 const animations = computed(() => model.value?.animations || [])
 
 const { selectedWeapon } = usePlayerState()
+const { mixer } = useCharacterCtrl(rig, animations)
 
 const toggableObjects = ref<string[]>([
   'Badge_Shield',
@@ -33,12 +38,28 @@ watch([selectedWeapon, nodes], ([weapon, nodes]) => {
   weaponNode.needUpdate = true
 }, { immediate: true })
 
-const rig = computed(() => nodes.value.Rig)
-const { actions } = useAnimations(animations, rig)
+watch([nodes, animations], ([nodes, animations]) => {
+  console.log('Character', {
+    nodes,
+    animations,
+  })
+}, { immediate: true })
+
+const { onBeforeRender } = useLoop()
+
+onBeforeRender(({ delta }) => {
+  mixer.value?.update(delta)
+})
+
+/* const { actions } = useAnimations(animations, rig)
 
 watch(actions, (actions) => {
   if (!actions) return
   actions?.Idle?.play()
+}) */
+
+useControls({
+  awiwi: false
 })
 
 </script>
