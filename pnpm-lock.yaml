@@ -54,6 +54,9 @@ importers:
       '@iconify-json/logos':
         specifier: ^1.2.5
         version: 1.2.9
+      '@iconify-json/lucide':
+        specifier: ^1.2.66
+        version: 1.2.66
       '@nuxt/content':
         specifier: ^3.6.3
         version: 3.6.3(better-sqlite3@11.10.0)(magicast@0.3.5)
@@ -753,6 +756,9 @@ packages:
 
   '@iconify-json/logos@1.2.9':
     resolution: {integrity: sha512-G6VCdFnwZcrT6Eveq3m43oJfLw/CX8plwFcE+2jgv3fiGB64pTmnU7Yd1MNZ/eA+/Re2iEDhuCfSNOWTHwwK8w==}
+
+  '@iconify-json/lucide@1.2.66':
+    resolution: {integrity: sha512-TrhmfThWY2FHJIckjz7g34gUx3+cmja61DcHNdmu0rVDBQHIjPMYO1O8mMjoDSqIXEllz9wDZxCqT3lFuI+f/A==}
 
   '@iconify/collections@1.0.589':
     resolution: {integrity: sha512-W5kq146pYqEaqriflgAZSAzljZldzmwxiC9GVZXkpQVDpWw/ujGYcyFTOIqoxbq01K4kd+UJS3yj/Z1cMqSEnQ==}
@@ -8344,6 +8350,10 @@ snapshots:
       '@iconify/types': 2.0.0
 
   '@iconify-json/logos@1.2.9':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/lucide@1.2.66':
     dependencies:
       '@iconify/types': 2.0.0
 
