@@ -7,9 +7,9 @@ useHead({
   ],
 })
 
-// Fetch all experiments ordered by date using useAsyncData
+// Fetch all experiments ordered by featured first, then by date
 const { data: experiments } = await useAsyncData('experiments', () =>
-  queryCollection('experiments').order('date', 'DESC').all()
+  queryCollection('experiments').all()
 )
 
 // Format experiments with additional data using a second useAsyncData to handle the dependencies
@@ -17,7 +17,7 @@ const { data: formattedExperiments } = await useAsyncData('formatted-experiments
   async () => {
     if (!experiments.value) return []
 
-    return await Promise.all(
+    const formattedList = await Promise.all(
       experiments.value.map(async (experiment) => {
         const slug = getSlugFromExperiment(experiment)
 
@@ -48,6 +48,18 @@ const { data: formattedExperiments } = await useAsyncData('formatted-experiments
         }
       })
     )
+
+    // Sort by featured first, then by date (newest first)
+    return formattedList.sort((a, b) => {
+      // Featured experiments first
+      if (a.featured && !b.featured) return -1
+      if (!a.featured && b.featured) return 1
+      
+      // Then sort by date (newest first)
+      const dateA = new Date(a.date || 0)
+      const dateB = new Date(b.date || 0)
+      return dateB.getTime() - dateA.getTime()
+    })
   },
   {
     // Watch the experiments data to re-evaluate when it changes

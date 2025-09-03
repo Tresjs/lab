@@ -31,11 +31,13 @@ const formattedDate = computed(() =>
 
 <template>
   <NuxtLink :to="`${experiment.stem}`">
-    <UCard class="transition-all duration-300 hover:shadow-lg hover:scale-102 hover:-translate-y-1">
+    <UCard class="relative transition-all duration-300 hover:shadow-lg hover:scale-102 hover:-translate-y-1">
       <div class="relative aspect-video overflow-hidden bg-gray-100 dark:bg-gray-800 rounded-md">
         <img :src="`/${experiment.stem}.png`" :alt="experiment.title"
           class="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105">
-      </div>
+        
+        </div>
+        
 
       <!-- Tags -->
       <div class="py-4 flex gap-2 flex-wrap">
@@ -66,10 +68,20 @@ const formattedDate = computed(() =>
             </template>
           </UAvatarGroup>
         </div>
-        <UTooltip :text="experiment.repoTitle">
-          <UButton color="primary" variant="ghost" icon="i-heroicons-code-bracket" size="xs" :to="experiment.repoPath"
-            target="_blank" @click.stop />
-        </UTooltip>
+        <div class="flex gap-2">
+          <UBadge 
+          v-if="experiment.featured" 
+            color="warning" 
+            variant="soft" 
+            label="Editor's Choice"
+            icon="i-lucide-star" 
+            size="sm"
+          />
+          <UTooltip :text="experiment.repoTitle">
+            <UButton color="primary" variant="ghost" icon="i-heroicons-code-bracket" size="xs" :to="experiment.repoPath"
+              target="_blank" @click.stop />
+          </UTooltip>
+        </div>
       </div>
     </UCard>
   </NuxtLink>

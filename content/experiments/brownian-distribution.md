@@ -3,6 +3,7 @@ title: Basic Brownian distribution
 author: [andretchen0, alvarosabu]
 description: Basic scene with grouping/parenting and Brownian distribution of instances
 thumbnail: /experiments/brownian-distribution.png
+featured: true
 tags: ['useLoop']
 date: 2025-01-01
 ---
