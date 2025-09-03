@@ -289,6 +289,7 @@ function handleDeleteSceneNode(sceneNodeId: string) {
                 history.resume(true);
                 " @object-change="handleTransformChange(selectedNodeId!, sceneNodeRefs[selectedNodeId!])" />
               <TresGridHelper :args="[100, 10, '#44403C', '#E4E4E7']" />
+              <TheScreenshot />
             </TresCanvas>
           </div>
         </SimpleEditorContainElement>

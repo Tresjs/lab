@@ -76,5 +76,6 @@ onLoop(({ delta }) => {
     </TresMesh>
     <TresDirectionalLight :args="[0xffffff, 0.8]" />
     <TresHemisphereLight :args="[0xffffbb, 0x887979, 0.9]" />
+    <TheScreenshot />
   </TresCanvas>
 </template>

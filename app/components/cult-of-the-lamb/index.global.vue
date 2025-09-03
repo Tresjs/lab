@@ -40,5 +40,6 @@ const bloomParams = reactive({
     <Backdrop :floor="1.5" :segments="20" :scale="[20, 8, 4]" :position="[0, -0.01, -4]">
       <TresMeshStandardMaterial color="#8D404A" :roughness="1" />
     </Backdrop>
+    <TheScreenshot />
   </TresCanvas>
 </template>

@@ -18,6 +18,7 @@ onMounted(() => { gameStore.actions.init(camera.value) })
         :fov="gameStore.mutation.fov" />
       <TresFog color="#121225" :near="150" :far="600" />
       <SpaceGameTheExperience />
+      <TheScreenshot />
     </TresCanvas>
     <SpaceGameHud />
   </div>

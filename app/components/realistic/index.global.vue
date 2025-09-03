@@ -27,5 +27,6 @@ const { hasFinishLoading, progress } = await useProgress()
 
     <TresDirectionalLight :position="[5, 5, 5]" :intensity="1" />
     <TresAmbientLight :intensity="1" />
+    <TheScreenshot />
   </TresCanvas>
 </template>

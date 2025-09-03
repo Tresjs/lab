@@ -15,5 +15,6 @@ import { PCFSoftShadowMap } from 'three'
     <TresDirectionalLight :position="[0, 2, 4]" :intensity="2" cast-shadow :shadow-mapSize="[2048, 2048]"
       :shadow-bias="0.0001" />
     <Stars :count="5000" />
+    <TheScreenshot />
   </TresCanvas>
 </template>

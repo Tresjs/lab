@@ -20,5 +20,6 @@ const { hasFinishLoading, progress } = await useProgress()
     </Suspense>
     <TresFog :color="'#242424'" :near="1" :far="100" />
     <TresAmbientLight :intensity="2" />
+    <TheScreenshot />
   </TresCanvas>
 </template>

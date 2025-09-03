@@ -93,5 +93,6 @@ const onLoop = ({ elapsed }: { elapsed: number }) => {
       :speed="SPEED" :shininess="dayProgress" />
     <SynthwaveLandscapeGradientSky :color-sky="PALETTE[3]" :color-ground="PALETTE[5]" :size="1000" :offset="0.3"
       :scale="2" />
+    <TheScreenshot />
   </TresCanvas>
 </template>

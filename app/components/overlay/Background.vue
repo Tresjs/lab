@@ -137,5 +137,6 @@ useRenderLoop().onLoop(({ elapsed }) => {
         />
       </TresGroup>
     </Levioso>
+    <TheScreenshot />
   </TresCanvas>
 </template>

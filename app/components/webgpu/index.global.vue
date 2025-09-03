@@ -37,5 +37,6 @@ const createWebGPURenderer = (ctx: TresRendererSetupContext) => {
     <TresDirectionalLight color="white" :intensity="0.4" :position="[2, 1, 3]" :shadow-mapSize-width="1024"
       :shadow-mapSize-height="1024" :shadow-camera-far="50" :shadow-camera-left="-10" :shadow-camera-right="10"
       :shadow-camera-top="10" :shadow-camera-bottom="-10" :shadow-bias="-0.000001" />
+    <TheScreenshot />
   </TresCanvas>
 </template>

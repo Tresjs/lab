@@ -63,5 +63,6 @@ const cameras = computed(() => {
     <TresDirectionalLight :color="0xffffff" :intensity="5" />
     <TresHemisphereLight />
     <TresGridHelper :size="10" :divisions="10" />
+    <TheScreenshot />
   </TresCanvas>
 </template>
