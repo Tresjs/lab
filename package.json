@@ -6,37 +6,52 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.vue"
+    "lint": "eslint ."
   },
   "dependencies": {
-    "@tresjs/post-processing": "1.0.0-next.1",
+    "@nuxt/eslint": "^1.7.1",
+    "@nuxt/ui-pro": "^3.3.0",
+    "@tresjs/post-processing": "3.0.0-next.0",
+    "@vueuse/nuxt": "^13.8.0",
+    "better-sqlite3": "^11.7.0",
     "mdast-util-to-string": "^4.0.0",
-    "three": "^0.171.0",
-    "three-custom-shader-material": "^6.2.1",
-    "unist-util-stringify-position": "^4.0.0"
+    "three": "^0.178.0",
+    "three-custom-shader-material": "^6.3.7",
+    "unist-util-stringify-position": "^4.0.0",
+    "vue": "^3.5.20"
   },
   "devDependencies": {
-    "@iconify-json/carbon": "^1.2.5",
-    "@iconify-json/game-icons": "^1.2.1",
+    "@iconify-json/carbon": "^1.2.11",
+    "@iconify-json/game-icons": "^1.2.3",
     "@iconify-json/ic": "^1.2.2",
-    "@iconify-json/logos": "^1.2.4",
-    "@nuxt/content": "^2.13.4",
-    "@nuxt/image": "^1.8.0",
-    "@nuxt/image-edge": "1.3.0-28493895.369b747",
-    "@nuxt/kit": "^3.15.0",
-    "@nuxtjs/color-mode": "^3.4.4",
-    "@tresjs/cientos": "^4.3.0",
-    "@tresjs/core": "4.3.3",
+    "@iconify-json/logos": "^1.2.5",
+    "@iconify-json/lucide": "^1.2.66",
+    "@nuxt/content": "^3.6.3",
+    "@nuxt/fonts": "0.11.4",
+    "@nuxt/icon": "1.15.0",
+    "@nuxt/image": "^1.10.0",
+    "@nuxt/kit": "^4.0.1",
+    "@nuxt/ui": "^3.1.3",
+    "@nuxtjs/color-mode": "^3.5.2",
+    "@tresjs/cientos": "5.0.0-alpha.0",
+    "@tresjs/core": "5.0.0-alpha.1",
     "@tresjs/eslint-config-vue": "^0.2.1",
-    "@tresjs/leches": "0.15.0-next.1",
-    "@tresjs/nuxt": "3.0.8",
+    "@tresjs/leches": "https://pkg.pr.new/@tresjs/leches@f356fed",
+    "@tresjs/nuxt": "4.1.0-next.1",
     "@tweakpane/plugin-essentials": "^0.2.1",
-    "@types/three": "^0.171.0",
-    "@unocss/nuxt": "^0.65.3",
-    "gsap": "^3.12.4",
-    "nuxt": "^3.15.0",
-    "nuxt-svgo": "^4.0.9",
-    "postprocessing": "6.37.1",
+    "@types/three": "^0.178.1",
+    "gsap": "^3.13.0",
+    "nuxt": "^4.0.1",
+    "nuxt-svgo": "^4.2.4",
+    "postprocessing": "6.37.6",
     "vite-svg-loader": "^5.1.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "better-sqlite3"
+    ],
+    "overrides": {
+      "ipx": "^3.1.1"
+    }
   }
 }
