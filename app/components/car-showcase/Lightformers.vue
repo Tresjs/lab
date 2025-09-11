@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import { BackSide, Color, Vector3 } from 'three'
 
-import { Lightformer } from '@tresjs/cientos';
 const group = ref<TresObject>()
 const positions = [2, 0, 2, 0, 2, 0, 2, 0]
 
 const { onBeforeRender } = useLoop()
 
-onBeforeRender(({ delta}) => {
+onBeforeRender(({ delta }) => {
   if (group.value) {
     (group.value.position.z += delta * 10) > 20 && (group.value.position.z = -60)
   }
@@ -69,7 +68,50 @@ const uniforms = {
     :rotation-x="Math.PI / 2"
     :scale="[10, 10, 1]"
   />
+  <Lightformer 
+    :intensity="4" 
+    :rotation-y="Math.PI / 2" 
+    :position="[-5, 1, -1]" 
+    :scale="[20, 0.1, 1]" 
+  />
+  <Lightformer 
+    :rotation-y="Math.PI / 2" 
+    :position="[-5, -1, -1]" 
+    :scale="[20, 0.5, 1]" 
+  />
+  <Lightformer 
+    :rotation-y="-Math.PI / 2" 
+    :position="[10, 1, 0]" 
+    :scale="[20, 1, 1]" 
+  />
   <TresGroup :rotation="[0, 0.5, 0]">
+    <TresGroup ref="group">
+      <Lightformer 
+        v-for="(x, i) in positions"
+        :key="i"
+        form="circle"
+        :intensity="2"
+        :rotation="[Math.PI/ 2, 0, 0]" 
+        :position="[x, 4, i * 4]" 
+        :scale="[3, 1, 1]" 
+      />
+    </TresGroup>
+  </TresGroup>
+  <Levioso 
+    :speed="5" 
+    :float-factor="2" 
+    :rotation-factor="2"
+  >
+    <Lightformer 
+      form="ring"
+      color="red"
+      :intensity="1"
+      :scale="10"
+      :position="[-15, 4, -18]" 
+      :target="[0, 0, 0]"
+    />
+  </Levioso>
+<!--   <TresGroup :rotation="[0, 0.5, 0]">
     <TresGroup ref="group">
       <Lightformer 
         v-for="(x, i) in positions"
@@ -120,5 +162,14 @@ const uniforms = {
       :fragment-shader="fragmentShader"
       :uniforms="uniforms"
     />
-  </TresMesh>
+  </TresMesh> -->
+   <TresMesh :scale="[60, 60, 60]">
+      <TresSphereGeometry :args="[1, 64, 64]" />
+      <TresShaderMaterial
+        :side="BackSide"
+        :vertex-shader="vertexShader"
+        :fragment-shader="fragmentShader"
+        :uniforms="uniforms"
+      />
+    </TresMesh> 
 </template>
