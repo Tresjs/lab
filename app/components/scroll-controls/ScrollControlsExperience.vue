@@ -89,6 +89,7 @@ const { hasFinishLoading } = await useProgress()
       :intensity="1"
       cast-shadow
     />
+    <TheScreenshot />
   </TresCanvas>
   <div>
     <section class="min-h-screen container flex justify-end items-center">

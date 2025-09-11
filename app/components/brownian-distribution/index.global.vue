@@ -8,6 +8,7 @@ const isDark = useDark()
 <template>
   <TresCanvas :clear-color="isDark ? colors.DARK : colors.LIGHT" window-size>
     <BrownianDistributionExperiment />
+    <TheScreenshot />
   </TresCanvas>
 
 </template>

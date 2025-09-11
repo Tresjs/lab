@@ -11,5 +11,6 @@ const gl = {
   <TresLeches />
   <TresCanvas window-size v-bind="gl">
     <GlassMaterialExperience />
+    <TheScreenshot />
   </TresCanvas>
 </template>

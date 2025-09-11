@@ -16,5 +16,6 @@ const gl = {
     <PortalJourneyThePortal />
     <PortalJourneyTheFireFlies />
     <TresAmbientLight :position="[10, 10, 10]" :intensity="1.5" color="#00ff00" />
+    <TheScreenshot />
   </TresCanvas>
 </template>

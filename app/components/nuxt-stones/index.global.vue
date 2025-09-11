@@ -22,6 +22,6 @@ const bloomParams = reactive({
       </EffectComposerPmndrs>
     </Suspense>
     <NuxtStonesTheStones />
-
+    <TheScreenshot />
   </TresCanvas>
 </template>

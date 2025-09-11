@@ -9,6 +9,7 @@
 
       <TresPolarGridHelper :radius="1" :radials="16" :circles="8" :position="[0, -1, 0]" />
       <Stars :size="0.75" :radius="150" />
+      <TheScreenshot />
     </TresCanvas>
     <ParticlePumpkinCredits />
   </div>

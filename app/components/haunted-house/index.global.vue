@@ -27,5 +27,6 @@ const gl = {
     <TresAmbientLight color="#b9d5ff" :intensity="0.3" />
     <TresDirectionalLight :args="['#b9d5ff', 1.12]" :position="[4, 5, -2]" :shadow-mapSize-width="256"
       :shadow-mapSize-height="256" :shadow-camera-far="15" cast-shadow />
+    <TheScreenshot />
   </TresCanvas>
 </template>

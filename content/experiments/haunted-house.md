@@ -2,6 +2,7 @@
 title: Haunted House
 author: jaime-bboyjt
 description: The classical threejs-journey haunted house, done with TresJs
+thumbnail: /experiments/haunted-house.png
 tags: ['PointLight', 'fog', 'useTexture', 'threejs-journey']
 ---
 

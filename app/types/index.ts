@@ -11,6 +11,7 @@ export interface ExperimentItem {
   authors?: string[]
   thumbnail?: string
   tags?: string[]
+  featured?: boolean
 }
 
 /**

@@ -48,5 +48,6 @@ onLoop(() => {
     </TresMesh>
     <Stars />
     <TresAmbientLight :intensity="1" />
+    <TheScreenshot />
   </TresCanvas>
 </template>

@@ -4,6 +4,7 @@
     <div class="absolute inset-0">
       <TresCanvas window-size clear-color="#f8fafc">
         <Experience />
+        <TheScreenshot />
       </TresCanvas>
     </div>
 

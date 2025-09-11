@@ -18,6 +18,7 @@ useControls('fpsgraph', {
     <TresPerspectiveCamera :position="[3, 3, 3]" />
     <GalaxyGeneratorGalaxy />
     <OrbitControls />
+    <TheScreenshot />
   </TresCanvas>
 </template>
 

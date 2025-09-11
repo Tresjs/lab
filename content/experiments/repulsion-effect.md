@@ -2,6 +2,7 @@
 title: Repulsion Effect
 author: damienmontastier
 description: Repulsion Effect
+thumbnail: /experiments/repulsion-effect.png
 tags: ['repulsion', 'effect', 'hover']
 date: 2024-02-28
 ---

@@ -192,7 +192,7 @@ const contactShadowColor = computed(() => {
         <ToneMappingPmndrs :mode="toneMappingMode" />
       </EffectComposerPmndrs>
     </Suspense>
-
+    <TheScreenshot />
   </TresCanvas>
 </template>
 

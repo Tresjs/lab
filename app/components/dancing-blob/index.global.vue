@@ -78,6 +78,7 @@ watch(
     </ClientOnly>
     <TresCanvas alpha clear-color="#0c1a30" class="relative z-10">
       <DancingBlobTheDancingBlob :analyser="analyser!" :data-array="dataArray!" />
+      <TheScreenshot />
     </TresCanvas>
     <div class="bg-dance-text z-20" aria-hidden="true">
       SOUND

@@ -69,6 +69,7 @@ const onDavidReady = () => {
     <TresFog color="black" />
     <BrickelangeloDavidTheDavid @ready="onDavidReady" />
     <TresSpotLight ref="lightRef" :position="[5, 5, 5]" :intensity="8" cast-shadow />
+    <TheScreenshot />
   </TresCanvas>
   <div
     class="title absolute left-0 bottom-30 w-full text-white z-20 pointer-events-none flex flex-col items-center justify-around">

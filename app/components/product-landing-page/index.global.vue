@@ -71,6 +71,7 @@ const state = reactive({
       <TresAmbientLight :intensity="2" />
       <TresPointLight :position="[0, 0, 10]" :intensity="1" />
       <TresDirectionalLight :position="[3, 3, 3]" :intensity="3" />
+      <TheScreenshot />
     </TresCanvas>
   </div>
 </template>
