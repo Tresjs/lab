@@ -57,6 +57,7 @@ watch(model, (newModel) => {
 <template>
   <primitive
     v-if="model"
+    :position="[0,1,0]"
     :object="model"
   />
 </template>
