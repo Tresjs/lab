@@ -17,7 +17,6 @@ const floorTexturePaths = [
 // Load floor textures
 const {
   textures: floorTextures,
-  isLoading: floorLoading,
   error: floorError
 } = useTextures(floorTexturePaths)
 

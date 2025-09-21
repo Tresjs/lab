@@ -8,7 +8,10 @@ const { onBeforeRender } = useLoop()
 
 onBeforeRender(({ delta }) => {
   if (group.value) {
-    (group.value.position.z += delta * 10) > 20 && (group.value.position.z = -60)
+    group.value.position.z += delta * 10
+    if (group.value.position.z > 20) {
+      group.value.position.z = -60
+    }
   }
 })
 

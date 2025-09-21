@@ -28,14 +28,12 @@ const doorTexturePaths = [
 // Load brick textures
 const {
   textures: brickTextures,
-  isLoading: brickLoading,
   error: brickError
 } = useTextures(brickTexturePaths)
 
 // Load door textures
 const {
   textures: doorTextures,
-  isLoading: doorLoading,
   error: doorError
 } = useTextures(doorTexturePaths)
 

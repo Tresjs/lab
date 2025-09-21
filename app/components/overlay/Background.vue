@@ -28,7 +28,7 @@ const rand = seededRandom(RAND_SEED)
 const randRange = (n = 1) => rand() * n
 const { PI, cos, sin } = Math
 const PI2 = PI * 2
-const spheres = new Array(SPHERE_COUNT).fill(0).map((_: any, i) => i)
+const spheres = new Array(SPHERE_COUNT).fill(0).map((_: unknown, i) => i)
 const sizes = new Array(SPHERE_COUNT).fill(0).map(() => randRange(1) * randRange() ** 3)
 const orbitRadii = new Array(SPHERE_COUNT).fill(0).map(() => MathUtils.lerp(ORBIT_MIN, ORBIT_MAX, randRange()))
 const thetas = new Array(SPHERE_COUNT).fill(0).map(() => randRange(PI2))
@@ -130,6 +130,7 @@ useRenderLoop().onLoop(({ elapsed }) => {
       <TresGroup :rotation-x="Math.PI * 1.5">
         <TresMesh
           v-for="i of spheres"
+          :key="i"
           :position="positions[i]"
           :scale="sizes[i]"
           :material="sphereMaterial"

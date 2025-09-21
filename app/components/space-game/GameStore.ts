@@ -1,5 +1,5 @@
 import { GrannyKnot } from 'three-stdlib'
-import { reactive, shallowRef } from 'vue'
+import { reactive, shallowRef, onMounted } from 'vue'
 import * as audio from './audio'
 import type { ExplosionData } from './Explosions.vue'
 import { Box3, Clock, Euler, Matrix4, Object3D, PerspectiveCamera, Ray, TubeGeometry, Vector2, Vector3 } from 'three'
@@ -46,12 +46,12 @@ export const gameStore = reactive({
     },
 
     actions: {
-        playAudio: () => { },
-        toggleSound: () => { },
+        playAudio: (_audio: HTMLAudioElement, _volume?: number, _loop?: boolean) => { },
+        toggleSound: (_sound?: boolean) => { },
         shoot: () => { },
-        test: (_data: { size: number; offset: Vector3; scale: number; hit: any; distance: number }) => { },
-        updateMouse: () => { },
-        init: () => { },
+        test: (_data: { size: number; offset: Vector3; scale: number; hit: Vector3; distance: number }) => false,
+        updateMouse: (_mouse: { clientX: number; clientY: number }) => { },
+        init: (_camera: PerspectiveCamera) => { },
         update: () => { },
     },
 })
@@ -164,9 +164,9 @@ gameStore.actions.update = () => {
             gameStore.explosions = gameStore.explosions.filter(({ time }) => Date.now() - time <= 1000)
         }
             , 1000)
-        gameStore.points = gameStore.points + rocksHit.length * 100 + enemiesHit.length * 200,
-            gameStore.rocks = gameStore.rocks.filter(rock => !rocksHit.find(r => r.guid === rock.guid)),
-            gameStore.enemies = gameStore.enemies.filter(enemy => !enemiesHit.find(e => e.guid === enemy.guid))
+        gameStore.points = gameStore.points + rocksHit.length * 100 + enemiesHit.length * 200
+        gameStore.rocks = gameStore.rocks.filter(rock => !rocksHit.find(r => r.guid === rock.guid))
+        gameStore.enemies = gameStore.enemies.filter(enemy => !enemiesHit.find(e => e.guid === enemy.guid))
     }
 }
 

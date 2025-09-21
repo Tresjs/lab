@@ -72,7 +72,7 @@ const controlsConfig = {
   }
 }
 
-const { amplitude, frequency, speed, colorA, colorB, colorC, noiseScale, grainIntensity, fresnelPower } = useControls(controlsConfig)
+const { amplitude: amplitudeControl, frequency, speed: speedControl, colorA: colorAControl, colorB: colorBControl, colorC: colorCControl, noiseScale, grainIntensity, fresnelPower } = useControls(controlsConfig)
 
 function hexToVector3(hex: string): Vector3 {
   const color = new Color(hex)
@@ -81,30 +81,30 @@ function hexToVector3(hex: string): Vector3 {
 
 const uniforms = ref({
   u_time: { value: 0.0 },
-  u_amplitude: { value: amplitude.value },
+  u_amplitude: { value: amplitudeControl.value },
   u_frequency: { value: frequency.value },
-  u_speed: { value: speed.value },
-  u_colorA: { value: hexToVector3(colorA.value) },
-  u_colorB: { value: hexToVector3(colorB.value) },
-  u_colorC: { value: hexToVector3(colorC.value) },
+  u_speed: { value: speedControl.value },
+  u_colorA: { value: hexToVector3(colorAControl.value) },
+  u_colorB: { value: hexToVector3(colorBControl.value) },
+  u_colorC: { value: hexToVector3(colorCControl.value) },
   u_noiseScale: { value: noiseScale.value },
   u_grainIntensity: { value: grainIntensity.value },
   u_fresnelPower: { value: fresnelPower.value }
 })
 
-watch([amplitude, frequency, speed, noiseScale, grainIntensity, fresnelPower], () => {
-  uniforms.value.u_amplitude.value = amplitude.value
+watch([amplitudeControl, frequency, speedControl, noiseScale, grainIntensity, fresnelPower], () => {
+  uniforms.value.u_amplitude.value = amplitudeControl.value
   uniforms.value.u_frequency.value = frequency.value
-  uniforms.value.u_speed.value = speed.value
+  uniforms.value.u_speed.value = speedControl.value
   uniforms.value.u_noiseScale.value = noiseScale.value
   uniforms.value.u_grainIntensity.value = grainIntensity.value
   uniforms.value.u_fresnelPower.value = fresnelPower.value
 })
 
-watch([colorA, colorB, colorC], () => {
-  uniforms.value.u_colorA.value = hexToVector3(colorA.value)
-  uniforms.value.u_colorB.value = hexToVector3(colorB.value)
-  uniforms.value.u_colorC.value = hexToVector3(colorC.value)
+watch([colorAControl, colorBControl, colorCControl], () => {
+  uniforms.value.u_colorA.value = hexToVector3(colorAControl.value)
+  uniforms.value.u_colorB.value = hexToVector3(colorBControl.value)
+  uniforms.value.u_colorC.value = hexToVector3(colorCControl.value)
 })
 
 onBeforeRender(({ elapsed }) => {

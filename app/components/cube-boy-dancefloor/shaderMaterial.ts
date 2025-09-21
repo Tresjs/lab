@@ -41,7 +41,7 @@ export function shaderMaterial(
       | Color
       | number
       | boolean
-      | Array<any>
+      | Array<unknown>
       | null
   },
   vertexShader: string,

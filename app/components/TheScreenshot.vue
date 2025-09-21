@@ -49,6 +49,3 @@ defineShortcuts({
   }
 })
 </script>
-<template>
-
-</template>

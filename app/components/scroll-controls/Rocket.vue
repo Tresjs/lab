@@ -17,7 +17,7 @@ const rocketRef = shallowRef()
 
 const { onLoop } = useRenderLoop()
 
-onLoop(({ delta }) => {
+onLoop(() => {
 
   if (!rocket) return
   rocket.rotation.y = - progress.value * Math.PI / 2 * 8
